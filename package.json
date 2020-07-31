@@ -15,11 +15,19 @@
   },
   "author": "PLAID, Inc.",
   "scripts": {
+    "prepare": "lerna run prepare",
+    "bootstrap": "lerna bootstrap",
+    "clean": "lerna clean",
+    "versionup": "lerna version --conventional-commits --no-commit-hooks",
+    "versionup:patch": "lerna version patch --conventional-commits --no-commit-hooks",
+    "versionup:minor": "lerna version minor --conventional-commits --no-commit-hooks",
+    "versionup:major": "lerna version major --conventional-commits --no-commit-hooks",
+    "release": "lerna publish from-package",
+    "release:canary": "lerna publish --canary",
     "typescript": "tsc --noEmit --composite false",
     "lint": "eslint \"**/*.{js,ts,tsx}\"",
-    "prepare": "lerna run prepare",
     "example": "yarn --cwd example",
-    "pods": "cd example && pod-install --quite"
+    "example:pods": "cd example && pod-install --quite"
   },
   "devDependencies": {
     "@commitlint/config-conventional": "^9.1.1",
@@ -42,8 +50,7 @@
   "jest": {
     "preset": "react-native",
     "modulePathIgnorePatterns": [
-      "<rootDir>/example/node_modules",
-      "<rootDir>/lib/"
+      "<rootDir>/example/node_modules"
     ]
   },
   "husky": {
