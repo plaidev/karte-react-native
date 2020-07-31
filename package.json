@@ -1,0 +1,62 @@
+{
+  "name": "react-native-karte",
+  "description": "KARTE SDK for React Native.",
+  "private": true,
+  "workspaces": {
+    "packages": [
+      "packages/*",
+      "example"
+    ]
+  },
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/plaidev/karte-react-native.git"
+  },
+  "author": "PLAID, Inc.",
+  "scripts": {
+    "typescript": "tsc --noEmit --composite false",
+    "lint": "eslint \"**/*.{js,ts,tsx}\"",
+    "prepare": "lerna run prepare",
+    "example": "yarn --cwd example",
+    "pods": "cd example && pod-install --quite"
+  },
+  "devDependencies": {
+    "@commitlint/config-conventional": "^9.1.1",
+    "@react-native-community/eslint-config": "^2.0.0",
+    "@types/jest": "^26.0.7",
+    "@types/react": "^16.9.43",
+    "@types/react-native": "^0.63.2",
+    "commitlint": "^9.1.0",
+    "eslint": "^7.5.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "genversion": "^2.2.1",
+    "husky": "^4.2.5",
+    "jest": "^26.1.0",
+    "lerna": "^3.22.1",
+    "pod-install": "^0.1.8",
+    "prettier": "^2.0.5",
+    "typescript": "^3.9.7"
+  },
+  "jest": {
+    "preset": "react-native",
+    "modulePathIgnorePatterns": [
+      "<rootDir>/example/node_modules",
+      "<rootDir>/lib/"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "pre-commit": "yarn lint && yarn typescript"
+    }
+  },
+  "prettier": {
+    "quoteProps": "consistent",
+    "singleQuote": true,
+    "tabWidth": 2,
+    "trailingComma": "es5",
+    "useTabs": false
+  }
+}
