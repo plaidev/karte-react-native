@@ -1,0 +1,15 @@
+rootProject.name = 'KarteExample'
+apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesSettingsGradle(settings)
+include ':app'
+
+include ':RNKRTCore'
+project(':RNKRTCore').projectDir = new File(rootProject.projectDir, '../../packages/core/android')
+
+include ':RNKRTInAppMessaging'
+project(':RNKRTInAppMessaging').projectDir = new File(rootProject.projectDir, '../../packages/in-app-messaging/android')
+
+include ':RNKRTNotification'
+project(':RNKRTNotification').projectDir = new File(rootProject.projectDir, '../../packages/notification/android')
+
+include ':RNKRTVariables'
+project(':RNKRTVariables').projectDir = new File(rootProject.projectDir, '../../packages/variables/android')

@@ -1,0 +1,60 @@
+{
+  "name": "@react-native-karte/variables",
+  "version": "0.0.0",
+  "description": "KARTE SDK Variables for React Native.",
+  "main": "lib/commonjs/index",
+  "module": "lib/module/index",
+  "types": "lib/typescript/src/index.d.ts",
+  "react-native": "src/index",
+  "source": "src/index",
+  "keywords": [
+    "react-native",
+    "karte",
+    "variables",
+    "ios",
+    "android"
+  ],
+  "author": "PLAID, Inc.",
+  "homepage": "https://karte.io",
+  "license": "Apache-2.0",
+  "files": [
+    "src",
+    "lib",
+    "android",
+    "ios",
+    "RNKRTVariables.podspec",
+    "!**/__tests__"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/plaidev/karte-react-native.git",
+    "directory": "packages/variables"
+  },
+  "scripts": {
+    "prepare": "npm run build",
+    "build": "bob build",
+    "build:clean": "del lib"
+  },
+  "bugs": {
+    "url": "https://github.com/plaidev/karte-react-native/issues"
+  },
+  "peerDependencies": {
+    "@react-native-karte/core": "^0.0.0"
+  },
+  "@react-native-community/bob": {
+    "source": "src",
+    "output": "lib",
+    "targets": [
+      "commonjs",
+      "module",
+      "typescript"
+    ]
+  },
+  "devDependencies": {
+    "@react-native-community/bob": "^0.16.2",
+    "typescript": "^3.9.7"
+  }
+}
