@@ -1,6 +1,6 @@
 {
   "name": "@react-native-karte/notification",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "KARTE SDK Notification for React Native.",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
