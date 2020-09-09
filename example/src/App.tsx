@@ -71,6 +71,9 @@ export default function App() {
           if (notification) {
             console.log('getInitialNotification(handle): ', remoteMessage);
             notification.handle();
+
+            // If automatic measurement is disabled, the following is called
+            // notification.track();
           }
         }
       });
@@ -82,6 +85,9 @@ export default function App() {
         if (notification) {
           console.log('onNotificationOpenedApp(handle): ', notification);
           notification.handle();
+
+          // If automatic measurement is disabled, the following is called
+          // notification.track();
         }
       }
     });

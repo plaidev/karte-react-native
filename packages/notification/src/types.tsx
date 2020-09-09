@@ -19,6 +19,7 @@ export interface KRTNotificationNativeModule {
   canHandle(userInfo: object): boolean;
   handle(userInfo: object): boolean;
   show(userInfo: object): void;
+  track(userInfo: object): void;
   retrieveURL(userInfo: object): string | null;
 }
 

@@ -64,6 +64,11 @@ RCT_REMAP_METHOD(show, showWithUserInfo:(NSDictionary *)userInfo) {
     // NOP (Android only)
 }
 
+RCT_REMAP_METHOD(track, trackWithUserInfo:(NSDictionary *)userInfo) {
+    KRTRemoteNotification *notification = [[KRTRemoteNotification alloc] initWithUserInfo:userInfo];
+    [notification track];
+}
+
 RCT_REMAP_BLOCKING_SYNCHRONOUS_METHOD(retrieveURL, NSString *, retrieveURLWithUserInfo:(NSDictionary *)userInfo) {
     KRTRemoteNotification *notification = [[KRTRemoteNotification alloc] initWithUserInfo:userInfo];
     if (notification) {
