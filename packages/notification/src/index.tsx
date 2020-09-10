@@ -52,6 +52,10 @@ class NotificationBridge {
   public handle(): boolean {
     return this.nativeModule.handle(this.remoteMessage.data ?? {});
   }
+
+  public track(): void {
+    this.nativeModule.track(this.remoteMessage.data ?? {});
+  }
 }
 
 export const Notification = {

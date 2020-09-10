@@ -52,6 +52,11 @@ class KarteNotificationModule(reactContext: ReactApplicationContext) : ReactCont
     return MessageHandler.handleMessage(reactApplicationContext, toData(message))
   }
 
+  @ReactMethod
+  fun track() {
+    // NOP (iOS only)
+  }
+
   @ReactMethod(isBlockingSynchronousMethod = true)
   fun retrieveURL(message: ReadableMap): String? {
     val attributes = MessageHandler.extractKarteAttributes(toData(message))

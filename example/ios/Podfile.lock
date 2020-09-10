@@ -142,16 +142,16 @@ PODS:
     - GoogleUtilities/Logger
   - GoogleUtilities/UserDefaults (6.6.0):
     - GoogleUtilities/Logger
-  - KarteCore (2.5.0):
+  - KarteCore (2.8.0):
     - KarteUtilities (~> 3.1)
-  - KarteInAppMessaging (2.4.0):
+  - KarteInAppMessaging (2.6.0):
     - KarteCore (~> 2.3)
     - KarteUtilities (~> 3.0)
-  - KarteRemoteNotification (2.1.0):
+  - KarteRemoteNotification (2.4.0):
     - KarteCore (~> 2.0)
     - KarteUtilities (~> 3.0)
   - KarteUtilities (3.1.0)
-  - KarteVariables (2.0.1):
+  - KarteVariables (2.1.0):
     - KarteCore (~> 2.0)
     - KarteUtilities (~> 3.0)
   - nanopb (1.30905.0):
@@ -394,18 +394,18 @@ PODS:
     - Firebase/Messaging (~> 6.27.0)
     - React
     - RNFBApp
-  - RNKRTCore (0.4.0):
+  - RNKRTCore (0.1.0):
     - KarteCore
     - React
-  - RNKRTInAppMessaging (0.4.0):
+  - RNKRTInAppMessaging (0.1.0):
     - KarteInAppMessaging
     - React
     - RNKRTCore
-  - RNKRTNotification (0.4.0):
+  - RNKRTNotification (0.1.0):
     - KarteRemoteNotification
     - React
     - RNKRTCore
-  - RNKRTVariables (0.4.0):
+  - RNKRTVariables (0.1.0):
     - KarteVariables
     - React
     - RNKRTCore
@@ -579,11 +579,11 @@ SPEC CHECKSUMS:
   GoogleDataTransport: 9a8a16f79feffc7f42096743de2a7c4815e84020
   GoogleDataTransportCCTSupport: 489c1265d2c85b68187a83a911913d190012158d
   GoogleUtilities: 39530bc0ad980530298e9c4af8549e991fd033b1
-  KarteCore: 9a17aac2e3c1ed259ae98373bf4236851dbb663f
-  KarteInAppMessaging: b76a77ada5f7c99c52b5cb1d442462ead8417762
-  KarteRemoteNotification: 2f4dbe3e389c4393b5ca26dd0d008dc342915ad9
+  KarteCore: b171d3bbc33c6c19b9a071a4c714f7d2bd91a988
+  KarteInAppMessaging: b964eb95370ace959b7df9c051e6157b252c9db7
+  KarteRemoteNotification: 6c3836cf3fe7679c876c4e377aa7b3ae9fa0d900
   KarteUtilities: ccc63f2916deb45485d1b2b63516a98b5ecba773
-  KarteVariables: d39eec7a2e263c1c63fd6b8af9e04be57bcfcd0a
+  KarteVariables: 263a5244f2b9524ad3ea2b40ba2aaa57748accd0
   nanopb: c43f40fadfe79e8b8db116583945847910cbabc9
   OpenSSL-Universal: 8b48cc0d10c1b2923617dfe5c178aa9ed2689355
   PromisesObjC: b48e0338dbbac2207e611750777895f7a5811b75
@@ -609,10 +609,10 @@ SPEC CHECKSUMS:
   ReactCommon: ed4e11d27609d571e7eee8b65548efc191116eb3
   RNFBApp: 6fd8a7e757135d4168bf033a8812c241af7363a0
   RNFBMessaging: 3e457bb1889607510ad80575c2afaf8080744703
-  RNKRTCore: defc9915810a0c1c69c1a4967f0f7e4df3319a3b
-  RNKRTInAppMessaging: 6d00615857da7a81aa20b5982f7cbc5424128c8c
-  RNKRTNotification: 8d84a3729ed8a1b5e8a85d8404ebae3d42588708
-  RNKRTVariables: ba2676e0428f88fd6470c98a1f9e02341e6adc40
+  RNKRTCore: f4c561809cb2e60f42fbe42b5d1b5960d85d4313
+  RNKRTInAppMessaging: f7aa3ebb023ae71275c575e924fe42332265ef19
+  RNKRTNotification: cb3981100ee0d99f7d8850cc63d9c24d7a7c3ccc
+  RNKRTVariables: 5ef13cf8bf86bb765b31c14a0f6de8e6a82e4e4b
   Yoga: 3ebccbdd559724312790e7742142d062476b698e
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
