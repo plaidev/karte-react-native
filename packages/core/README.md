@@ -18,3 +18,4 @@ The developer guide is located at
 React Native KARTE Core module is published under the Apache 2.0 License.
 
 Your use of KARTE is governed by the [KARTE Terms of Use](https://karte.io/legal/terms-of-use-en.html).
+
