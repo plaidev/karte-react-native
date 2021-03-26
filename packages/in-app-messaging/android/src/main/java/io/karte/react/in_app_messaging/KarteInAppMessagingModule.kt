@@ -15,12 +15,46 @@
 //
 package io.karte.react.in_app_messaging
 
+import android.app.Activity
+import android.content.Intent
+import android.util.Log
+import androidx.fragment.app.FragmentActivity
+import com.facebook.react.bridge.BaseActivityEventListener
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReactContextBaseJavaModule
 import com.facebook.react.bridge.ReactMethod
 import io.karte.android.inappmessaging.InAppMessaging
 
+private fun log(msg: String) {
+  if (BuildConfig.DEBUG) {
+    Log.d("KarteInAppMessaging", msg)
+  }
+}
+
+private const val FRAGMENT_TAG = "Karte.FileChooserFragment"
+
 class KarteInAppMessagingModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext) {
+
+  init {
+    reactContext.addActivityEventListener(object : BaseActivityEventListener() {
+      override fun onActivityResult(activity: Activity?, requestCode: Int, resultCode: Int, data: Intent?) {
+        log("onActivityResult $activity, $requestCode, $resultCode, $data")
+        if (activity is FragmentActivity) {
+          val fragment = activity.supportFragmentManager.findFragmentByTag(FRAGMENT_TAG)
+          try {
+            fragment?.onActivityResult(requestCode and 0xffff, resultCode, data)
+          } catch (e: IllegalStateException) {
+          }
+        } else if (activity != null) {
+          val fragment = activity.fragmentManager.findFragmentByTag(FRAGMENT_TAG)
+          try {
+            fragment?.onActivityResult(requestCode and 0xffff, resultCode, data)
+          } catch (e: IllegalStateException) {
+          }
+        }
+      }
+    })
+  }
 
   override fun getName(): String {
     return "RNKRTInAppMessagingModule"
