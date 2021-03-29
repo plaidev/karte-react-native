@@ -38,6 +38,10 @@ static void InitializeFlipper(UIApplication *application) {
 {
   [FIRApp configure];
   
+  UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+  center.delegate = self;
+  
+  [KRTApp setLogLevel:KRTLogLevelVerbose];
   [KRTApp setupWithAppKey:@"" configuration:KRTConfiguration.defaultConfiguration];
 
   #if DEBUG
@@ -70,7 +74,28 @@ static void InitializeFlipper(UIApplication *application) {
 
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
 {
-  return YES;
+  return [KRTApp application:app openURL:url];
+}
+
+- (void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler{
+  NSLog(@"userNotificationCenter willPresentNotification");
+  // Even if the following implementation is performed, FCM push notifications including notifications from KARTE are not automatically displayed in the foreground due to the implementation of RNFBMessaging.
+  // Please display using local push on 'onMessage'.
+  completionHandler(UNNotificationPresentationOptionBadge |
+                      UNNotificationPresentationOptionSound |
+                      UNNotificationPresentationOptionAlert);
+}
+
+- (void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)(void))completionHandler{
+  NSLog(@"userNotificationCenter didReceiveNotificationResponse");
+  completionHandler();
+}
+
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification{
+  NSLog(@"application didReceiveLocalNotification");
+}
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo{
+  NSLog(@"application didReceiveRemoteNotification");
 }
 
 @end

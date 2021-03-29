@@ -57,6 +57,8 @@ export default function App() {
         const notification = Notification.create(remoteMessage);
         if (notification) {
           console.log('onMessage(handle): ', notification);
+          // This function only works on Android.
+          // If you want to display the foreground notification on iOS, please display it with local notification etc.
           notification.show();
         }
       }
