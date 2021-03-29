@@ -85,14 +85,30 @@ class TrackerBridge {
     this.nativeModule = nativeModule;
   }
 
+  /**
+   * イベントの送信を行います。
+   * @param name イベント名
+   * @param values イベントに紐付けるカスタムオブジェクト
+   */
   public track(name: string, values: object = {}) {
     this.nativeModule.track(name, values ?? {});
   }
 
+  /**
+   * Identifyイベントの送信を行います。
+   *
+   * @param values Identifyイベントに紐付けるカスタムオブジェクト
+   */
   public identify(values: object) {
     this.nativeModule.identify(values);
   }
 
+  /**
+   * Viewイベントの送信を行います。
+   * @param viewName 画面名
+   * @param title タイトル
+   * @param values Viewイベントに紐付けるカスタムオブジェクト
+   */
   public view(viewName: string, title?: string, values: object = {}) {
     this.nativeModule.view(viewName, title, values);
   }
@@ -103,11 +119,29 @@ class UserSyncBridge {
     this.nativeModule = nativeModule;
   }
 
+  /**
+   * WebView 連携するためのクラスです。
+   *
+   * @remarks
+   * WebページURLに連携用のクエリパラメータを付与した状態で、URLをWebViewで開くことでWebとAppのユーザーの紐付けが行われます。
+   * なお連携を行うためにはWebページに、KARTEのタグが埋め込まれている必要があります。
+   */
   public appendingQueryParameter(url: string): string {
     return this.nativeModule.appendingUserSyncQueryParameter(url);
   }
 }
 
+/** KARTE SDKのエントリポイントクラスです。 */
 export const KarteApp = new KarteAppBridge(NativeModules.RNKRTCoreModule);
+
+/** イベントトラッキングを行うためのクラスです。 */
 export const Tracker = new TrackerBridge(NativeModules.RNKRTCoreModule);
+
+/**
+ * WebView 連携するためのクラスです。
+ *
+ * @remarks
+ * WebページURLに連携用のクエリパラメータを付与した状態で、URLをWebViewで開くことでWebとAppのユーザーの紐付けが行われます。
+ * なお連携を行うためにはWebページに、KARTEのタグが埋め込まれている必要があります。
+ */
 export const UserSync = new UserSyncBridge(NativeModules.RNKRTCoreModule);

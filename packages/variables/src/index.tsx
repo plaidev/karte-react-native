@@ -20,57 +20,142 @@ import type { KRTVariablesNativeModule } from './types';
 class VariablesBridge {
   constructor(private readonly nativeModule: KRTVariablesNativeModule) {}
 
+  /**
+   * 設定値を取得し、端末上にキャッシュします。
+   * @returns 取得完了Promise
+   */
   public fetch(): Promise<void> {
     return this.nativeModule.fetch();
   }
 
+  /**
+   * 指定されたキーに関連付けられた設定値にアクセスします。
+   *
+   * @remarks
+   * なお設定値にアクセスするには事前に Variables.fetch(completion:) を呼び出しておく必要があります。
+   * @param key 検索するためのキー
+   */
   public getVariable(key: string): Variable {
     const name = this.nativeModule.getVariable(key);
     return new Variable(this.nativeModule, name);
   }
 
+  /**
+   * 指定された設定値に関連するキャンペーン情報を元に効果測定用のイベント（message_open）を発火します。
+   * @param variables 設定値の配列
+   * @param values イベントに紐付けるカスタムオブジェクト
+   */
   public trackOpen(variables: Array<Variable>, values?: object): void {
     const keys = variables.map((variable) => variable.name);
     this.nativeModule.trackOpen(keys, values);
   }
 
+  /**
+   * 指定された設定値に関連するキャンペーン情報を元に効果測定用のイベント（message_click）を発火します。
+   * @param variables 設定値の配列
+   * @param values イベントに紐付けるカスタムオブジェクト
+   */
   public trackClick(variables: Array<Variable>, values?: object): void {
     const keys = variables.map((variable) => variable.name);
     this.nativeModule.trackClick(keys, values);
   }
 }
 
+/**
+ * 設定値とそれに付随する情報を保持するためのクラスです。
+ *
+ * @remarks
+ * 設定値の他に、接客サービスIDやアクションIDを保持しています。
+ */
 class Variable {
+  /**
+   * 設定値インスタンスを初期化します。
+   * @param name 設定値名
+   */
   public constructor(
     private readonly nativeModule: KRTVariablesNativeModule,
     public name: string
   ) {}
 
+  /**
+   * 設定値（文字列）を返します。
+   *
+   * @remarks
+   * なお設定値が未定義の場合は、デフォルト値を返します。
+   * @param defaultValue デフォルト値
+   */
   public getString(defaultValue: string): string {
     return this.nativeModule.getString(this.name, defaultValue);
   }
 
+  /**
+   * 設定値（整数）を返します。
+   *
+   * @remarks
+   * なお設定値が数値でない場合は、デフォルト値を返します。
+   * @param defaultValue デフォルト値
+   */
   public getInteger(defaultValue: number): number {
     return this.nativeModule.getInteger(this.name, defaultValue);
   }
 
+  /**
+   * 設定値（浮動小数点数）を返します。
+   *
+   * @remarks
+   * なお設定値が数値でない場合は、デフォルト値を返します。
+   * @param defaultValue デフォルト値
+   */
   public getDouble(defaultValue: number): number {
     return this.nativeModule.getDouble(this.name, defaultValue);
   }
 
+  /**
+   * 設定値（ブール値）を返します。
+   *
+   * @remarks
+   * なおブール値への変換ルールについては下記を参照してください。
+   * - [iOS](https://developer.apple.com/documentation/foundation/nsstring/1409420-boolvalue)
+   * - [Android](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.text/to-boolean.html)
+   *
+   * 設定値が未定義の場合は、デフォルト値を返します。
+   *
+   * @param defaultValue デフォルト値
+   */
   public getBoolean(defaultValue: boolean): boolean {
     return this.nativeModule.getBoolean(this.name, defaultValue);
   }
 
+  /**
+   * 設定値（配列）を返します。
+   *
+   * @remarks
+   * 以下の場合においてデフォルト値を返します。
+   * - 設定値が未定義の場合
+   * - 設定値（JSON文字列）のパースができない場合
+   *
+   * @param defaultValue デフォルト値
+   */
   public getArray(defaultValue: Array<any>): Array<any> {
     return this.nativeModule.getArray(this.name, defaultValue);
   }
 
+  /**
+   * 設定値（辞書）を返します。
+   *
+   * @remarks
+   * 以下の場合においてデフォルト値を返します。
+   * - 設定値が未定義の場合
+   * - 設定値（JSON文字列）のパースができない場合
+   *
+   * @param defaultValue デフォルト値
+   */
   public getObject(defaultValue: object): object {
     return this.nativeModule.getObject(this.name, defaultValue);
   }
 }
 
+/** 設定値の取得・管理を司るクラスです。 */
 export const Variables = new VariablesBridge(
   NativeModules.RNKRTVariablesModule
 );
