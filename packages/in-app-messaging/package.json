@@ -1,6 +1,6 @@
 {
   "name": "@react-native-karte/in-app-messaging",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "KARTE SDK In-app messaging for React Native.",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",

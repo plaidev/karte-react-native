@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.1](https://github.com/plaidev/karte-react-native/compare/@react-native-karte/in-app-messaging@1.0.0...@react-native-karte/in-app-messaging@1.0.1) (2021-03-30)
+
+
+### Bug Fixes
+
+* **in-app-messaging:** support chat image upload on android ([9bfeadb](https://github.com/plaidev/karte-react-native/commit/9bfeadb06a3183612b4993d82ab30b21d0547630))
+
+
+
+
+
 # [1.0.0](https://github.com/plaidev/karte-react-native/compare/@react-native-karte/in-app-messaging@0.1.0...@react-native-karte/in-app-messaging@1.0.0) (2020-11-18)
 
 
