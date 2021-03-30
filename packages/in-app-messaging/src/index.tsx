@@ -22,23 +22,38 @@ class InAppMessagingBridge {
     this.nativeModule = nativeModule;
   }
 
+  /**
+   * アプリ内メッセージの表示有無を返します。
+   *
+   * @remarks
+   * アプリ内メッセージが表示中の場合は true を返し、表示されていない場合は false を返します。
+   */
   public get isPresenting(): boolean {
     return this.nativeModule.isPresenting();
   }
 
+  /** 現在表示中の全てのアプリ内メッセージを非表示にします。 */
   public dismiss(): void {
     this.nativeModule.dismiss();
   }
 
+  /**
+   * アプリ内メッセージの表示を抑制します。
+   *
+   * @remarks
+   * なお既に表示されているアプリ内メッセージは、メソッドの呼び出しと同時に非表示となります。
+   */
   public suppress(): void {
     this.nativeModule.suppress();
   }
 
+  /** アプリ内メッセージの表示抑制状態を解除します。 */
   public unsuppress(): void {
     this.nativeModule.unsuppress();
   }
 }
 
+/** アプリ内メッセージの管理を行うクラスです。 */
 export const InAppMessaging = new InAppMessagingBridge(
   NativeModules.RNKRTInAppMessagingModule
 );
