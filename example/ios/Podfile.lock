@@ -394,18 +394,18 @@ PODS:
     - Firebase/Messaging (~> 6.27.0)
     - React
     - RNFBApp
-  - RNKRTCore (0.1.0):
+  - RNKRTCore (1.0.0):
     - KarteCore
     - React
-  - RNKRTInAppMessaging (0.1.0):
+  - RNKRTInAppMessaging (1.0.0):
     - KarteInAppMessaging
     - React
     - RNKRTCore
-  - RNKRTNotification (0.1.0):
+  - RNKRTNotification (1.0.0):
     - KarteRemoteNotification
     - React
     - RNKRTCore
-  - RNKRTVariables (0.1.0):
+  - RNKRTVariables (1.0.0):
     - KarteVariables
     - React
     - RNKRTCore
@@ -455,7 +455,7 @@ DEPENDENCIES:
   - Yoga (from `../../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
-  https://cdn.cocoapods.org/:
+  trunk:
     - boost-for-react-native
     - CocoaAsyncSocket
     - CocoaLibEvent
@@ -609,13 +609,13 @@ SPEC CHECKSUMS:
   ReactCommon: ed4e11d27609d571e7eee8b65548efc191116eb3
   RNFBApp: 6fd8a7e757135d4168bf033a8812c241af7363a0
   RNFBMessaging: 3e457bb1889607510ad80575c2afaf8080744703
-  RNKRTCore: f4c561809cb2e60f42fbe42b5d1b5960d85d4313
-  RNKRTInAppMessaging: f7aa3ebb023ae71275c575e924fe42332265ef19
-  RNKRTNotification: cb3981100ee0d99f7d8850cc63d9c24d7a7c3ccc
-  RNKRTVariables: 5ef13cf8bf86bb765b31c14a0f6de8e6a82e4e4b
+  RNKRTCore: c7a30297a0099fce825b46819f8bfeb2d6a5126d
+  RNKRTInAppMessaging: 81a07e1ee4eecc03ca0102f2199becc7e319f87e
+  RNKRTNotification: f4ffa6ffff811b834e5603ddc48fe02ec162b7d0
+  RNKRTVariables: 1e9d140da5c93e810c48e00fe9b902f0975e0107
   Yoga: 3ebccbdd559724312790e7742142d062476b698e
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
 PODFILE CHECKSUM: 2346a269d8ea604edffae76a27e7e612353dfac8
 
-COCOAPODS: 1.9.1
+COCOAPODS: 1.10.0
