@@ -37,6 +37,8 @@
     "prepare": "npm run build",
     "build": "bob build",
     "build:clean": "del lib",
+    "docs": "typedoc src/index.tsx --excludePrivate",
+    "docs:clean": "del docs",
     "test": "jest"
   },
   "bugs": {

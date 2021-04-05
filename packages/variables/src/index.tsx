@@ -17,15 +17,19 @@
 import { NativeModules } from 'react-native';
 import type { KRTVariablesNativeModule } from './types';
 
-class VariablesBridge {
-  constructor(private readonly nativeModule: KRTVariablesNativeModule) {}
+const nativeModule: KRTVariablesNativeModule =
+  NativeModules.RNKRTVariablesModule;
+
+/** 設定値の取得・管理を司るクラスです。 */
+export class Variables {
+  private constructor() {}
 
   /**
    * 設定値を取得し、端末上にキャッシュします。
    * @returns 取得完了Promise
    */
-  public fetch(): Promise<void> {
-    return this.nativeModule.fetch();
+  public static fetch(): Promise<void> {
+    return nativeModule.fetch();
   }
 
   /**
@@ -35,9 +39,9 @@ class VariablesBridge {
    * なお設定値にアクセスするには事前に Variables.fetch(completion:) を呼び出しておく必要があります。
    * @param key 検索するためのキー
    */
-  public getVariable(key: string): Variable {
-    const name = this.nativeModule.getVariable(key);
-    return new Variable(this.nativeModule, name);
+  public static getVariable(key: string): Variable {
+    const name = nativeModule.getVariable(key);
+    return new VariableImpl(name);
   }
 
   /**
@@ -45,9 +49,9 @@ class VariablesBridge {
    * @param variables 設定値の配列
    * @param values イベントに紐付けるカスタムオブジェクト
    */
-  public trackOpen(variables: Array<Variable>, values?: object): void {
+  public static trackOpen(variables: Array<Variable>, values?: object): void {
     const keys = variables.map((variable) => variable.name);
-    this.nativeModule.trackOpen(keys, values);
+    nativeModule.trackOpen(keys, values);
   }
 
   /**
@@ -55,9 +59,9 @@ class VariablesBridge {
    * @param variables 設定値の配列
    * @param values イベントに紐付けるカスタムオブジェクト
    */
-  public trackClick(variables: Array<Variable>, values?: object): void {
+  public static trackClick(variables: Array<Variable>, values?: object): void {
     const keys = variables.map((variable) => variable.name);
-    this.nativeModule.trackClick(keys, values);
+    nativeModule.trackClick(keys, values);
   }
 }
 
@@ -67,16 +71,8 @@ class VariablesBridge {
  * @remarks
  * 設定値の他に、接客サービスIDやアクションIDを保持しています。
  */
-class Variable {
-  /**
-   * 設定値インスタンスを初期化します。
-   * @param name 設定値名
-   */
-  public constructor(
-    private readonly nativeModule: KRTVariablesNativeModule,
-    public name: string
-  ) {}
-
+export interface Variable {
+  name: string;
   /**
    * 設定値（文字列）を返します。
    *
@@ -84,10 +80,7 @@ class Variable {
    * なお設定値が未定義の場合は、デフォルト値を返します。
    * @param defaultValue デフォルト値
    */
-  public getString(defaultValue: string): string {
-    return this.nativeModule.getString(this.name, defaultValue);
-  }
-
+  getString(defaultValue: string): string;
   /**
    * 設定値（整数）を返します。
    *
@@ -95,10 +88,7 @@ class Variable {
    * なお設定値が数値でない場合は、デフォルト値を返します。
    * @param defaultValue デフォルト値
    */
-  public getInteger(defaultValue: number): number {
-    return this.nativeModule.getInteger(this.name, defaultValue);
-  }
-
+  getInteger(defaultValue: number): number;
   /**
    * 設定値（浮動小数点数）を返します。
    *
@@ -106,10 +96,7 @@ class Variable {
    * なお設定値が数値でない場合は、デフォルト値を返します。
    * @param defaultValue デフォルト値
    */
-  public getDouble(defaultValue: number): number {
-    return this.nativeModule.getDouble(this.name, defaultValue);
-  }
-
+  getDouble(defaultValue: number): number;
   /**
    * 設定値（ブール値）を返します。
    *
@@ -122,10 +109,7 @@ class Variable {
    *
    * @param defaultValue デフォルト値
    */
-  public getBoolean(defaultValue: boolean): boolean {
-    return this.nativeModule.getBoolean(this.name, defaultValue);
-  }
-
+  getBoolean(defaultValue: boolean): boolean;
   /**
    * 設定値（配列）を返します。
    *
@@ -136,10 +120,7 @@ class Variable {
    *
    * @param defaultValue デフォルト値
    */
-  public getArray(defaultValue: Array<any>): Array<any> {
-    return this.nativeModule.getArray(this.name, defaultValue);
-  }
-
+  getArray(defaultValue: Array<any>): Array<any>;
   /**
    * 設定値（辞書）を返します。
    *
@@ -150,12 +131,27 @@ class Variable {
    *
    * @param defaultValue デフォルト値
    */
-  public getObject(defaultValue: object): object {
-    return this.nativeModule.getObject(this.name, defaultValue);
-  }
+  getObject(defaultValue: object): object;
 }
 
-/** 設定値の取得・管理を司るクラスです。 */
-export const Variables = new VariablesBridge(
-  NativeModules.RNKRTVariablesModule
-);
+class VariableImpl implements Variable {
+  constructor(public name: string) {}
+  public getString(defaultValue: string): string {
+    return nativeModule.getString(this.name, defaultValue);
+  }
+  public getInteger(defaultValue: number): number {
+    return nativeModule.getInteger(this.name, defaultValue);
+  }
+  public getDouble(defaultValue: number): number {
+    return nativeModule.getDouble(this.name, defaultValue);
+  }
+  public getBoolean(defaultValue: boolean): boolean {
+    return nativeModule.getBoolean(this.name, defaultValue);
+  }
+  public getArray(defaultValue: Array<any>): Array<any> {
+    return nativeModule.getArray(this.name, defaultValue);
+  }
+  public getObject(defaultValue: object): object {
+    return nativeModule.getObject(this.name, defaultValue);
+  }
+}

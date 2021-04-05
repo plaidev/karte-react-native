@@ -17,11 +17,11 @@
 import { NativeModules } from 'react-native';
 import type { KRTCoreNativeModule } from './types';
 
-class KarteAppBridge {
-  constructor(private readonly nativeModule: KRTCoreNativeModule) {
-    this.nativeModule = nativeModule;
-  }
+const nativeModule: KRTCoreNativeModule = NativeModules.RNKRTCoreModule;
 
+/** KARTE SDKのエントリポイントクラスです。 */
+export class KarteApp {
+  private constructor() {}
   /**
    * ビジターIDを返します。
    *
@@ -30,8 +30,8 @@ class KarteAppBridge {
    *
    * なお初期化が行われていない場合は空文字列を返します。
    */
-  public get visitorId(): string {
-    return this.nativeModule.getVisitorId();
+  public static get visitorId(): string {
+    return nativeModule.getVisitorId();
   }
 
   /**
@@ -42,8 +42,8 @@ class KarteAppBridge {
    *
    * また初期化が行われていない場合は `false` を返します。
    */
-  public get isOptOut(): boolean {
-    return this.nativeModule.isOptOut();
+  public static get isOptOut(): boolean {
+    return nativeModule.isOptOut();
   }
 
   /**
@@ -52,8 +52,8 @@ class KarteAppBridge {
    * @remarks
    * 初期化が行われていない状態で呼び出した場合はオプトインは行われません。
    */
-  public optIn(): void {
-    this.nativeModule.optIn();
+  public static optIn(): void {
+    nativeModule.optIn();
   }
 
   /**
@@ -62,8 +62,8 @@ class KarteAppBridge {
    * @remarks
    * 初期化が行われていない状態で呼び出した場合はオプトアウトは行われません。
    */
-  public optOut(): void {
-    this.nativeModule.optOut();
+  public static optOut(): void {
+    nativeModule.optOut();
   }
 
   /**
@@ -75,23 +75,22 @@ class KarteAppBridge {
    *
    * なお初期化が行われていない状態で呼び出した場合は再生成は行われません。
    */
-  public renewVisitorId(): void {
-    this.nativeModule.renewVisitorId();
+  public static renewVisitorId(): void {
+    nativeModule.renewVisitorId();
   }
 }
 
-class TrackerBridge {
-  constructor(private readonly nativeModule: KRTCoreNativeModule) {
-    this.nativeModule = nativeModule;
-  }
-
+/** イベントトラッキングを行うためのクラスです。 */
+export class Tracker {
+  private constructor() {}
   /**
    * イベントの送信を行います。
    * @param name イベント名
    * @param values イベントに紐付けるカスタムオブジェクト
    */
-  public track(name: string, values: object = {}) {
-    this.nativeModule.track(name, values ?? {});
+
+  public static track(name: string, values: object = {}) {
+    nativeModule.track(name, values ?? {});
   }
 
   /**
@@ -99,8 +98,8 @@ class TrackerBridge {
    *
    * @param values Identifyイベントに紐付けるカスタムオブジェクト
    */
-  public identify(values: object) {
-    this.nativeModule.identify(values);
+  public static identify(values: object) {
+    nativeModule.identify(values);
   }
 
   /**
@@ -109,34 +108,11 @@ class TrackerBridge {
    * @param title タイトル
    * @param values Viewイベントに紐付けるカスタムオブジェクト
    */
-  public view(viewName: string, title?: string, values: object = {}) {
-    this.nativeModule.view(viewName, title, values);
+
+  public static view(viewName: string, title?: string, values: object = {}) {
+    nativeModule.view(viewName, title, values);
   }
 }
-
-class UserSyncBridge {
-  constructor(private readonly nativeModule: KRTCoreNativeModule) {
-    this.nativeModule = nativeModule;
-  }
-
-  /**
-   * WebView 連携するためのクラスです。
-   *
-   * @remarks
-   * WebページURLに連携用のクエリパラメータを付与した状態で、URLをWebViewで開くことでWebとAppのユーザーの紐付けが行われます。
-   * なお連携を行うためにはWebページに、KARTEのタグが埋め込まれている必要があります。
-   */
-  public appendingQueryParameter(url: string): string {
-    return this.nativeModule.appendingUserSyncQueryParameter(url);
-  }
-}
-
-/** KARTE SDKのエントリポイントクラスです。 */
-export const KarteApp = new KarteAppBridge(NativeModules.RNKRTCoreModule);
-
-/** イベントトラッキングを行うためのクラスです。 */
-export const Tracker = new TrackerBridge(NativeModules.RNKRTCoreModule);
-
 /**
  * WebView 連携するためのクラスです。
  *
@@ -144,4 +120,18 @@ export const Tracker = new TrackerBridge(NativeModules.RNKRTCoreModule);
  * WebページURLに連携用のクエリパラメータを付与した状態で、URLをWebViewで開くことでWebとAppのユーザーの紐付けが行われます。
  * なお連携を行うためにはWebページに、KARTEのタグが埋め込まれている必要があります。
  */
-export const UserSync = new UserSyncBridge(NativeModules.RNKRTCoreModule);
+export class UserSync {
+  private constructor() {}
+  /**
+   * 指定されたURL文字列にWebView連携用のクエリパラメータを付与します。
+   *
+   * @remarks
+   * 連携用のクエリパラメータを付与したURL文字列を返します。
+   * 指定されたURL文字列の形式が正しくない場合、またはSDKの初期化が行われていない場合は、引数に指定したURL文字列を返します。
+   *
+   * @param url 連携するページのURL文字列
+   */
+  public static appendingQueryParameter(url: string): string {
+    return nativeModule.appendingUserSyncQueryParameter(url);
+  }
+}
