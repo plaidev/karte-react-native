@@ -36,7 +36,8 @@
   "scripts": {
     "prepare": "npm run build",
     "build": "bob build",
-    "build:clean": "del lib"
+    "build:clean": "del lib",
+    "test": "jest"
   },
   "bugs": {
     "url": "https://github.com/plaidev/karte-react-native/issues"

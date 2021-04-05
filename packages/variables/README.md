@@ -2,7 +2,7 @@
 
 [![License](https://img.shields.io/badge/license-Apache%202-blue)](https://github.com/plaidev/karte-react-native/blob/master/LICENSE)
 
-React Native KARTE provides native integration of KARTE for both Android & iOS. The React Native KARTE Core module provides a simple JavaScript API for Variables delivery.
+React Native KARTE provides native integration of KARTE for both Android & iOS. The React Native KARTE Variables module provides a simple JavaScript API for Variables delivery.
 
 ## Installation
 
