@@ -17,24 +17,24 @@
 import { NativeModules } from 'react-native';
 import type { KRTInAppMessagingNativeModule } from './types';
 
-class InAppMessagingBridge {
-  constructor(private readonly nativeModule: KRTInAppMessagingNativeModule) {
-    this.nativeModule = nativeModule;
-  }
+const nativeModule: KRTInAppMessagingNativeModule =
+  NativeModules.RNKRTInAppMessagingModule;
 
+/** アプリ内メッセージの管理を行うクラスです。 */
+export class InAppMessaging {
+  private constructor() {}
   /**
    * アプリ内メッセージの表示有無を返します。
    *
    * @remarks
    * アプリ内メッセージが表示中の場合は true を返し、表示されていない場合は false を返します。
    */
-  public get isPresenting(): boolean {
-    return this.nativeModule.isPresenting();
+  public static get isPresenting(): boolean {
+    return nativeModule.isPresenting();
   }
-
   /** 現在表示中の全てのアプリ内メッセージを非表示にします。 */
-  public dismiss(): void {
-    this.nativeModule.dismiss();
+  public static dismiss(): void {
+    nativeModule.dismiss();
   }
 
   /**
@@ -43,17 +43,12 @@ class InAppMessagingBridge {
    * @remarks
    * なお既に表示されているアプリ内メッセージは、メソッドの呼び出しと同時に非表示となります。
    */
-  public suppress(): void {
-    this.nativeModule.suppress();
+  public static suppress(): void {
+    nativeModule.suppress();
   }
 
   /** アプリ内メッセージの表示抑制状態を解除します。 */
-  public unsuppress(): void {
-    this.nativeModule.unsuppress();
+  public static unsuppress(): void {
+    nativeModule.unsuppress();
   }
 }
-
-/** アプリ内メッセージの管理を行うクラスです。 */
-export const InAppMessaging = new InAppMessagingBridge(
-  NativeModules.RNKRTInAppMessagingModule
-);

@@ -38,6 +38,8 @@
     "build": "bob build && npm run build:version",
     "build:version": "genversion --semi lib/version.js && node ./scripts/genversion-ios && node ./scripts/genversion-android",
     "build:clean": "del lib",
+    "docs": "typedoc src/index.tsx --excludePrivate",
+    "docs:clean": "del docs",
     "test": "jest"
   },
   "bugs": {

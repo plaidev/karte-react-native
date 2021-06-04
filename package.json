@@ -28,6 +28,9 @@
     "lint": "eslint \"**/*.{js,ts,tsx}\"",
     "example": "yarn --cwd example",
     "example:pods": "cd example && pod-install --quite",
+    "docs": "lerna run docs",
+    "docs:clean": "lerna run docs:clean",
+    "docs:publish": "yarn docs && ts-node scripts/publish-docs.ts",
     "test": "jest"
   },
   "devDependencies": {
@@ -37,9 +40,12 @@
     "@types/react": "^16.9.43",
     "@types/react-native": "^0.63.2",
     "commitlint": "^9.1.0",
+    "compare-versions": "^3.6.0",
     "eslint": "^7.5.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.1.4",
+    "exit-hook": "^2.2.1",
+    "fs-extra": "^9.1.0",
     "genversion": "^2.2.1",
     "husky": "^4.2.5",
     "jest": "^26.6.3",
@@ -47,6 +53,8 @@
     "pod-install": "^0.1.8",
     "prettier": "^2.0.5",
     "ts-jest": "^26.5.4",
+    "ts-node": "^9.1.1",
+    "typedoc": "^0.20.35",
     "typescript": "^3.9.7"
   },
   "jest": {
