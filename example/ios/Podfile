@@ -57,6 +57,7 @@ target 'KarteExample' do
   pod 'RNKRTInAppMessaging', :path => '../../packages/in-app-messaging'
   pod 'RNKRTNotification', :path => '../../packages/notification'
   pod 'RNKRTVariables', :path => '../../packages/variables'
+  pod 'RNKRTVisualTracking', :path => '../../packages/visual-tracking'
 
   use_native_modules!
 
@@ -65,6 +66,8 @@ target 'KarteExample' do
   # Note that if you have use_frameworks! enabled, Flipper will not work and
   # you should disable these next few lines.
   add_flipper_pods!
+  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+
   post_install do |installer|
     flipper_post_install(installer)
   end

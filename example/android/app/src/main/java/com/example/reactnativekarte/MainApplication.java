@@ -12,10 +12,12 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 import io.karte.android.KarteApp;
+import io.karte.android.core.logger.LogLevel;
 import io.karte.react.KarteCorePackage;
 import io.karte.react.in_app_messaging.KarteInAppMessagingPackage;
 import io.karte.react.notification.KarteNotificationPackage;
 import io.karte.react.variables.KarteVariablesPackage;
+import io.karte.react.visual_tracking.KarteVisualTrackingPackage;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -36,6 +38,7 @@ public class MainApplication extends Application implements ReactApplication {
           packages.add(new KarteInAppMessagingPackage());
           packages.add(new KarteNotificationPackage());
           packages.add(new KarteVariablesPackage());
+          packages.add(new KarteVisualTrackingPackage());
 
           return packages;
         }
@@ -55,7 +58,8 @@ public class MainApplication extends Application implements ReactApplication {
   public void onCreate() {
     super.onCreate();
 
-    KarteApp.setup(getApplicationContext(), "");
+    KarteApp.setLogLevel(LogLevel.VERBOSE);
+    KarteApp.setup(getApplicationContext());
 
     SoLoader.init(this, /* native exopackage */ false);
     initializeFlipper(this, getReactNativeHost().getReactInstanceManager()); // Remove this line if you don't want Flipper enabled

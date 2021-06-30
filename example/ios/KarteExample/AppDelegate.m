@@ -42,7 +42,7 @@ static void InitializeFlipper(UIApplication *application) {
   center.delegate = self;
   
   [KRTApp setLogLevel:KRTLogLevelVerbose];
-  [KRTApp setupWithAppKey:@"" configuration:KRTConfiguration.defaultConfiguration];
+  [KRTApp setupWithConfiguration:KRTConfiguration.default_];
 
   #if DEBUG
     InitializeFlipper(application);

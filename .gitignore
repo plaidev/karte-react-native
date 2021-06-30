@@ -67,4 +67,8 @@ RNKRTVersion.m
 google-services.json
 GoogleService-Info.plist
 
+# KARTE
+karte.xml
+Karte-Info.plist
+
 docs/

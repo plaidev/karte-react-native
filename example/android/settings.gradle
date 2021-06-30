@@ -1,4 +1,6 @@
 rootProject.name = 'KarteExample'
+include ':react-native-vector-icons'
+project(':react-native-vector-icons').projectDir = new File(rootProject.projectDir, '../../node_modules/react-native-vector-icons/android')
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesSettingsGradle(settings)
 include ':app'
 
@@ -13,3 +15,6 @@ project(':RNKRTNotification').projectDir = new File(rootProject.projectDir, '../
 
 include ':RNKRTVariables'
 project(':RNKRTVariables').projectDir = new File(rootProject.projectDir, '../../packages/variables/android')
+
+include ':RNKRTVisualTracking'
+project(':RNKRTVisualTracking').projectDir = new File(rootProject.projectDir, '../../packages/visual-tracking/android')
