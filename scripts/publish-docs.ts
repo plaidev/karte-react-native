@@ -168,7 +168,7 @@ class Command {
       'in-app-messaging',
       'notification',
       'variables',
-      // 'visualtracking',
+      'visual-tracking',
     ];
     modules.forEach((mod) => {
       const docs = new Documents(mod, platform, this.workspace);
