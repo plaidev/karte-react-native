@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.3.0](https://github.com/plaidev/karte-react-native/compare/react-native-karte-example@0.2.0...react-native-karte-example@0.3.0) (2021-07-01)
+
+
+### Features
+
+* **visual-tracking:** add visual tracking api ([100456c](https://github.com/plaidev/karte-react-native/commit/100456c3d60cdd34b3a1079b20185eafa3b3a416))
+
+
+
+
+
 # [0.2.0](https://github.com/plaidev/karte-react-native/compare/react-native-karte-example@0.1.0...react-native-karte-example@0.2.0) (2020-09-10)
 
 
