@@ -1,7 +1,7 @@
 {
   "name": "react-native-karte-example",
   "description": "Example app for react-native-karte",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "private": true,
   "scripts": {
     "android": "react-native run-android",
