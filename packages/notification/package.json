@@ -1,6 +1,6 @@
 {
   "name": "@react-native-karte/notification",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "KARTE SDK Notification for React Native.",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
@@ -45,13 +45,13 @@
     "url": "https://github.com/plaidev/karte-react-native/issues"
   },
   "peerDependencies": {
-    "@react-native-karte/core": "^0.0.0"
+    "@react-native-karte/core": "^1.0.0"
   },
   "devDependencies": {
-    "@react-native-community/bob": "^0.16.2",
+    "react-native-builder-bob": "^0.18.3",
     "typescript": "^3.9.7"
   },
-  "@react-native-community/bob": {
+  "react-native-builder-bob": {
     "source": "src",
     "output": "lib",
     "targets": [

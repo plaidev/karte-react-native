@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.1.0](https://github.com/plaidev/karte-react-native/compare/@react-native-karte/notification@1.0.0...@react-native-karte/notification@1.1.0) (2022-08-23)
+
+
+### Bug Fixes
+
+* update deployment target to ios10 ([d051822](https://github.com/plaidev/karte-react-native/commit/d051822d24b5441f894b83abc6d22dcfcf689946))
+
+
+### Features
+
+* **visual-tracking:** add visual tracking api ([100456c](https://github.com/plaidev/karte-react-native/commit/100456c3d60cdd34b3a1079b20185eafa3b3a416))
+
+
+
+
+
 # [1.0.0](https://github.com/plaidev/karte-react-native/compare/@react-native-karte/notification@0.2.0...@react-native-karte/notification@1.0.0) (2020-11-18)
 
 

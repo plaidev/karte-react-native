@@ -1,24 +1,5 @@
-platform :ios, '9.0'
+platform :ios, '10.0'
 require_relative '../../node_modules/@react-native-community/cli-platform-ios/native_modules'
-
-def add_flipper_pods!
-  version = '~> 0.33.1'
-  pod 'FlipperKit', version, :configuration => 'Debug'
-  pod 'FlipperKit/FlipperKitLayoutPlugin', version, :configuration => 'Debug'
-  pod 'FlipperKit/SKIOSNetworkPlugin', version, :configuration => 'Debug'
-  pod 'FlipperKit/FlipperKitUserDefaultsPlugin', version, :configuration => 'Debug'
-  pod 'FlipperKit/FlipperKitReactPlugin', version, :configuration => 'Debug'
-end
-# Post Install processing for Flipper
-def flipper_post_install(installer)
-  installer.pods_project.targets.each do |target|
-    if target.name == 'YogaKit'
-      target.build_configurations.each do |config|
-        config.build_settings['SWIFT_VERSION'] = '4.1'
-      end
-    end
-  end
-end
 
 target 'KarteExample' do
   # Pods for KarteExample
@@ -61,14 +42,27 @@ target 'KarteExample' do
 
   use_native_modules!
 
-  # Enables Flipper.
-  #
-  # Note that if you have use_frameworks! enabled, Flipper will not work and
-  # you should disable these next few lines.
-  add_flipper_pods!
-  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+  pod 'RNVectorIcons', :path => '../../node_modules/react-native-vector-icons'
 
+  ## Fix for XCode 12.5 or later
+  ## Via https://github.com/facebook/react-native/issues/31412#issuecomment-855594504
   post_install do |installer|
-    flipper_post_install(installer)
+    find_and_replace("../../node_modules/react-native/React/CxxBridge/RCTCxxBridge.mm",
+    "_initializeModules:(NSArray<id<RCTBridgeModule>> *)modules", "_initializeModules:(NSArray<Class> *)modules")
+    find_and_replace("../../node_modules/react-native/ReactCommon/turbomodule/core/platform/ios/RCTTurboModuleManager.mm",
+    "RCTBridgeModuleNameForClass(strongModule))", "RCTBridgeModuleNameForClass(Class(strongModule)))")
+  end
+
+  def find_and_replace(dir, findstr, replacestr)
+    Dir[dir].each do |name|
+      text = File.read(name)
+      replace = text.gsub(findstr,replacestr)
+      if text != replace
+          puts "Fix: " + name
+          File.open(name, "w") { |file| file.puts replace }
+          STDOUT.flush
+      end
+    end
+    Dir[dir + '*/'].each(&method(:find_and_replace))
   end
 end
