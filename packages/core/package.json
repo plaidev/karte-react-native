@@ -45,7 +45,7 @@
   "bugs": {
     "url": "https://github.com/plaidev/karte-react-native/issues"
   },
-  "-peerDependencies": {
+  "peerDependencies": {
     "react": "*",
     "react-native": "*"
   },
