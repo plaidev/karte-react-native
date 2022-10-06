@@ -19,5 +19,5 @@ Pod::Spec.new do |s|
   
   s.dependency "React"
   s.dependency "RNKRTCore"
-	s.dependency "KarteVariables"
+	s.dependency "KarteVariables", '~> 2'
 end
