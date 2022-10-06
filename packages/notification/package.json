@@ -45,13 +45,14 @@
     "url": "https://github.com/plaidev/karte-react-native/issues"
   },
   "peerDependencies": {
-    "@react-native-karte/core": "^0.0.0"
+    "@react-native-karte/core": "^1.0.0"
   },
   "devDependencies": {
-    "@react-native-community/bob": "^0.16.2",
+    "react-native-builder-bob": "^0.18.3",
+    "jest": "^29.1.2",
     "typescript": "^3.9.7"
   },
-  "@react-native-community/bob": {
+  "react-native-builder-bob": {
     "source": "src",
     "output": "lib",
     "targets": [
