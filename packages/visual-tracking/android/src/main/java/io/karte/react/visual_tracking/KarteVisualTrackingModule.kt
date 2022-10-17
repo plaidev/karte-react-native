@@ -51,8 +51,8 @@ class KarteVisualTrackingModule(reactContext: ReactApplicationContext) : ReactCo
   private fun addListenerIfNeed() {
     if (isRegistered) return
     isRegistered = true
-    val uiManagerModule: UIManagerModule = reactApplicationContext.getNativeModule(UIManagerModule::class.java)
-    uiManagerModule.eventDispatcher.addListener { event ->
+    val uiManagerModule: UIManagerModule? = reactApplicationContext.getNativeModule(UIManagerModule::class.java)
+    uiManagerModule?.eventDispatcher?.addListener { event ->
       if (event.eventName == TouchEventType.getJSEventName(TouchEventType.END)) {
         UiThreadUtil.runOnUiThread {
           runCatching {
@@ -69,14 +69,16 @@ class KarteVisualTrackingModule(reactContext: ReactApplicationContext) : ReactCo
     VisualTracking.handle(BasicAction(action, view.actionId, view.targetText, ImageProvider { view.bitmap }))
   }
 
-  private fun handleLifecycleAction(action: String, activity: Activity) {
+  private fun handleLifecycleAction(activity: Activity, action: String, actionId: String?, targetText: String?) {
     val contentView = activity.contentView
-    VisualTracking.handle(BasicAction(action, null, null, ImageProvider { contentView.bitmap }))
+    contentView.postDelayed({
+      VisualTracking.handle(BasicAction(action, actionId, targetText, ImageProvider { contentView.bitmap }))
+    }, 200)
   }
 
   @ReactMethod
   fun view(action: String, actionId: String?, targetText: String?) {
-    currentActivity?.let { handleLifecycleAction(action, it) }
+    currentActivity?.let { handleLifecycleAction(it, action, actionId, targetText) }
   }
 
 }
