@@ -69,16 +69,16 @@ class KarteVisualTrackingModule(reactContext: ReactApplicationContext) : ReactCo
     VisualTracking.handle(BasicAction(action, view.actionId, view.targetText, ImageProvider { view.bitmap }))
   }
 
-  private fun handleLifecycleAction(action: String, activity: Activity) {
+  private fun handleLifecycleAction(activity: Activity, action: String, actionId: String?, targetText: String?) {
     val contentView = activity.contentView
     contentView.postDelayed({
-      VisualTracking.handle(BasicAction(action, null, null, ImageProvider { contentView.bitmap }))
+      VisualTracking.handle(BasicAction(action, actionId, targetText, ImageProvider { contentView.bitmap }))
     }, 200)
   }
 
   @ReactMethod
   fun view(action: String, actionId: String?, targetText: String?) {
-    currentActivity?.let { handleLifecycleAction(action, it) }
+    currentActivity?.let { handleLifecycleAction(it, action, actionId, targetText) }
   }
 
 }

@@ -15,7 +15,7 @@
 //
 
 #import "RNKRTVisualTrackingModule.h"
-#import "RNKRTVisualTracking-Swift.h"
+#import <RNKRTVisualTracking/RNKRTVisualTracking-Swift.h>
 
 @implementation RNKRTVisualTrackingModule
 
