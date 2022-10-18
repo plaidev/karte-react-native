@@ -15,6 +15,9 @@
 //
 package io.karte.react
 
+import android.app.Activity
+import android.content.Intent
+import com.facebook.react.bridge.ActivityEventListener
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReactContextBaseJavaModule
 import com.facebook.react.bridge.ReactMethod
@@ -23,11 +26,25 @@ import io.karte.android.KarteApp
 import io.karte.android.core.usersync.UserSync
 import io.karte.android.tracking.Tracker
 
-class KarteCoreModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext) {
+class KarteCoreModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext), ActivityEventListener {
+  init {
+      reactContext.addActivityEventListener(this)
+  }
 
+  //region NativeModule
   override fun getName(): String {
     return "RNKRTCoreModule"
   }
+  //endregion
+
+  //region ActivityEventListener
+  override fun onActivityResult(p0: Activity?, p1: Int, p2: Int, p3: Intent?) {
+  }
+
+  override fun onNewIntent(intent: Intent?) {
+    KarteApp.onNewIntent(intent)
+  }
+  //endregion
 
   @ReactMethod(isBlockingSynchronousMethod = true)
   fun getVisitorId(): String {
