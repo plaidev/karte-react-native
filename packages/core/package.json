@@ -54,7 +54,7 @@
     "genversion": "^2.2.1",
     "react-native": "^0.70.2",
     "react-native-builder-bob": "^0.18.3",
-    "typescript": "^3.9.7"
+    "typescript": "^4.8.4"
   },
   "react-native-builder-bob": {
     "source": "src",

@@ -1,68 +1,40 @@
-platform :ios, '10.0'
-require_relative '../../node_modules/@react-native-community/cli-platform-ios/native_modules'
+require_relative '../node_modules/react-native/scripts/react_native_pods'
+require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
+
+platform :ios, '12.4'
+install! 'cocoapods', :deterministic_uuids => false
+$RNFirebaseAsStaticFramework = true
 
 target 'KarteExample' do
-  # Pods for KarteExample
-  pod 'FBLazyVector', :path => "../../node_modules/react-native/Libraries/FBLazyVector"
-  pod 'FBReactNativeSpec', :path => "../../node_modules/react-native/Libraries/FBReactNativeSpec"
-  pod 'RCTRequired', :path => "../../node_modules/react-native/Libraries/RCTRequired"
-  pod 'RCTTypeSafety', :path => "../../node_modules/react-native/Libraries/TypeSafety"
-  pod 'React', :path => '../../node_modules/react-native/'
-  pod 'React-Core', :path => '../../node_modules/react-native/'
-  pod 'React-CoreModules', :path => '../../node_modules/react-native/React/CoreModules'
-  pod 'React-Core/DevSupport', :path => '../../node_modules/react-native/'
-  pod 'React-RCTActionSheet', :path => '../../node_modules/react-native/Libraries/ActionSheetIOS'
-  pod 'React-RCTAnimation', :path => '../../node_modules/react-native/Libraries/NativeAnimation'
-  pod 'React-RCTBlob', :path => '../../node_modules/react-native/Libraries/Blob'
-  pod 'React-RCTImage', :path => '../../node_modules/react-native/Libraries/Image'
-  pod 'React-RCTLinking', :path => '../../node_modules/react-native/Libraries/LinkingIOS'
-  pod 'React-RCTNetwork', :path => '../../node_modules/react-native/Libraries/Network'
-  pod 'React-RCTSettings', :path => '../../node_modules/react-native/Libraries/Settings'
-  pod 'React-RCTText', :path => '../../node_modules/react-native/Libraries/Text'
-  pod 'React-RCTVibration', :path => '../../node_modules/react-native/Libraries/Vibration'
-  pod 'React-Core/RCTWebSocket', :path => '../../node_modules/react-native/'
+  config = use_native_modules!
+  use_frameworks! :linkage => :static
 
-  pod 'React-cxxreact', :path => '../../node_modules/react-native/ReactCommon/cxxreact'
-  pod 'React-jsi', :path => '../../node_modules/react-native/ReactCommon/jsi'
-  pod 'React-jsiexecutor', :path => '../../node_modules/react-native/ReactCommon/jsiexecutor'
-  pod 'React-jsinspector', :path => '../../node_modules/react-native/ReactCommon/jsinspector'
-  pod 'ReactCommon/callinvoker', :path => "../../node_modules/react-native/ReactCommon"
-  pod 'ReactCommon/turbomodule/core', :path => "../../node_modules/react-native/ReactCommon"
-  pod 'Yoga', :path => '../../node_modules/react-native/ReactCommon/yoga', :modular_headers => true
+  # Flags change depending on the env values.
+  flags = get_default_flags()
 
-  pod 'DoubleConversion', :podspec => '../../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec'
-  pod 'glog', :podspec => '../../node_modules/react-native/third-party-podspecs/glog.podspec'
-  pod 'Folly', :podspec => '../../node_modules/react-native/third-party-podspecs/Folly.podspec'
+  use_react_native!(
+    :path => config[:reactNativePath],
+    # Hermes is now enabled by default. Disable by setting this flag to false.
+    # Upcoming versions of React Native may rely on get_default_flags(), but
+    # we make it explicit here to aid in the React Native upgrade process.
+    :hermes_enabled => true,
+    :fabric_enabled => flags[:fabric_enabled],
+    # Enables Flipper.
+    #
+    # Note that if you have use_frameworks! enabled, Flipper will not work and
+    # you should disable the next line.
+    # :flipper_configuration => FlipperConfiguration.enabled,
+    # An absolute path to your application root.
+    :app_path => "#{Pod::Config.instance.installation_root}/.."
+  )
 
-  pod 'RNKRTCore', :path => '../../packages/core'
-  pod 'RNKRTInAppMessaging', :path => '../../packages/in-app-messaging'
-  pod 'RNKRTNotification', :path => '../../packages/notification'
-  pod 'RNKRTVariables', :path => '../../packages/variables'
-  pod 'RNKRTVisualTracking', :path => '../../packages/visual-tracking'
-
-  use_native_modules!
-
-  pod 'RNVectorIcons', :path => '../../node_modules/react-native-vector-icons'
-
-  ## Fix for XCode 12.5 or later
-  ## Via https://github.com/facebook/react-native/issues/31412#issuecomment-855594504
   post_install do |installer|
-    find_and_replace("../../node_modules/react-native/React/CxxBridge/RCTCxxBridge.mm",
-    "_initializeModules:(NSArray<id<RCTBridgeModule>> *)modules", "_initializeModules:(NSArray<Class> *)modules")
-    find_and_replace("../../node_modules/react-native/ReactCommon/turbomodule/core/platform/ios/RCTTurboModuleManager.mm",
-    "RCTBridgeModuleNameForClass(strongModule))", "RCTBridgeModuleNameForClass(Class(strongModule)))")
-  end
-
-  def find_and_replace(dir, findstr, replacestr)
-    Dir[dir].each do |name|
-      text = File.read(name)
-      replace = text.gsub(findstr,replacestr)
-      if text != replace
-          puts "Fix: " + name
-          File.open(name, "w") { |file| file.puts replace }
-          STDOUT.flush
-      end
-    end
-    Dir[dir + '*/'].each(&method(:find_and_replace))
+    react_native_post_install(
+      installer,
+      # Set `mac_catalyst_enabled` to `true` in order to apply patches
+      # necessary for Mac Catalyst builds
+      :mac_catalyst_enabled => false
+    )
+    __apply_Xcode_12_5_M1_post_install_workaround(installer)
   end
 end

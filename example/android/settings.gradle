@@ -1,20 +1,11 @@
 rootProject.name = 'KarteExample'
-include ':react-native-vector-icons'
-project(':react-native-vector-icons').projectDir = new File(rootProject.projectDir, '../../node_modules/react-native-vector-icons/android')
-apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesSettingsGradle(settings)
+apply from: file("../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesSettingsGradle(settings)
 include ':app'
+includeBuild('../node_modules/react-native-gradle-plugin')
 
-include ':RNKRTCore'
-project(':RNKRTCore').projectDir = new File(rootProject.projectDir, '../../packages/core/android')
-
-include ':RNKRTInAppMessaging'
-project(':RNKRTInAppMessaging').projectDir = new File(rootProject.projectDir, '../../packages/in-app-messaging/android')
-
-include ':RNKRTNotification'
-project(':RNKRTNotification').projectDir = new File(rootProject.projectDir, '../../packages/notification/android')
-
-include ':RNKRTVariables'
-project(':RNKRTVariables').projectDir = new File(rootProject.projectDir, '../../packages/variables/android')
-
-include ':RNKRTVisualTracking'
-project(':RNKRTVisualTracking').projectDir = new File(rootProject.projectDir, '../../packages/visual-tracking/android')
+if (settings.hasProperty("newArchEnabled") && settings.newArchEnabled == "true") {
+    include(":ReactAndroid")
+    project(":ReactAndroid").projectDir = file('../node_modules/react-native/ReactAndroid')
+    include(":ReactAndroid:hermes-engine")
+    project(":ReactAndroid:hermes-engine").projectDir = file('../node_modules/react-native/ReactAndroid/hermes-engine')
+}
