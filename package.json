@@ -6,6 +6,10 @@
     "packages": [
       "packages/*",
       "example"
+    ],
+    "nohoist": [
+      "**/react-native",
+      "**/react-native/**"
     ]
   },
   "license": "Apache-2.0",
@@ -24,8 +28,9 @@
     "versionup:major": "lerna version major --conventional-commits --no-commit-hooks",
     "release": "lerna publish from-package",
     "release:canary": "lerna publish --canary",
-    "typescript": "tsc --noEmit --composite false",
+    "typecheck": "tsc --noEmit --composite false",
     "lint": "eslint \"**/*.{js,ts,tsx}\"",
+    "format": "eslint \"**/*.{js,ts,tsx}\" --fix",
     "example": "yarn --cwd example",
     "example:pods": "cd example && pod-install --quite",
     "docs": "lerna run docs",
@@ -35,27 +40,30 @@
   },
   "devDependencies": {
     "@commitlint/config-conventional": "^9.1.1",
-    "@react-native-community/eslint-config": "^2.0.0",
-    "@types/jest": "^26.0.22",
-    "@types/react": "^16.9.43",
-    "@types/react-native": "^0.64.10",
+    "@react-native-community/eslint-config": "^3.1.0",
+    "@types/jest": "^29.1.2",
+    "@types/react": "^18.0.0",
+    "@types/react-native": "^0.70.4",
     "commitlint": "^12.1.4",
     "compare-versions": "^3.6.0",
-    "eslint": "^7.5.0",
-    "eslint-config-prettier": "^6.11.0",
-    "eslint-plugin-prettier": "^3.1.4",
+    "eslint": "^8.25.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
     "exit-hook": "^2.2.1",
     "fs-extra": "^9.1.0",
     "genversion": "^2.2.1",
     "husky": "^4.2.5",
     "jest": "^26.6.3",
     "lerna": "^4.0.0",
+    "metro-react-native-babel-preset": "^0.73.2",
     "pod-install": "^0.1.8",
     "prettier": "^2.0.5",
+    "react": "^18.2.0",
+    "react-native": "^0.70.3",
     "ts-jest": "^26.5.4",
     "ts-node": "^9.1.1",
-    "typedoc": "^0.20.35",
-    "typescript": "^3.9.7"
+    "typedoc": "^0.23.17",
+    "typescript": "^4.8.4"
   },
   "jest": {
     "projects": [
@@ -65,7 +73,7 @@
   "husky": {
     "hooks": {
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-commit": "yarn lint && yarn typescript"
+      "pre-commit": "yarn lint && yarn typecheck"
     }
   },
   "prettier": {

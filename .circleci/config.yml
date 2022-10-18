@@ -44,7 +44,7 @@ jobs:
           command: yarn lint
       - run:
           name: Typecheck files
-          command: yarn typescript
+          command: yarn typecheck
 
   build-package:
     executor: default

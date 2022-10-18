@@ -3,7 +3,7 @@ import { ScrollView } from 'react-native';
 
 import {
   NavigationContainer,
-  NavigationContainerRef,
+  useNavigationContainerRef,
 } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
@@ -75,8 +75,7 @@ export default function App() {
   React.useEffect(() => {
     NotificationUseEffect();
   }, []);
-  const navigationRef =
-    React.useRef() as React.RefObject<NavigationContainerRef>;
+  const navigationRef = useNavigationContainerRef();
   const routeNameRef = React.useRef<string>();
 
   return (
@@ -101,9 +100,9 @@ export default function App() {
       >
         <Tab.Navigator
           initialRouteName="All"
-          tabBarOptions={{
-            activeTintColor: '#e91e63',
-          }}
+          screenOptions={() => ({
+            tabBarActiveTintColor: '#e91e63',
+          })}
         >
           <Tab.Screen
             name="All"
