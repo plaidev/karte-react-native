@@ -21,6 +21,11 @@
             <action android:name="android.intent.action.MAIN" />
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
+        <intent-filter>
+            <action android:name="android.intent.action.VIEW" />
+            <category android:name="android.intent.category.DEFAULT" />
+            <data android:scheme="karte-tracker-sample" />
+        </intent-filter>
       </activity>
       <meta-data android:name="io.karte.android.Tracker.PairingUrlScheme" android:value="karte-tracker-sample"/>
     </application>
