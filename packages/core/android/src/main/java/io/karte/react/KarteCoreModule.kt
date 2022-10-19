@@ -82,6 +82,16 @@ class KarteCoreModule(reactContext: ReactApplicationContext) : ReactContextBaseJ
   }
 
   @ReactMethod
+  fun identifyWithUserId(userId: String, values: ReadableMap?) {
+    Tracker.identify(userId, values?.toHashMap())
+  }
+
+  @ReactMethod
+  fun attribute(values: ReadableMap) {
+    Tracker.attribute(values.toHashMap())
+  }
+
+  @ReactMethod
   fun view(viewName: String, title: String?, values: ReadableMap?) {
     Tracker.view(viewName, title, values?.toHashMap())
   }
@@ -89,5 +99,10 @@ class KarteCoreModule(reactContext: ReactApplicationContext) : ReactContextBaseJ
   @ReactMethod(isBlockingSynchronousMethod = true)
   fun appendingUserSyncQueryParameter(url: String): String {
     return UserSync.appendUserSyncQueryParameter(url)
+  }
+
+  @ReactMethod(isBlockingSynchronousMethod = true)
+  fun getUserSyncScript(): String? {
+    return UserSync.getUserSyncScript()
   }
 }

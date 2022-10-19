@@ -6,6 +6,7 @@ import { styles } from '../styles';
 export function TrackerComponent() {
   const [viewName, setViewName] = React.useState<string | undefined>();
   const [userId, setUserId] = React.useState<string | undefined>();
+  const [gender, setGender] = React.useState<string | undefined>();
   const [eventName, setEventName] = React.useState<string | undefined>();
 
   const fireViewEvent = () => {
@@ -18,6 +19,20 @@ export function TrackerComponent() {
     if (userId && userId.length > 0) {
       Tracker.identify({
         user_id: userId,
+      });
+    }
+  };
+
+  const fireIdentifyWithUserIdEvent = () => {
+    if (userId && userId.length > 0) {
+      Tracker.identify(userId);
+    }
+  };
+
+  const fireAttributeEvent = () => {
+    if (gender && gender.length > 0) {
+      Tracker.attribute({
+        gender: gender,
       });
     }
   };
@@ -47,7 +62,20 @@ export function TrackerComponent() {
           placeholder="User ID"
           value={userId}
         />
-        <Button onPress={() => fireIdentifyEvent()} title="Send" />
+        <Button onPress={() => fireIdentifyEvent()} title="Send by values" />
+        <Button
+          onPress={() => fireIdentifyWithUserIdEvent()}
+          title="Send with userId"
+        />
+      </View>
+      <View style={styles.subContainer}>
+        <Text style={styles.header}>Attribute event</Text>
+        <TextInput
+          onChangeText={(value) => setGender(value)}
+          placeholder="Gender"
+          value={gender}
+        />
+        <Button onPress={() => fireAttributeEvent()} title="Send" />
       </View>
       <View style={styles.subContainer}>
         <Text style={styles.header}>Custom event</Text>
@@ -73,9 +101,18 @@ export function CoreComponent() {
     ]);
   };
 
-  const userSync = () => {
+  const userSyncAppendParameter = () => {
     const url = UserSync.appendingQueryParameter('https://karte.io');
-    Alert.alert('User sync', url, [
+    Alert.alert('User sync url', url, [
+      {
+        text: 'OK',
+        onPress: () => {},
+      },
+    ]);
+  };
+  const userSyncScript = () => {
+    const script = UserSync.getUserSyncScript();
+    Alert.alert('User sync script', script, [
       {
         text: 'OK',
         onPress: () => {},
@@ -96,7 +133,11 @@ export function CoreComponent() {
       </View>
       <View style={styles.subContainer}>
         <Text style={styles.header}>User sync</Text>
-        <Button onPress={() => userSync()} title="User sync" />
+        <Button
+          onPress={() => userSyncAppendParameter()}
+          title="User sync by param"
+        />
+        <Button onPress={() => userSyncScript()} title="User sync script" />
       </View>
     </View>
   );

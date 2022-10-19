@@ -64,6 +64,14 @@ RCT_EXPORT_METHOD(identify:(NSDictionary *)values) {
     [KRTTracker identify:values];
 }
 
+RCT_EXPORT_METHOD(identifyWithUserId:(NSString *)userId values:(NSDictionary *)values) {
+    [KRTTracker identify:userId :values];
+}
+
+RCT_EXPORT_METHOD(attribute:(NSDictionary *)values) {
+    [KRTTracker attribute:values];
+}
+
 RCT_EXPORT_METHOD(view:(NSString *)viewName title:(NSString *)title values:(NSDictionary *)values) {
     [KRTTracker view:viewName title:title values:values];
 }
@@ -73,5 +81,8 @@ RCT_EXPORT_SYNCHRONOUS_TYPED_METHOD(NSString *, appendingUserSyncQueryParameter:
     return [KRTUserSync appendingQueryParameterWithURLString:url];
 }
 
+RCT_EXPORT_SYNCHRONOUS_TYPED_METHOD(NSString *, getUserSyncScript) {
+    return [KRTUserSync getUserSyncScript];
+}
 
 @end
