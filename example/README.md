@@ -11,3 +11,5 @@ Prepare the following files.
 - android/app/src/main/res/values/karte.xml
 - ios/GoogleService-Info.plist
 - ios/Karte-Info.plist
+
+And replace `your_api_key` in `src/components/WebView.tsx` file with your karte project's api key.
