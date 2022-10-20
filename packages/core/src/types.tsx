@@ -22,6 +22,9 @@ export interface KRTCoreNativeModule {
   renewVisitorId(): void;
   track(name: string, values?: object): void;
   identify(values: object): void;
+  identifyWithUserId(userId: string, values?: object): void;
+  attribute(values: object): void;
   view(viewName: string, title?: string, values?: object): void;
   appendingUserSyncQueryParameter(url: string): string;
+  getUserSyncScript(): string;
 }

@@ -98,8 +98,30 @@ export class Tracker {
    *
    * @param values Identifyイベントに紐付けるカスタムオブジェクト
    */
-  public static identify(values: object) {
-    nativeModule.identify(values);
+  public static identify(values: object): void;
+  /**
+   * Identifyイベントの送信を行います。
+   *
+   * @param userId ユーザーを識別する一意なID
+   * @param values Identifyイベントに紐付けるカスタムオブジェクト
+   */
+  public static identify(userId: string, values?: object): void;
+
+  public static identify(value: string | object, values?: object): void {
+    if (typeof value === 'string') {
+      nativeModule.identifyWithUserId(value, values ?? {});
+    } else {
+      nativeModule.identify(value);
+    }
+  }
+
+  /**
+   * Attributeイベントの送信を行います。
+   *
+   * @param values Attributeイベントにっっxz紐付けるカスタムオブジェクト
+   */
+  public static attribute(values: object) {
+    nativeModule.attribute(values);
   }
 
   /**
@@ -123,6 +145,8 @@ export class Tracker {
 export class UserSync {
   private constructor() {}
   /**
+   * @deprecated User sync function using query parameters is deprecated. It will be removed in the future. Use {@link getUserSyncScript} instead.
+   *
    * 指定されたURL文字列にWebView連携用のクエリパラメータを付与します。
    *
    * @remarks
@@ -133,5 +157,16 @@ export class UserSync {
    */
   public static appendingQueryParameter(url: string): string {
     return nativeModule.appendingUserSyncQueryParameter(url);
+  }
+
+  /**
+   * WebView 連携用のスクリプト(javascript)を返却します。
+   *
+   * @remarks
+   * ユーザースクリプトとしてWebViewに設定することで、WebView内のタグと連携されます。
+   * なおSDKの初期化が行われていない場合はnullを返却します。
+   */
+  public static getUserSyncScript(): string {
+    return nativeModule.getUserSyncScript();
   }
 }

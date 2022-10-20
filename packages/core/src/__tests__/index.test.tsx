@@ -16,8 +16,11 @@ const nativeMock = {
   },
   track: jest.fn(),
   identify: jest.fn(),
+  identifyWithUserId: jest.fn(),
+  attribute: jest.fn(),
   view: jest.fn(),
   appendingUserSyncQueryParameter: (url: string) => `${url}?appended=true`,
+  getUserSyncScript: () => 'window.__karte_ntvsync = {};',
 };
 NativeModules.RNKRTCoreModule = nativeMock;
 const { KarteApp, Tracker, UserSync } = require('../index');
@@ -36,13 +39,34 @@ describe('KarteApp test', () => {
     expect(KarteApp.visitorId).toBe('renewed');
   });
 });
-test('Tracker test', () => {
-  Tracker.track('aaa');
-  expect(nativeMock.track).toBeCalled();
+describe('Tracker test', () => {
+  it('track test', () => {
+    Tracker.track('aaa');
+    expect(nativeMock.track).toBeCalled();
+  });
+  it('identify test', () => {
+    Tracker.identify({ user_id: 'aaa' });
+    expect(nativeMock.identify).toBeCalled();
+    Tracker.identify('aaa');
+    expect(nativeMock.identifyWithUserId).toBeCalled();
+  });
+  it('attribute test', () => {
+    Tracker.attribute({ gender: 'm' });
+    expect(nativeMock.attribute).toBeCalled();
+  });
+  it('view test', () => {
+    Tracker.view('aaa');
+    expect(nativeMock.view).toBeCalled();
+  });
 });
-test('UserSync test', () => {
-  const url = 'https://example.com';
-  expect(UserSync.appendingQueryParameter(url)).toBe(
-    'https://example.com?appended=true'
-  );
+describe('UserSync test', () => {
+  it('append param test', () => {
+    const url = 'https://example.com';
+    expect(UserSync.appendingQueryParameter(url)).toBe(
+      'https://example.com?appended=true'
+    );
+  });
+  it('get script test', () => {
+    expect(UserSync.getUserSyncScript()).toBe('window.__karte_ntvsync = {};');
+  });
 });
