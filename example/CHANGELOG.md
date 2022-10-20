@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.4.0](https://github.com/plaidev/karte-react-native/compare/react-native-karte-example@0.3.1...react-native-karte-example@0.4.0) (2022-10-20)
+
+
+### Bug Fixes
+
+* **core,in-app-messaging,notification,variables,visual-tracking:** update dependencies ([#36](https://github.com/plaidev/karte-react-native/issues/36)) ([9baea8b](https://github.com/plaidev/karte-react-native/commit/9baea8bb5b658c77fd1b4eb8b554a833d2156f33))
+* **core:** support for activities that restart deep link processing ([#39](https://github.com/plaidev/karte-react-native/issues/39)) ([7c27469](https://github.com/plaidev/karte-react-native/commit/7c27469f66accc2730a623abbc20ac66987ead58))
+
+
+### Features
+
+* **core:** add UserSync.getUserSyncScript ([#40](https://github.com/plaidev/karte-react-native/issues/40)) ([ff2fb48](https://github.com/plaidev/karte-react-native/commit/ff2fb48434825252dbc29c8652d05f0c947c467e))
+* **example:** update react native and etc ([#38](https://github.com/plaidev/karte-react-native/issues/38)) ([d490697](https://github.com/plaidev/karte-react-native/commit/d490697bb1829d6be2df0c1f6a670829e5556e5a))
+
+
+
+
+
 ## [0.3.1](https://github.com/plaidev/karte-react-native/compare/react-native-karte-example@0.3.0...react-native-karte-example@0.3.1) (2022-08-23)
 
 

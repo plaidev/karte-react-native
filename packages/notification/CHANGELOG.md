@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.2.0](https://github.com/plaidev/karte-react-native/compare/@react-native-karte/notification@1.1.0...@react-native-karte/notification@1.2.0) (2022-10-20)
+
+
+### Bug Fixes
+
+* **core,in-app-messaging,notification,variables,visual-tracking:** native dependencies ([a58685f](https://github.com/plaidev/karte-react-native/commit/a58685f2f8c4da0f0209d8c1807fe549a9388826))
+* **core,in-app-messaging,notification,variables,visual-tracking:** update dependencies ([#36](https://github.com/plaidev/karte-react-native/issues/36)) ([9baea8b](https://github.com/plaidev/karte-react-native/commit/9baea8bb5b658c77fd1b4eb8b554a833d2156f33))
+
+
+### Features
+
+* **example:** update react native and etc ([#38](https://github.com/plaidev/karte-react-native/issues/38)) ([d490697](https://github.com/plaidev/karte-react-native/commit/d490697bb1829d6be2df0c1f6a670829e5556e5a))
+
+
+
+
+
 # [1.1.0](https://github.com/plaidev/karte-react-native/compare/@react-native-karte/notification@1.0.0...@react-native-karte/notification@1.1.0) (2022-08-23)
 
 
