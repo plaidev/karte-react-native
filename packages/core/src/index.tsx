@@ -15,7 +15,7 @@
 //
 
 import { NativeModules } from 'react-native';
-import type { KRTCoreNativeModule } from './types';
+import type { KRTCoreNativeModule, JSONObject } from './types';
 
 const nativeModule: KRTCoreNativeModule = NativeModules.RNKRTCoreModule;
 
@@ -89,8 +89,8 @@ export class Tracker {
    * @param values イベントに紐付けるカスタムオブジェクト
    */
 
-  public static track(name: string, values: object = {}) {
-    nativeModule.track(name, values ?? {});
+  public static track(name: string, values: JSONObject = {}) {
+    nativeModule.track(name, this.normalize(values));
   }
 
   /**
@@ -98,20 +98,20 @@ export class Tracker {
    *
    * @param values Identifyイベントに紐付けるカスタムオブジェクト
    */
-  public static identify(values: object): void;
+  public static identify(values: JSONObject): void;
   /**
    * Identifyイベントの送信を行います。
    *
    * @param userId ユーザーを識別する一意なID
    * @param values Identifyイベントに紐付けるカスタムオブジェクト
    */
-  public static identify(userId: string, values?: object): void;
+  public static identify(userId: string, values?: JSONObject): void;
 
-  public static identify(value: string | object, values?: object): void {
+  public static identify(value: string | JSONObject, values?: JSONObject): void {
     if (typeof value === 'string') {
-      nativeModule.identifyWithUserId(value, values ?? {});
+      nativeModule.identifyWithUserId(value, this.normalize(values ?? {}));
     } else {
-      nativeModule.identify(value);
+      nativeModule.identify(this.normalize(value));
     }
   }
 
@@ -120,8 +120,8 @@ export class Tracker {
    *
    * @param values Attributeイベントにっっxz紐付けるカスタムオブジェクト
    */
-  public static attribute(values: object) {
-    nativeModule.attribute(values);
+  public static attribute(values: JSONObject) {
+    nativeModule.attribute(this.normalize(values));
   }
 
   /**
@@ -130,9 +130,20 @@ export class Tracker {
    * @param title タイトル
    * @param values Viewイベントに紐付けるカスタムオブジェクト
    */
+  public static view(viewName: string, title?: string, values: JSONObject = {}) {
+    nativeModule.view(viewName, title, this.normalize(values));
+  }
 
-  public static view(viewName: string, title?: string, values: object = {}) {
-    nativeModule.view(viewName, title, values);
+  private static normalize(values: JSONObject): JSONObject {
+    return Object.keys(values).reduce((acc, k) => {
+      const v = values[k];
+      if (v instanceof Date) {
+        acc[k] = Math.floor(v.getTime() / 1000);
+      } else {
+        acc[k] = v;
+      }
+      return acc;
+    }, {} as JSONObject);
   }
 }
 /**
