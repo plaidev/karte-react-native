@@ -29,7 +29,13 @@ export interface KRTCoreNativeModule {
   getUserSyncScript(): string;
 }
 
-export type JSONValue = string | number | boolean | Date | JSONArray | JSONObject;
+export type JSONValue =
+  | string
+  | number
+  | boolean
+  | Date
+  | JSONArray
+  | JSONObject;
 
 export interface JSONArray extends Array<JSONValue> {}
 

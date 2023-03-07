@@ -42,8 +42,14 @@ describe('KarteApp test', () => {
 });
 describe('Tracker test', () => {
   it('track test', () => {
-
-    Tracker.track('aaa', { a: 'foo', b: 1, c: true, d: new Date(1000), e: [1, 2, 3], f: { g: 'bar' }});
+    Tracker.track('aaa', {
+      a: 'foo',
+      b: 1,
+      c: true,
+      d: new Date(1000),
+      e: [1, 2, 3],
+      f: { g: 'bar' },
+    });
     expect(nativeMock.track).toBeCalled();
 
     const name = nativeMock.track.mock.calls[0][0];
@@ -54,7 +60,7 @@ describe('Tracker test', () => {
     expect(values.b).toBe(1);
     expect(values.c).toBe(true);
     expect(values.d).toBe(1);
-    expect(values.e).toEqual([1,2,3])
+    expect(values.e).toEqual([1, 2, 3]);
     expect(values.f).toEqual({ g: 'bar' });
   });
   it('identify test', () => {
@@ -64,7 +70,7 @@ describe('Tracker test', () => {
     const values1 = nativeMock.identify.mock.calls[0][0];
     expect(values1.user_id).toBe('aaa');
     expect(values1.date).toBe(1);
-    
+
     Tracker.identify('aaa', { date: new Date(1000) });
     expect(nativeMock.identifyWithUserId).toBeCalled();
     expect(nativeMock.identifyWithUserId.mock.calls[0][0]).toBe('aaa');

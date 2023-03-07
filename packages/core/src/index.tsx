@@ -107,7 +107,10 @@ export class Tracker {
    */
   public static identify(userId: string, values?: JSONObject): void;
 
-  public static identify(value: string | JSONObject, values?: JSONObject): void {
+  public static identify(
+    value: string | JSONObject,
+    values?: JSONObject
+  ): void {
     if (typeof value === 'string') {
       nativeModule.identifyWithUserId(value, this.normalize(values ?? {}));
     } else {
@@ -130,7 +133,11 @@ export class Tracker {
    * @param title タイトル
    * @param values Viewイベントに紐付けるカスタムオブジェクト
    */
-  public static view(viewName: string, title?: string, values: JSONObject = {}) {
+  public static view(
+    viewName: string,
+    title?: string,
+    values: JSONObject = {}
+  ) {
     nativeModule.view(viewName, title, this.normalize(values));
   }
 
