@@ -141,16 +141,30 @@ export class Tracker {
     nativeModule.view(viewName, title, this.normalize(values));
   }
 
-  private static normalize(values: JSONObject): JSONObject {
-    return Object.keys(values).reduce((acc, k) => {
-      const v = values[k];
-      if (v instanceof Date) {
-        acc[k] = Math.floor(v.getTime() / 1000);
-      } else {
-        acc[k] = v;
+  private static normalize(values: unknown): any {
+    if (Array.isArray(values) || values instanceof Set) {
+      return Array.from(values).map(this.normalize);
+    } else if (values instanceof Map) {
+      const newValues: JSONObject = {};
+      for (const [k, v] of values) {
+        newValues[k] = this.normalize(v);
       }
-      return acc;
-    }, {} as JSONObject);
+      return newValues;
+    } else if (values !== null && typeof values === 'object') {
+      if (values instanceof Date) {
+        const time = Math.round(values.getTime() / 1000);
+        return !Number.isNaN(time) ? time : values;
+      } else if (Object.prototype.toString.call(values) === '[object String]') {
+        return values;
+      }
+      for (const k in values) {
+        if (values.hasOwnProperty(k)) {
+          // @ts-ignore
+          values[k] = this.normalize(values[k]);
+        }
+      }
+    }
+    return values;
   }
 }
 /**
