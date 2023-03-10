@@ -15,6 +15,7 @@
 //
 
 import { NativeModules } from 'react-native';
+import { normalize } from './utils';
 import type { KRTCoreNativeModule, JSONObject } from './types';
 
 const nativeModule: KRTCoreNativeModule = NativeModules.RNKRTCoreModule;
@@ -90,7 +91,7 @@ export class Tracker {
    */
 
   public static track(name: string, values: JSONObject = {}) {
-    nativeModule.track(name, this.normalize(values));
+    nativeModule.track(name, normalize(values));
   }
 
   /**
@@ -112,19 +113,19 @@ export class Tracker {
     values?: JSONObject
   ): void {
     if (typeof value === 'string') {
-      nativeModule.identifyWithUserId(value, this.normalize(values ?? {}));
+      nativeModule.identifyWithUserId(value, normalize(values ?? {}));
     } else {
-      nativeModule.identify(this.normalize(value));
+      nativeModule.identify(normalize(value));
     }
   }
 
   /**
    * Attributeイベントの送信を行います。
    *
-   * @param values Attributeイベントにっっxz紐付けるカスタムオブジェクト
+   * @param values Attributeイベントに紐付けるカスタムオブジェクト
    */
   public static attribute(values: JSONObject) {
-    nativeModule.attribute(this.normalize(values));
+    nativeModule.attribute(normalize(values));
   }
 
   /**
@@ -138,33 +139,7 @@ export class Tracker {
     title?: string,
     values: JSONObject = {}
   ) {
-    nativeModule.view(viewName, title, this.normalize(values));
-  }
-
-  private static normalize(values: unknown): any {
-    if (Array.isArray(values) || values instanceof Set) {
-      return Array.from(values).map(this.normalize);
-    } else if (values instanceof Map) {
-      const newValues: JSONObject = {};
-      for (const [k, v] of values) {
-        newValues[k] = this.normalize(v);
-      }
-      return newValues;
-    } else if (values !== null && typeof values === 'object') {
-      if (values instanceof Date) {
-        const time = Math.round(values.getTime() / 1000);
-        return !Number.isNaN(time) ? time : values;
-      } else if (Object.prototype.toString.call(values) === '[object String]') {
-        return values;
-      }
-      for (const k in values) {
-        if (values.hasOwnProperty(k)) {
-          // @ts-ignore
-          values[k] = this.normalize(values[k]);
-        }
-      }
-    }
-    return values;
+    nativeModule.view(viewName, title, normalize(values));
   }
 }
 /**
@@ -202,3 +177,5 @@ export class UserSync {
     return nativeModule.getUserSyncScript();
   }
 }
+
+export { normalize };
