@@ -16,7 +16,7 @@
 
 import { NativeModules } from 'react-native';
 import { normalize } from './utils';
-import type { KRTCoreNativeModule, JSONObject } from './types';
+import type { KRTCoreNativeModule } from './types';
 
 const nativeModule: KRTCoreNativeModule = NativeModules.RNKRTCoreModule;
 
@@ -90,7 +90,7 @@ export class Tracker {
    * @param values イベントに紐付けるカスタムオブジェクト
    */
 
-  public static track(name: string, values: JSONObject = {}) {
+  public static track(name: string, values: object = {}) {
     nativeModule.track(name, normalize(values));
   }
 
@@ -99,19 +99,16 @@ export class Tracker {
    *
    * @param values Identifyイベントに紐付けるカスタムオブジェクト
    */
-  public static identify(values: JSONObject): void;
+  public static identify(values: object): void;
   /**
    * Identifyイベントの送信を行います。
    *
    * @param userId ユーザーを識別する一意なID
    * @param values Identifyイベントに紐付けるカスタムオブジェクト
    */
-  public static identify(userId: string, values?: JSONObject): void;
+  public static identify(userId: string, values?: object): void;
 
-  public static identify(
-    value: string | JSONObject,
-    values?: JSONObject
-  ): void {
+  public static identify(value: string | object, values?: object): void {
     if (typeof value === 'string') {
       nativeModule.identifyWithUserId(value, normalize(values ?? {}));
     } else {
@@ -124,7 +121,7 @@ export class Tracker {
    *
    * @param values Attributeイベントに紐付けるカスタムオブジェクト
    */
-  public static attribute(values: JSONObject) {
+  public static attribute(values: object) {
     nativeModule.attribute(normalize(values));
   }
 
@@ -134,11 +131,7 @@ export class Tracker {
    * @param title タイトル
    * @param values Viewイベントに紐付けるカスタムオブジェクト
    */
-  public static view(
-    viewName: string,
-    title?: string,
-    values: JSONObject = {}
-  ) {
+  public static view(viewName: string, title?: string, values: object = {}) {
     nativeModule.view(viewName, title, normalize(values));
   }
 }

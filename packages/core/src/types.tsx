@@ -20,25 +20,11 @@ export interface KRTCoreNativeModule {
   optIn(): void;
   optOut(): void;
   renewVisitorId(): void;
-  track(name: string, values?: JSONObject): void;
-  identify(values: JSONObject): void;
-  identifyWithUserId(userId: string, values?: JSONObject): void;
-  attribute(values: JSONObject): void;
-  view(viewName: string, title?: string, values?: JSONObject): void;
+  track(name: string, values?: object): void;
+  identify(values: object): void;
+  identifyWithUserId(userId: string, values?: object): void;
+  attribute(values: object): void;
+  view(viewName: string, title?: string, values?: object): void;
   appendingUserSyncQueryParameter(url: string): string;
   getUserSyncScript(): string;
-}
-
-export type JSONValue =
-  | string
-  | number
-  | boolean
-  | Date
-  | JSONArray
-  | JSONObject;
-
-export interface JSONArray extends Array<JSONValue> {}
-
-export interface JSONObject {
-  [key: string]: JSONValue;
 }
