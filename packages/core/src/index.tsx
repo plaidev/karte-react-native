@@ -15,6 +15,7 @@
 //
 
 import { NativeModules } from 'react-native';
+import { normalize } from './utils';
 import type { KRTCoreNativeModule } from './types';
 
 const nativeModule: KRTCoreNativeModule = NativeModules.RNKRTCoreModule;
@@ -90,7 +91,7 @@ export class Tracker {
    */
 
   public static track(name: string, values: object = {}) {
-    nativeModule.track(name, values ?? {});
+    nativeModule.track(name, normalize(values));
   }
 
   /**
@@ -109,19 +110,19 @@ export class Tracker {
 
   public static identify(value: string | object, values?: object): void {
     if (typeof value === 'string') {
-      nativeModule.identifyWithUserId(value, values ?? {});
+      nativeModule.identifyWithUserId(value, normalize(values ?? {}));
     } else {
-      nativeModule.identify(value);
+      nativeModule.identify(normalize(value));
     }
   }
 
   /**
    * Attributeイベントの送信を行います。
    *
-   * @param values Attributeイベントにっっxz紐付けるカスタムオブジェクト
+   * @param values Attributeイベントに紐付けるカスタムオブジェクト
    */
   public static attribute(values: object) {
-    nativeModule.attribute(values);
+    nativeModule.attribute(normalize(values));
   }
 
   /**
@@ -130,9 +131,8 @@ export class Tracker {
    * @param title タイトル
    * @param values Viewイベントに紐付けるカスタムオブジェクト
    */
-
   public static view(viewName: string, title?: string, values: object = {}) {
-    nativeModule.view(viewName, title, values);
+    nativeModule.view(viewName, title, normalize(values));
   }
 }
 /**
@@ -170,3 +170,5 @@ export class UserSync {
     return nativeModule.getUserSyncScript();
   }
 }
+
+export { normalize };

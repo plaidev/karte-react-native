@@ -23,6 +23,7 @@ const nativeMock = {
   getUserSyncScript: () => 'window.__karte_ntvsync = {};',
 };
 NativeModules.RNKRTCoreModule = nativeMock;
+
 const { KarteApp, Tracker, UserSync } = require('../index');
 
 describe('KarteApp test', () => {
@@ -41,22 +42,55 @@ describe('KarteApp test', () => {
 });
 describe('Tracker test', () => {
   it('track test', () => {
-    Tracker.track('aaa');
+    const date = new Date(1000);
+    Tracker.track('aaa', {
+      a: 'foo',
+      b: 1,
+      c: true,
+      d: date,
+      e: [date],
+      f: { g: date },
+    });
     expect(nativeMock.track).toBeCalled();
+    expect(nativeMock.track.mock.calls[0][0]).toBe('aaa');
+    expect(nativeMock.track.mock.calls[0][1]).toEqual({
+      a: 'foo',
+      b: 1,
+      c: true,
+      d: 1,
+      e: [1],
+      f: {
+        g: 1,
+      },
+    });
   });
   it('identify test', () => {
-    Tracker.identify({ user_id: 'aaa' });
+    Tracker.identify({ user_id: 'aaa', date: new Date(1000) });
     expect(nativeMock.identify).toBeCalled();
-    Tracker.identify('aaa');
+    expect(nativeMock.identify.mock.calls[0][0]).toEqual({
+      user_id: 'aaa',
+      date: 1,
+    });
+
+    Tracker.identify('aaa', { date: new Date(1000) });
     expect(nativeMock.identifyWithUserId).toBeCalled();
+    expect(nativeMock.identifyWithUserId.mock.calls[0][0]).toBe('aaa');
+    expect(nativeMock.identifyWithUserId.mock.calls[0][1]).toEqual({ date: 1 });
   });
   it('attribute test', () => {
-    Tracker.attribute({ gender: 'm' });
+    Tracker.attribute({ gender: 'm', date: new Date(1000) });
     expect(nativeMock.attribute).toBeCalled();
+    expect(nativeMock.attribute.mock.calls[0][0]).toEqual({
+      gender: 'm',
+      date: 1,
+    });
   });
   it('view test', () => {
-    Tracker.view('aaa');
+    Tracker.view('aaa', 'bbb', { date: new Date(1000) });
     expect(nativeMock.view).toBeCalled();
+    expect(nativeMock.view.mock.calls[0][0]).toBe('aaa');
+    expect(nativeMock.view.mock.calls[0][1]).toBe('bbb');
+    expect(nativeMock.view.mock.calls[0][2]).toEqual({ date: 1 });
   });
 });
 describe('UserSync test', () => {
