@@ -15,7 +15,12 @@
 //
 
 #import "RNKRTVisualTrackingModule.h"
+
+#if __has_include("RNKRTVisualTracking-Swift.h")
+#import "RNKRTVisualTracking-Swift.h"
+#else
 #import <RNKRTVisualTracking/RNKRTVisualTracking-Swift.h>
+#endif
 
 @implementation RNKRTVisualTrackingModule
 
