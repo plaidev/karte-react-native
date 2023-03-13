@@ -35,7 +35,7 @@
     "prepare": "bob build",
     "build": "bob build",
     "build:clean": "del lib",
-    "docs": "typedoc src/index.tsx --excludePrivate",
+    "docs": "typedoc src/index.ts --excludePrivate",
     "docs:clean": "del docs",
     "test": "jest"
   },
