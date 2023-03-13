@@ -20,11 +20,21 @@ describe('Variables test', () => {
     Variables.fetch();
     expect(nativeMock.fetch).toBeCalled();
     Variables.trackOpen([]);
-    Variables.trackOpen([], { test: 'a' });
+    Variables.trackOpen([], { test: 'a', date: new Date(1000) });
     expect(nativeMock.trackOpen).toBeCalledTimes(2);
+    expect(nativeMock.trackOpen.mock.calls[1][0]).toEqual([]);
+    expect(nativeMock.trackOpen.mock.calls[1][1]).toEqual({
+      test: 'a',
+      date: 1,
+    });
     Variables.trackClick([]);
-    Variables.trackClick([], { test: 'a' });
+    Variables.trackClick([], { test: 'a', date: new Date(1000) });
     expect(nativeMock.trackClick).toBeCalledTimes(2);
+    expect(nativeMock.trackClick.mock.calls[1][0]).toEqual([]);
+    expect(nativeMock.trackClick.mock.calls[1][1]).toEqual({
+      test: 'a',
+      date: 1,
+    });
   });
   it('Variable test', () => {
     const variable = Variables.getVariable('test');

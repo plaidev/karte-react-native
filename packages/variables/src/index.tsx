@@ -15,6 +15,7 @@
 //
 
 import { NativeModules } from 'react-native';
+import { normalize } from '@react-native-karte/utilities';
 import type { KRTVariablesNativeModule } from './types';
 
 const nativeModule: KRTVariablesNativeModule =
@@ -51,7 +52,7 @@ export class Variables {
    */
   public static trackOpen(variables: Array<Variable>, values?: object): void {
     const keys = variables.map((variable) => variable.name);
-    nativeModule.trackOpen(keys, values);
+    nativeModule.trackOpen(keys, normalize(values));
   }
 
   /**
@@ -61,7 +62,7 @@ export class Variables {
    */
   public static trackClick(variables: Array<Variable>, values?: object): void {
     const keys = variables.map((variable) => variable.name);
-    nativeModule.trackClick(keys, values);
+    nativeModule.trackClick(keys, normalize(values));
   }
 }
 
