@@ -15,7 +15,7 @@
 //
 
 import { NativeModules } from 'react-native';
-import { normalize } from './utils';
+import { normalize } from '@react-native-karte/utilities';
 import type { KRTCoreNativeModule } from './types';
 
 const nativeModule: KRTCoreNativeModule = NativeModules.RNKRTCoreModule;

@@ -44,8 +44,8 @@
   "bugs": {
     "url": "https://github.com/plaidev/karte-react-native/issues"
   },
-  "peerDependencies": {
-    "@react-native-karte/core": "^1.0.0"
+  "dependencies": {
+    "@react-native-karte/utilities": "^0.1.0"
   },
   "devDependencies": {
     "react-native-builder-bob": "^0.18.3",

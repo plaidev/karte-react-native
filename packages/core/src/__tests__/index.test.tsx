@@ -42,27 +42,10 @@ describe('KarteApp test', () => {
 });
 describe('Tracker test', () => {
   it('track test', () => {
-    const date = new Date(1000);
-    Tracker.track('aaa', {
-      a: 'foo',
-      b: 1,
-      c: true,
-      d: date,
-      e: [date],
-      f: { g: date },
-    });
+    Tracker.track('aaa', { date: new Date(1000) });
     expect(nativeMock.track).toBeCalled();
     expect(nativeMock.track.mock.calls[0][0]).toBe('aaa');
-    expect(nativeMock.track.mock.calls[0][1]).toEqual({
-      a: 'foo',
-      b: 1,
-      c: true,
-      d: 1,
-      e: [1],
-      f: {
-        g: 1,
-      },
-    });
+    expect(nativeMock.track.mock.calls[0][1]).toEqual({ date: 1 });
   });
   it('identify test', () => {
     Tracker.identify({ user_id: 'aaa', date: new Date(1000) });
