@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.4.0](https://github.com/plaidev/karte-react-native/compare/@react-native-karte/core@1.3.0...@react-native-karte/core@1.4.0) (2023-03-13)
+
+
+### Features
+
+* convert date in values to unixtime ([#52](https://github.com/plaidev/karte-react-native/issues/52)) ([7a76244](https://github.com/plaidev/karte-react-native/commit/7a7624468251637792b3896539cf82f958c9c8fb))
+
+
+
+
+
 # [1.3.0](https://github.com/plaidev/karte-react-native/compare/@react-native-karte/core@1.2.0...@react-native-karte/core@1.3.0) (2023-03-10)
 
 
