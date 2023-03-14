@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.1](https://github.com/plaidev/karte-react-native/compare/@react-native-karte/visual-tracking@0.2.0...@react-native-karte/visual-tracking@0.2.1) (2023-03-14)
+
+
+### Bug Fixes
+
+* **vt:** switching the header file import method according to the linking method ([#53](https://github.com/plaidev/karte-react-native/issues/53)) ([907f414](https://github.com/plaidev/karte-react-native/commit/907f414b322c3c74b7d1bc308bb98aae8994fd83))
+
+
+
+
+
 # [0.2.0](https://github.com/plaidev/karte-react-native/compare/@react-native-karte/visual-tracking@0.1.1...@react-native-karte/visual-tracking@0.2.0) (2022-10-20)
 
 
