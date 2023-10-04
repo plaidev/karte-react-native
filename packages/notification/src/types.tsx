@@ -24,5 +24,5 @@ export interface KRTNotificationNativeModule {
 }
 
 export interface RemoteMessage {
-  data?: { [key: string]: string };
+  data?: { [key: string]: string | object };
 }
