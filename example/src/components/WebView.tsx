@@ -5,7 +5,7 @@ import { UserSync } from '@react-native-karte/core';
 
 export function WebViewComponent() {
   const api_key = 'your_api_key';
-  const script = UserSync.getUserSyncScript();
+  const script = UserSync.getUserSyncScript() ?? '';
   return (
     <View style={{ flex: 1 }}>
       <WebView

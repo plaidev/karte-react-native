@@ -111,7 +111,7 @@ export function CoreComponent() {
     ]);
   };
   const userSyncScript = () => {
-    const script = UserSync.getUserSyncScript();
+    const script = UserSync.getUserSyncScript() ?? '';
     Alert.alert('User sync script', script, [
       {
         text: 'OK',
