@@ -17,7 +17,7 @@
 import { NativeModules } from 'react-native';
 import type { KRTNotificationNativeModule, RemoteMessage } from './types';
 
-const nativeModule: KRTNotificationNativeModule =
+const nativeModule: KRTNotificationNativeModule | undefined =
   NativeModules.RNKRTNotificationModule;
 
 /** リモート通知メッセージのパースおよびメッセージ中に含まれるディープリンクのハンドリングを行うためのクラスです。 */
@@ -32,7 +32,7 @@ export class Notification {
    * @param fcmToken FCMトークン
    */
   public static registerFCMToken(fcmToken?: string): void {
-    nativeModule.registerFCMToken(fcmToken);
+    nativeModule?.registerFCMToken(fcmToken);
   }
 
   /**
@@ -44,7 +44,7 @@ export class Notification {
    * @param remoteMessage リモート通知メッセージ
    */
   public static create(remoteMessage: RemoteMessage): Notification | null {
-    if (nativeModule.canHandle(remoteMessage.data ?? {})) {
+    if (nativeModule?.canHandle(remoteMessage.data ?? {})) {
       return new Notification(remoteMessage);
     } else {
       return null;
@@ -59,16 +59,17 @@ export class Notification {
    * - KARTE以外から送信されたメッセージ
    * - メッセージ中に URL が含まれていない場合
    * - 不正なURL
+   * - NativeModules.RNKRTNotificationModule が存在しない場合(expo go 使用時を想定)
    */
   public get url(): string | null {
-    return nativeModule.retrieveURL(this.remoteMessage.data ?? {});
+    return nativeModule?.retrieveURL(this.remoteMessage.data ?? {}) ?? null;
   }
 
   /**
    * (Androidのみ) KARTE経由で送信された通知メッセージから、通知を作成・表示します。
    */
   public show(): void {
-    return nativeModule.show(this.remoteMessage.data ?? {});
+    return nativeModule?.show(this.remoteMessage.data ?? {});
   }
 
   /**
@@ -77,9 +78,10 @@ export class Notification {
    * @remarks
    * 内部では、メッセージ中に含まれるURLを `UIApplication.open(_:options:completionHandler:)` に渡す処理を行っています。
    * `UIApplication.open(_:options:completionHandler:)`の呼び出しが行われた場合は true を返し、メッセージ中にURLが含まれない場合は false を返します。
+   * NativeModules.RNKRTNotificationModule が存在しない場合(expo go 使用時を想定)
    */
   public handle(): boolean {
-    return nativeModule.handle(this.remoteMessage.data ?? {});
+    return nativeModule?.handle(this.remoteMessage.data ?? {}) ?? false;
   }
 
   /**
@@ -89,6 +91,6 @@ export class Notification {
    * 通常は自動でクリック計測が行われるため本メソッドを呼び出す必要はありませんが、 `isEnabledAutoMeasurement` が false の場合は自動での計測が行われないため、 本メソッドを呼び出す必要があります。
    */
   public track(): void {
-    nativeModule.track(this.remoteMessage.data ?? {});
+    nativeModule?.track(this.remoteMessage.data ?? {});
   }
 }
