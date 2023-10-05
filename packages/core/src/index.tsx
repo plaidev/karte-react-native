@@ -18,7 +18,8 @@ import { NativeModules } from 'react-native';
 import { normalize } from '@react-native-karte/utilities';
 import type { KRTCoreNativeModule } from './types';
 
-const nativeModule: KRTCoreNativeModule = NativeModules.RNKRTCoreModule;
+const nativeModule: KRTCoreNativeModule | undefined =
+  NativeModules.RNKRTCoreModule;
 
 /** KARTE SDKのエントリポイントクラスです。 */
 export class KarteApp {
@@ -32,7 +33,7 @@ export class KarteApp {
    * なお初期化が行われていない場合は空文字列を返します。
    */
   public static get visitorId(): string {
-    return nativeModule.getVisitorId();
+    return nativeModule?.getVisitorId() ?? '';
   }
 
   /**
@@ -44,7 +45,7 @@ export class KarteApp {
    * また初期化が行われていない場合は `false` を返します。
    */
   public static get isOptOut(): boolean {
-    return nativeModule.isOptOut();
+    return nativeModule?.isOptOut() ?? false;
   }
 
   /**
@@ -54,7 +55,7 @@ export class KarteApp {
    * 初期化が行われていない状態で呼び出した場合はオプトインは行われません。
    */
   public static optIn(): void {
-    nativeModule.optIn();
+    nativeModule?.optIn();
   }
 
   /**
@@ -64,7 +65,7 @@ export class KarteApp {
    * 初期化が行われていない状態で呼び出した場合はオプトアウトは行われません。
    */
   public static optOut(): void {
-    nativeModule.optOut();
+    nativeModule?.optOut();
   }
 
   /**
@@ -77,7 +78,7 @@ export class KarteApp {
    * なお初期化が行われていない状態で呼び出した場合は再生成は行われません。
    */
   public static renewVisitorId(): void {
-    nativeModule.renewVisitorId();
+    nativeModule?.renewVisitorId();
   }
 }
 
@@ -91,7 +92,7 @@ export class Tracker {
    */
 
   public static track(name: string, values: object = {}) {
-    nativeModule.track(name, normalize(values));
+    nativeModule?.track(name, normalize(values));
   }
 
   /**
@@ -110,9 +111,9 @@ export class Tracker {
 
   public static identify(value: string | object, values?: object): void {
     if (typeof value === 'string') {
-      nativeModule.identifyWithUserId(value, normalize(values ?? {}));
+      nativeModule?.identifyWithUserId(value, normalize(values ?? {}));
     } else {
-      nativeModule.identify(normalize(value));
+      nativeModule?.identify(normalize(value));
     }
   }
 
@@ -122,7 +123,7 @@ export class Tracker {
    * @param values Attributeイベントに紐付けるカスタムオブジェクト
    */
   public static attribute(values: object) {
-    nativeModule.attribute(normalize(values));
+    nativeModule?.attribute(normalize(values));
   }
 
   /**
@@ -132,7 +133,7 @@ export class Tracker {
    * @param values Viewイベントに紐付けるカスタムオブジェクト
    */
   public static view(viewName: string, title?: string, values: object = {}) {
-    nativeModule.view(viewName, title, normalize(values));
+    nativeModule?.view(viewName, title, normalize(values));
   }
 }
 /**
@@ -156,7 +157,7 @@ export class UserSync {
    * @param url 連携するページのURL文字列
    */
   public static appendingQueryParameter(url: string): string {
-    return nativeModule.appendingUserSyncQueryParameter(url);
+    return nativeModule?.appendingUserSyncQueryParameter(url) ?? url;
   }
 
   /**
@@ -166,8 +167,8 @@ export class UserSync {
    * ユーザースクリプトとしてWebViewに設定することで、WebView内のタグと連携されます。
    * なおSDKの初期化が行われていない場合はnullを返却します。
    */
-  public static getUserSyncScript(): string {
-    return nativeModule.getUserSyncScript();
+  public static getUserSyncScript(): string | null {
+    return nativeModule?.getUserSyncScript() ?? null;
   }
 }
 
