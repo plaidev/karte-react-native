@@ -17,7 +17,7 @@
 import { NativeModules } from 'react-native';
 import type { KRTInAppMessagingNativeModule } from './types';
 
-const nativeModule: KRTInAppMessagingNativeModule =
+const nativeModule: KRTInAppMessagingNativeModule | undefined =
   NativeModules.RNKRTInAppMessagingModule;
 
 /** アプリ内メッセージの管理を行うクラスです。 */
@@ -30,11 +30,11 @@ export class InAppMessaging {
    * アプリ内メッセージが表示中の場合は true を返し、表示されていない場合は false を返します。
    */
   public static get isPresenting(): boolean {
-    return nativeModule.isPresenting();
+    return nativeModule?.isPresenting() ?? false;
   }
   /** 現在表示中の全てのアプリ内メッセージを非表示にします。 */
   public static dismiss(): void {
-    nativeModule.dismiss();
+    nativeModule?.dismiss();
   }
 
   /**
@@ -44,11 +44,11 @@ export class InAppMessaging {
    * なお既に表示されているアプリ内メッセージは、メソッドの呼び出しと同時に非表示となります。
    */
   public static suppress(): void {
-    nativeModule.suppress();
+    nativeModule?.suppress();
   }
 
   /** アプリ内メッセージの表示抑制状態を解除します。 */
   public static unsuppress(): void {
-    nativeModule.unsuppress();
+    nativeModule?.unsuppress();
   }
 }
