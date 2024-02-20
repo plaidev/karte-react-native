@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.5.0](https://github.com/plaidev/karte-react-native/compare/react-native-karte-example@0.4.3...react-native-karte-example@0.5.0) (2024-02-20)
+
+**Note:** Version bump only for package react-native-karte-example
+
+
+
+
+
 ## [0.4.3](https://github.com/plaidev/karte-react-native/compare/react-native-karte-example@0.4.2...react-native-karte-example@0.4.3) (2023-03-14)
 
 **Note:** Version bump only for package react-native-karte-example

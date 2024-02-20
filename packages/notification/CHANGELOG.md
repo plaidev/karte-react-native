@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.3.0](https://github.com/plaidev/karte-react-native/compare/@react-native-karte/notification@1.2.0...@react-native-karte/notification@1.3.0) (2024-02-20)
+
+
+### Bug Fixes
+
+* **notifications:** fix RemoteMessage type ([9681d66](https://github.com/plaidev/karte-react-native/commit/9681d66c9443f50ee5e55a55544b268667e1af9e))
+
+
+
+
+
 # [1.2.0](https://github.com/plaidev/karte-react-native/compare/@react-native-karte/notification@1.1.0...@react-native-karte/notification@1.2.0) (2022-10-20)
 
 

@@ -1,7 +1,7 @@
 {
   "name": "react-native-karte-example",
   "description": "Example app for react-native-karte",
-  "version": "0.4.3",
+  "version": "0.5.0",
   "private": true,
   "workspaces": {
     "nohoist": [
@@ -20,7 +20,7 @@
     "@react-native-firebase/messaging": "^15.7.0",
     "@react-native-karte/core": "^1.4.0",
     "@react-native-karte/in-app-messaging": "^1.2.0",
-    "@react-native-karte/notification": "^1.2.0",
+    "@react-native-karte/notification": "^1.3.0",
     "@react-native-karte/variables": "^1.3.0",
     "@react-native-karte/visual-tracking": "^0.2.1",
     "@react-navigation/bottom-tabs": "^6.4.0",
