@@ -4,8 +4,7 @@
   "private": true,
   "workspaces": {
     "packages": [
-      "packages/*",
-      "example"
+      "packages/*"
     ],
     "nohoist": [
       "**/react-native",
@@ -31,8 +30,6 @@
     "typecheck": "tsc --noEmit --composite false",
     "lint": "eslint \"**/*.{js,ts,tsx}\"",
     "format": "eslint \"**/*.{js,ts,tsx}\" --fix",
-    "example": "yarn --cwd example",
-    "example:pods": "cd example && pod-install --quite",
     "docs": "lerna run docs",
     "docs:clean": "lerna run docs:clean",
     "docs:publish": "yarn docs && ts-node scripts/publish-docs.ts",
