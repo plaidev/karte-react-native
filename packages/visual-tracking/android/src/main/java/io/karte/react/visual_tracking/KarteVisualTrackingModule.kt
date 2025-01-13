@@ -18,7 +18,10 @@ package io.karte.react.visual_tracking
 import android.app.Activity
 import android.view.View
 import com.facebook.react.bridge.*
+import com.facebook.react.fabric.FabricUIManager
+import com.facebook.react.uimanager.UIManagerHelper
 import com.facebook.react.uimanager.UIManagerModule
+import com.facebook.react.uimanager.common.UIManagerType
 import com.facebook.react.uimanager.events.TouchEventType
 import io.karte.android.core.logger.Logger
 import io.karte.android.visualtracking.BasicAction
@@ -51,14 +54,33 @@ class KarteVisualTrackingModule(reactContext: ReactApplicationContext) : ReactCo
   private fun addListenerIfNeed() {
     if (isRegistered) return
     isRegistered = true
-    val uiManagerModule: UIManagerModule? = reactApplicationContext.getNativeModule(UIManagerModule::class.java)
-    uiManagerModule?.eventDispatcher?.addListener { event ->
-      if (event.eventName == TouchEventType.getJSEventName(TouchEventType.END)) {
-        UiThreadUtil.runOnUiThread {
-          runCatching {
-            val v = uiManagerModule.resolveView(event.viewTag)
-            Logger.d(LOG_TAG, "onEventDispatch touchEnd, ${v.javaClass.simpleName}, ${event.viewTag} ${v.tag}")
-            handleViewAction("RN.touchEnd", v)
+
+    if (BuildConfig.IS_NEW_ARCHITECTURE_ENABLED) {
+      // https://github.com/reactwg/react-native-new-architecture/discussions/201
+      val uiManager = UIManagerHelper.getUIManager(reactApplicationContext, UIManagerType.FABRIC) as? FabricUIManager
+      uiManager?.eventDispatcher?.addListener { event ->
+        if (event.eventName == TouchEventType.getJSEventName(TouchEventType.END)) {
+          UiThreadUtil.runOnUiThread {
+            runCatching {
+              uiManager.resolveView(event.viewTag)?.let { v ->
+                Logger.d(LOG_TAG, "onEventDispatch touchEnd, ${v.javaClass.simpleName}, ${event.viewTag} ${v.tag}")
+                handleViewAction("RN.touchEnd", v)
+              }
+            }
+          }
+        }
+      }
+    } else {
+      val uiManagerModule: UIManagerModule? = reactApplicationContext.getNativeModule(UIManagerModule::class.java)
+      uiManagerModule?.eventDispatcher?.addListener { event ->
+        if (event.eventName == TouchEventType.getJSEventName(TouchEventType.END)) {
+          UiThreadUtil.runOnUiThread {
+            runCatching {
+              uiManagerModule.resolveView(event.viewTag)?.let { v ->
+                Logger.d(LOG_TAG, "onEventDispatch touchEnd, ${v.javaClass.simpleName}, ${event.viewTag} ${v.tag}")
+                handleViewAction("RN.touchEnd", v)
+              }
+            }
           }
         }
       }
