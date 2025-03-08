@@ -105,7 +105,7 @@ class KarteVariablesModule(reactContext: ReactApplicationContext) : ReactContext
   @ReactMethod(isBlockingSynchronousMethod = true)
   fun getObject(key: String, defaultValue: ReadableMap): WritableMap? {
     val variable = variables[key] ?: return Arguments.makeNativeMap(defaultValue.toHashMap())
-    val map = variable.jsonObject(JSONObject(defaultValue.toHashMap()))
+    val map = variable.jsonObject(JSONObject(defaultValue.toHashMap() as HashMap<*, *>))
     return Arguments.makeNativeMap(map.toMap())
   }
 }
