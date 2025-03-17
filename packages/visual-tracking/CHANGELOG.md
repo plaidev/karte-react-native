@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.2](https://github.com/plaidev/karte-react-native/compare/@react-native-karte/visual-tracking@0.2.1...@react-native-karte/visual-tracking@0.2.2) (2025-03-17)
+
+
+### Bug Fixes
+
+* **visual-tracking:** add condition for new architecture UIManager handling ([58ae5f7](https://github.com/plaidev/karte-react-native/commit/58ae5f7c4c3d1d1eadac22e06c2a0d533729a8e4))
+
+
+
+
+
 ## [0.2.1](https://github.com/plaidev/karte-react-native/compare/@react-native-karte/visual-tracking@0.2.0...@react-native-karte/visual-tracking@0.2.1) (2023-03-14)
 
 

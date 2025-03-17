@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.1](https://github.com/plaidev/karte-react-native/compare/@react-native-karte/variables@1.3.0...@react-native-karte/variables@1.3.1) (2025-03-17)
+
+
+### Bug Fixes
+
+* **variables:** fix build error on Android with RN 0.75+ ([19af7df](https://github.com/plaidev/karte-react-native/commit/19af7df04ef15869e71b111bab82543aff965921))
+
+
+
+
+
 # [1.3.0](https://github.com/plaidev/karte-react-native/compare/@react-native-karte/variables@1.2.0...@react-native-karte/variables@1.3.0) (2023-03-13)
 
 
