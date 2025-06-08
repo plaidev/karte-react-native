@@ -15,22 +15,39 @@
 //
 package io.karte.react.in_app_messaging
 
-import java.util.Arrays
-
-import com.facebook.react.ReactPackage
+import com.facebook.react.TurboReactPackage
 import com.facebook.react.bridge.NativeModule
 import com.facebook.react.bridge.ReactApplicationContext
+import com.facebook.react.module.model.ReactModuleInfo
+import com.facebook.react.module.model.ReactModuleInfoProvider
 import com.facebook.react.uimanager.ViewManager
-import io.karte.react.in_app_messaging.KarteInAppMessagingModule
+import java.util.HashMap
 
-class KarteInAppMessagingPackage : ReactPackage {
-    override fun createNativeModules(reactContext: ReactApplicationContext): List<NativeModule> {
-        return Arrays.asList<NativeModule>(
-          KarteInAppMessagingModule(reactContext)
-        )
+class KarteInAppMessagingPackage : TurboReactPackage() {
+    override fun getModule(name: String, reactContext: ReactApplicationContext): NativeModule? {
+        return when (name) {
+            KarteInAppMessagingModule.NAME -> KarteInAppMessagingModule(reactContext)
+            else -> null
+        }
+    }
+
+    override fun getReactModuleInfoProvider(): ReactModuleInfoProvider {
+        return ReactModuleInfoProvider {
+            val moduleInfos: MutableMap<String, ReactModuleInfo> = HashMap()
+            moduleInfos[KarteInAppMessagingModule.NAME] = ReactModuleInfo(
+                KarteInAppMessagingModule.NAME,
+                KarteInAppMessagingModule::class.java.name,
+                false,  // canOverrideExistingModule
+                false,  // needsEagerInit
+                true,   // hasConstants
+                false,  // isCxxModule
+                true    // isTurboModule
+            )
+            moduleInfos
+        }
     }
 
     override fun createViewManagers(reactContext: ReactApplicationContext): List<ViewManager<*, *>> {
-        return emptyList<ViewManager<*, *>>()
+        return emptyList()
     }
 }

@@ -67,5 +67,10 @@
       "module",
       "typescript"
     ]
+  },
+  "codegenConfig": {
+    "name": "RNKRTCoreModuleSpec",
+    "type": "modules",
+    "jsSrcsDir": "src"
   }
 }

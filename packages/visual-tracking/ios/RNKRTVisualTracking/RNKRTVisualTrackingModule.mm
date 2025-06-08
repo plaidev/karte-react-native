@@ -22,21 +22,45 @@
 #import <RNKRTVisualTracking/RNKRTVisualTracking-Swift.h>
 #endif
 
+#ifdef RCT_NEW_ARCH_ENABLED
+#import <React/RCTConversions.h>
+#import <React/RCTUtils.h>
+#endif
+
 @implementation RNKRTVisualTrackingModule
+
+RCT_EXPORT_MODULE()
 
 + (BOOL)requiresMainQueueSetup {
     return YES;
 }
 
+#ifdef RCT_NEW_ARCH_ENABLED
+- (std::shared_ptr<facebook::react::TurboModule>)getTurboModule:
+    (const facebook::react::ObjCTurboModule::InitParams &)params
+{
+    return std::make_shared<facebook::react::NativeRNKRTVisualTrackingModuleSpecJSI>(params);
+}
+#endif
+
 - (dispatch_queue_t)methodQueue {
     return dispatch_get_main_queue();
 }
 
-RCT_EXPORT_MODULE()
+#ifdef RCT_NEW_ARCH_ENABLED
+- (void)view:(NSString *)action actionId:(NSString *)actionId targetText:(NSString *)targetText resolve:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject {
+    [KRTVisualTrackingWrapper view:action actionId:actionId targetText:targetText];
+    resolve(nil);
+}
+
+#else
+// Old Architecture implementation
 
 RCT_EXPORT_METHOD(view:(NSString *)action actionId:(nullable NSString *)actionId targetText:(nullable NSString *)targetText)
 {
     [KRTVisualTrackingWrapper view:action actionId:actionId targetText:targetText];
 }
+
+#endif
 
 @end

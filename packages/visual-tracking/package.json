@@ -68,5 +68,10 @@
       "module",
       "typescript"
     ]
+  },
+  "codegenConfig": {
+    "name": "RNKRTVisualTrackingModuleSpec",
+    "type": "modules",
+    "jsSrcsDir": "src"
   }
 }

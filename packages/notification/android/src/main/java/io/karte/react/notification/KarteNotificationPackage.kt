@@ -15,22 +15,39 @@
 //
 package io.karte.react.notification
 
-import java.util.Arrays
-
-import com.facebook.react.ReactPackage
+import com.facebook.react.TurboReactPackage
 import com.facebook.react.bridge.NativeModule
 import com.facebook.react.bridge.ReactApplicationContext
+import com.facebook.react.module.model.ReactModuleInfo
+import com.facebook.react.module.model.ReactModuleInfoProvider
 import com.facebook.react.uimanager.ViewManager
-import io.karte.react.notification.KarteNotificationModule
+import java.util.HashMap
 
-class KarteNotificationPackage : ReactPackage {
-    override fun createNativeModules(reactContext: ReactApplicationContext): List<NativeModule> {
-        return Arrays.asList<NativeModule>(
-          KarteNotificationModule(reactContext)
-        )
+class KarteNotificationPackage : TurboReactPackage() {
+    override fun getModule(name: String, reactContext: ReactApplicationContext): NativeModule? {
+        return when (name) {
+            KarteNotificationModule.NAME -> KarteNotificationModule(reactContext)
+            else -> null
+        }
+    }
+
+    override fun getReactModuleInfoProvider(): ReactModuleInfoProvider {
+        return ReactModuleInfoProvider {
+            val moduleInfos: MutableMap<String, ReactModuleInfo> = HashMap()
+            moduleInfos[KarteNotificationModule.NAME] = ReactModuleInfo(
+                KarteNotificationModule.NAME,
+                KarteNotificationModule::class.java.name,
+                false,  // canOverrideExistingModule
+                false,  // needsEagerInit
+                true,   // hasConstants
+                false,  // isCxxModule
+                true    // isTurboModule
+            )
+            moduleInfos
+        }
     }
 
     override fun createViewManagers(reactContext: ReactApplicationContext): List<ViewManager<*, *>> {
-        return emptyList<ViewManager<*, *>>()
+        return emptyList()
     }
 }

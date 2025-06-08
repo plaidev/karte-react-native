@@ -15,25 +15,33 @@
 //
 package io.karte.react.notification
 
+import com.facebook.react.bridge.Promise
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReactContextBaseJavaModule
 import com.facebook.react.bridge.ReactMethod
 import com.facebook.react.bridge.ReadableMap
+import com.facebook.react.module.annotations.ReactModule
+import com.facebook.react.turbomodule.core.interfaces.TurboModule
 import io.karte.android.KarteApp
 import io.karte.android.notifications.MessageHandler
 import io.karte.android.notifications.registerFCMToken
 
-class KarteNotificationModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext) {
+@ReactModule(name = KarteNotificationModule.NAME)
+class KarteNotificationModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext), TurboModule {
+  companion object {
+    const val NAME = "RNKRTNotificationModule"
+  }
 
   override fun getName(): String {
-    return "RNKRTNotificationModule"
+    return NAME
   }
 
   @ReactMethod
-  fun registerFCMToken(fcmToken: String?) {
+  fun registerFCMToken(fcmToken: String?, promise: Promise) {
     fcmToken?.let {
       KarteApp.registerFCMToken(it)
     }
+    promise.resolve(null)
   }
 
   @ReactMethod(isBlockingSynchronousMethod = true)
@@ -48,13 +56,15 @@ class KarteNotificationModule(reactContext: ReactApplicationContext) : ReactCont
   }
 
   @ReactMethod
-  fun show(message: ReadableMap): Boolean {
-    return MessageHandler.handleMessage(reactApplicationContext, toData(message))
+  fun show(message: ReadableMap, promise: Promise) {
+    MessageHandler.handleMessage(reactApplicationContext, toData(message))
+    promise.resolve(null)
   }
 
   @ReactMethod
-  fun track() {
+  fun track(message: ReadableMap, promise: Promise) {
     // NOP (iOS only)
+    promise.resolve(null)
   }
 
   @ReactMethod(isBlockingSynchronousMethod = true)

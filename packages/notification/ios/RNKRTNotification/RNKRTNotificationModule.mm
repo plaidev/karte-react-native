@@ -19,21 +19,83 @@
 @import KarteCore;
 @import KarteRemoteNotification;
 
-@interface RNKRTNotificationModule ()
+#ifdef RCT_NEW_ARCH_ENABLED
+#import <React/RCTConversions.h>
+#import <React/RCTUtils.h>
+#endif
 
+@interface RNKRTNotificationModule ()
 @end
 
 @implementation RNKRTNotificationModule
+
+RCT_EXPORT_MODULE()
 
 + (BOOL)requiresMainQueueSetup {
     return YES;
 }
 
+#ifdef RCT_NEW_ARCH_ENABLED
+- (std::shared_ptr<facebook::react::TurboModule>)getTurboModule:
+    (const facebook::react::ObjCTurboModule::InitParams &)params
+{
+    return std::make_shared<facebook::react::NativeRNKRTNotificationModuleSpecJSI>(params);
+}
+#endif
+
 - (dispatch_queue_t)methodQueue {
     return dispatch_get_main_queue();
 }
 
-RCT_EXPORT_MODULE()
+#ifdef RCT_NEW_ARCH_ENABLED
+- (void)registerFCMToken:(NSString *)fcmToken resolve:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject {
+    [KRTApp registerFCMToken:fcmToken];
+    resolve(nil);
+}
+
+- (BOOL)canHandle:(NSDictionary *)userInfo {
+    KRTRemoteNotification *notification = [[KRTRemoteNotification alloc] initWithUserInfo:userInfo];
+    return notification != nil;
+}
+
+- (BOOL)handle:(NSDictionary *)userInfo {
+    KRTRemoteNotification *notification = [[KRTRemoteNotification alloc] initWithUserInfo:userInfo];
+    if (notification) {
+        __block BOOL ret;
+        dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            ret = [notification handle];
+            dispatch_semaphore_signal(semaphore);
+        });
+        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+        return ret;
+    } else {
+        return NO;
+    }
+}
+
+- (void)show:(NSDictionary *)userInfo resolve:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject {
+    // NOP (Android only)
+    resolve(nil);
+}
+
+- (void)track:(NSDictionary *)userInfo resolve:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject {
+    KRTRemoteNotification *notification = [[KRTRemoteNotification alloc] initWithUserInfo:userInfo];
+    [notification track];
+    resolve(nil);
+}
+
+- (NSString *)retrieveURL:(NSDictionary *)userInfo {
+    KRTRemoteNotification *notification = [[KRTRemoteNotification alloc] initWithUserInfo:userInfo];
+    if (notification) {
+        return notification.url.absoluteString;
+    } else {
+        return nil;
+    }
+}
+
+#else
+// Old Architecture implementation
 
 RCT_EXPORT_METHOD(registerFCMToken:(NSString *)fcmToken) {
     [KRTApp registerFCMToken:fcmToken];
@@ -77,5 +139,7 @@ RCT_REMAP_BLOCKING_SYNCHRONOUS_METHOD(retrieveURL, NSString *, retrieveURLWithUs
         return nil;
     }
 }
+
+#endif
 
 @end

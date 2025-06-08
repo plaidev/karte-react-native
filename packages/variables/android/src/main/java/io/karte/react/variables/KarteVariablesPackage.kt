@@ -15,22 +15,39 @@
 //
 package io.karte.react.variables
 
-import java.util.Arrays
-
-import com.facebook.react.ReactPackage
+import com.facebook.react.TurboReactPackage
 import com.facebook.react.bridge.NativeModule
 import com.facebook.react.bridge.ReactApplicationContext
+import com.facebook.react.module.model.ReactModuleInfo
+import com.facebook.react.module.model.ReactModuleInfoProvider
 import com.facebook.react.uimanager.ViewManager
-import io.karte.react.variables.KarteVariablesModule
+import java.util.HashMap
 
-class KarteVariablesPackage : ReactPackage {
-    override fun createNativeModules(reactContext: ReactApplicationContext): List<NativeModule> {
-        return Arrays.asList<NativeModule>(
-          KarteVariablesModule(reactContext)
-        )
+class KarteVariablesPackage : TurboReactPackage() {
+    override fun getModule(name: String, reactContext: ReactApplicationContext): NativeModule? {
+        return when (name) {
+            KarteVariablesModule.NAME -> KarteVariablesModule(reactContext)
+            else -> null
+        }
+    }
+
+    override fun getReactModuleInfoProvider(): ReactModuleInfoProvider {
+        return ReactModuleInfoProvider {
+            val moduleInfos: MutableMap<String, ReactModuleInfo> = HashMap()
+            moduleInfos[KarteVariablesModule.NAME] = ReactModuleInfo(
+                KarteVariablesModule.NAME,
+                KarteVariablesModule::class.java.name,
+                false,  // canOverrideExistingModule
+                false,  // needsEagerInit
+                true,   // hasConstants
+                false,  // isCxxModule
+                true    // isTurboModule
+            )
+            moduleInfos
+        }
     }
 
     override fun createViewManagers(reactContext: ReactApplicationContext): List<ViewManager<*, *>> {
-        return emptyList<ViewManager<*, *>>()
+        return emptyList()
     }
 }

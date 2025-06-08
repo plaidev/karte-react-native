@@ -17,8 +17,12 @@
 import { NativeModules } from 'react-native';
 import type { KRTInAppMessagingNativeModule } from './types';
 
-const nativeModule: KRTInAppMessagingNativeModule =
-  NativeModules.RNKRTInAppMessagingModule;
+// TurboModule support with backward compatibility
+const isTurboModuleEnabled = global.__turboModuleProxy != null;
+
+const nativeModule: KRTInAppMessagingNativeModule = isTurboModuleEnabled
+  ? require('./NativeRNKRTInAppMessagingModule').default
+  : NativeModules.RNKRTInAppMessagingModule;
 
 /** アプリ内メッセージの管理を行うクラスです。 */
 export class InAppMessaging {

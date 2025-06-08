@@ -20,9 +20,12 @@ import android.content.Intent
 import android.util.Log
 import androidx.fragment.app.FragmentActivity
 import com.facebook.react.bridge.BaseActivityEventListener
+import com.facebook.react.bridge.Promise
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReactContextBaseJavaModule
 import com.facebook.react.bridge.ReactMethod
+import com.facebook.react.module.annotations.ReactModule
+import com.facebook.react.turbomodule.core.interfaces.TurboModule
 import io.karte.android.inappmessaging.InAppMessaging
 
 private fun log(msg: String) {
@@ -33,7 +36,11 @@ private fun log(msg: String) {
 
 private const val FRAGMENT_TAG = "Karte.FileChooserFragment"
 
-class KarteInAppMessagingModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext) {
+@ReactModule(name = KarteInAppMessagingModule.NAME)
+class KarteInAppMessagingModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext), TurboModule {
+  companion object {
+    const val NAME = "RNKRTInAppMessagingModule"
+  }
 
   init {
     reactContext.addActivityEventListener(object : BaseActivityEventListener() {
@@ -57,7 +64,7 @@ class KarteInAppMessagingModule(reactContext: ReactApplicationContext) : ReactCo
   }
 
   override fun getName(): String {
-    return "RNKRTInAppMessagingModule"
+    return NAME
   }
 
   @ReactMethod(isBlockingSynchronousMethod = true)
@@ -66,17 +73,20 @@ class KarteInAppMessagingModule(reactContext: ReactApplicationContext) : ReactCo
   }
 
   @ReactMethod
-  fun dismiss() {
+  fun dismiss(promise: Promise) {
     InAppMessaging.dismiss()
+    promise.resolve(null)
   }
 
   @ReactMethod
-  fun suppress() {
+  fun suppress(promise: Promise) {
     InAppMessaging.suppress()
+    promise.resolve(null)
   }
 
   @ReactMethod
-  fun unsuppress() {
+  fun unsuppress(promise: Promise) {
     InAppMessaging.unsuppress()
+    promise.resolve(null)
   }
 }

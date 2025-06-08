@@ -18,21 +18,56 @@
 
 @import KarteInAppMessaging;
 
-@interface RNKRTInAppMessagingModule ()
+#ifdef RCT_NEW_ARCH_ENABLED
+#import <React/RCTConversions.h>
+#import <React/RCTUtils.h>
+#endif
 
+@interface RNKRTInAppMessagingModule ()
 @end
 
 @implementation RNKRTInAppMessagingModule
+
+RCT_EXPORT_MODULE()
 
 + (BOOL)requiresMainQueueSetup {
     return YES;
 }
 
+#ifdef RCT_NEW_ARCH_ENABLED
+- (std::shared_ptr<facebook::react::TurboModule>)getTurboModule:
+    (const facebook::react::ObjCTurboModule::InitParams &)params
+{
+    return std::make_shared<facebook::react::NativeRNKRTInAppMessagingModuleSpecJSI>(params);
+}
+#endif
+
 - (dispatch_queue_t)methodQueue {
     return dispatch_get_main_queue();
 }
 
-RCT_EXPORT_MODULE()
+#ifdef RCT_NEW_ARCH_ENABLED
+- (BOOL)isPresenting {
+    return [[KRTInAppMessaging shared] isPresenting];
+}
+
+- (void)dismiss:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject {
+    [[KRTInAppMessaging shared] dismiss];
+    resolve(nil);
+}
+
+- (void)suppress:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject {
+    [[KRTInAppMessaging shared] suppress];
+    resolve(nil);
+}
+
+- (void)unsuppress:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject {
+    [[KRTInAppMessaging shared] unsuppress];
+    resolve(nil);
+}
+
+#else
+// Old Architecture implementation
 
 RCT_EXPORT_SYNCHRONOUS_TYPED_METHOD(NSNumber *, isPresenting) {
     return @([[KRTInAppMessaging shared] isPresenting]);
@@ -50,5 +85,6 @@ RCT_EXPORT_METHOD(unsuppress) {
     [[KRTInAppMessaging shared] unsuppress];
 }
 
+#endif
 
 @end

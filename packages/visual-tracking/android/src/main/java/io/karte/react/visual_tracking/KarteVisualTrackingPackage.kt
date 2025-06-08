@@ -15,15 +15,36 @@
 //
 package io.karte.react.visual_tracking
 
-import com.facebook.react.ReactPackage
+import com.facebook.react.TurboReactPackage
 import com.facebook.react.bridge.NativeModule
 import com.facebook.react.bridge.ReactApplicationContext
+import com.facebook.react.module.model.ReactModuleInfo
+import com.facebook.react.module.model.ReactModuleInfoProvider
 import com.facebook.react.uimanager.ViewManager
+import java.util.HashMap
 
+class KarteVisualTrackingPackage : TurboReactPackage() {
+    override fun getModule(name: String, reactContext: ReactApplicationContext): NativeModule? {
+        return when (name) {
+            KarteVisualTrackingModule.NAME -> KarteVisualTrackingModule(reactContext)
+            else -> null
+        }
+    }
 
-class KarteVisualTrackingPackage : ReactPackage {
-    override fun createNativeModules(reactContext: ReactApplicationContext): List<NativeModule> {
-        return listOf(KarteVisualTrackingModule(reactContext))
+    override fun getReactModuleInfoProvider(): ReactModuleInfoProvider {
+        return ReactModuleInfoProvider {
+            val moduleInfos: MutableMap<String, ReactModuleInfo> = HashMap()
+            moduleInfos[KarteVisualTrackingModule.NAME] = ReactModuleInfo(
+                KarteVisualTrackingModule.NAME,
+                KarteVisualTrackingModule::class.java.name,
+                false,  // canOverrideExistingModule
+                false,  // needsEagerInit
+                true,   // hasConstants
+                false,  // isCxxModule
+                true    // isTurboModule
+            )
+            moduleInfos
+        }
     }
 
     override fun createViewManagers(reactContext: ReactApplicationContext): List<ViewManager<*, *>> {

@@ -18,7 +18,12 @@ import { NativeModules } from 'react-native';
 import { normalize } from '@react-native-karte/utilities';
 import type { KRTCoreNativeModule } from './types';
 
-const nativeModule: KRTCoreNativeModule = NativeModules.RNKRTCoreModule;
+// TurboModule support with backward compatibility
+const isTurboModuleEnabled = global.__turboModuleProxy != null;
+
+const nativeModule: KRTCoreNativeModule = isTurboModuleEnabled
+  ? require('./NativeRNKRTCoreModule').default
+  : NativeModules.RNKRTCoreModule;
 
 /** KARTE SDKのエントリポイントクラスです。 */
 export class KarteApp {

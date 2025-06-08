@@ -17,8 +17,12 @@
 import { NativeModules } from 'react-native';
 import type { KRTVisualTrackingNativeModule } from './types';
 
-const nativeModule: KRTVisualTrackingNativeModule =
-  NativeModules.RNKRTVisualTrackingModule;
+// TurboModule support with backward compatibility
+const isTurboModuleEnabled = global.__turboModuleProxy != null;
+
+const nativeModule: KRTVisualTrackingNativeModule = isTurboModuleEnabled
+  ? require('./NativeRNKRTVisualTrackingModule').default
+  : NativeModules.RNKRTVisualTrackingModule;
 
 /** ビジュアルトラッキングの管理を行うクラスです。  */
 export class VisualTracking {

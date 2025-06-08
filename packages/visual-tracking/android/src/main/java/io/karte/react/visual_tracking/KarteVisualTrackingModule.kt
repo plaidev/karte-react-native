@@ -19,6 +19,8 @@ import android.app.Activity
 import android.view.View
 import com.facebook.react.bridge.*
 import com.facebook.react.fabric.FabricUIManager
+import com.facebook.react.module.annotations.ReactModule
+import com.facebook.react.turbomodule.core.interfaces.TurboModule
 import com.facebook.react.uimanager.UIManagerHelper
 import com.facebook.react.uimanager.UIManagerModule
 import com.facebook.react.uimanager.common.UIManagerType
@@ -30,7 +32,12 @@ import io.karte.android.visualtracking.VisualTracking
 
 private const val LOG_TAG = "Karte.VT.RN"
 
-class KarteVisualTrackingModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext), LifecycleEventListener {
+@ReactModule(name = KarteVisualTrackingModule.NAME)
+class KarteVisualTrackingModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext), LifecycleEventListener, TurboModule {
+  companion object {
+    const val NAME = "RNKRTVisualTrackingModule"
+  }
+
   private var isRegistered = false
 
   init {
@@ -38,7 +45,7 @@ class KarteVisualTrackingModule(reactContext: ReactApplicationContext) : ReactCo
   }
 
   override fun getName(): String {
-    return "RNKRTVisualTrackingModule"
+    return NAME
   }
 
   override fun onHostResume() {
@@ -99,8 +106,9 @@ class KarteVisualTrackingModule(reactContext: ReactApplicationContext) : ReactCo
   }
 
   @ReactMethod
-  fun view(action: String, actionId: String?, targetText: String?) {
+  fun view(action: String, actionId: String?, targetText: String?, promise: Promise) {
     currentActivity?.let { handleLifecycleAction(it, action, actionId, targetText) }
+    promise.resolve(null)
   }
 
 }

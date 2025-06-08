@@ -18,8 +18,12 @@ import { NativeModules } from 'react-native';
 import { normalize } from '@react-native-karte/utilities';
 import type { KRTVariablesNativeModule } from './types';
 
-const nativeModule: KRTVariablesNativeModule =
-  NativeModules.RNKRTVariablesModule;
+// TurboModule support with backward compatibility
+const isTurboModuleEnabled = global.__turboModuleProxy != null;
+
+const nativeModule: KRTVariablesNativeModule = isTurboModuleEnabled
+  ? require('./NativeRNKRTVariablesModule').default
+  : NativeModules.RNKRTVariablesModule;
 
 /** 設定値の取得・管理を司るクラスです。 */
 export class Variables {

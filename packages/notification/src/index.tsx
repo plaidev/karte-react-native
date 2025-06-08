@@ -17,8 +17,12 @@
 import { NativeModules } from 'react-native';
 import type { KRTNotificationNativeModule, RemoteMessage } from './types';
 
-const nativeModule: KRTNotificationNativeModule =
-  NativeModules.RNKRTNotificationModule;
+// TurboModule support with backward compatibility
+const isTurboModuleEnabled = global.__turboModuleProxy != null;
+
+const nativeModule: KRTNotificationNativeModule = isTurboModuleEnabled
+  ? require('./NativeRNKRTNotificationModule').default
+  : NativeModules.RNKRTNotificationModule;
 
 /** リモート通知メッセージのパースおよびメッセージ中に含まれるディープリンクのハンドリングを行うためのクラスです。 */
 export class Notification {

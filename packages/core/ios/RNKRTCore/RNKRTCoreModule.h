@@ -16,9 +16,17 @@
 
 #import <React/RCTBridgeModule.h>
 
+#ifdef RCT_NEW_ARCH_ENABLED
+#import <RNKRTCoreModuleSpec/RNKRTCoreModuleSpec.h>
+#endif
+
 NS_ASSUME_NONNULL_BEGIN
 
+#ifdef RCT_NEW_ARCH_ENABLED
+@interface RNKRTCoreModule : NSObject <NativeRNKRTCoreModuleSpec>
+#else
 @interface RNKRTCoreModule : NSObject <RCTBridgeModule>
+#endif
 @end
 
 NS_ASSUME_NONNULL_END

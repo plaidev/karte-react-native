@@ -2,6 +2,9 @@ require "json"
 
 package = JSON.parse(File.read(File.join(__dir__, "package.json")))
 
+# Check if new architecture is enabled
+new_arch_enabled = ENV['RCT_NEW_ARCH_ENABLED'] == '1'
+
 Pod::Spec.new do |s|
   s.name         = "RNKRTInAppMessaging"
   s.version      = package["version"]
@@ -17,7 +20,16 @@ Pod::Spec.new do |s|
   
   s.static_framework = true
   
-  s.dependency "React"
+  if new_arch_enabled
+    s.dependency "React-Codegen"
+    s.dependency "RCT-Folly"
+    s.dependency "RCTRequired"
+    s.dependency "RCTTypeSafety"
+    s.dependency "ReactCommon/turbomodule/core"
+  else
+    s.dependency "React"
+  end
+  
   s.dependency "RNKRTCore"
-	s.dependency "KarteInAppMessaging", '~> 2'
+  s.dependency "KarteInAppMessaging", '~> 2'
 end
