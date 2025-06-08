@@ -14,16 +14,15 @@
 //  limitations under the License.
 //
 
-import { NativeModules } from 'react-native';
+import { TurboModuleRegistry, NativeModules } from 'react-native';
 import { normalize } from '@react-native-karte/utilities';
-import type { KRTCoreNativeModule } from './types';
+import type { Spec } from './NativeRNKRTCoreModule';
 
-// TurboModule support with backward compatibility
-const isTurboModuleEnabled = global.__turboModuleProxy != null;
+// TurboModule/Bridge fallback with public API
+const TurboImpl = TurboModuleRegistry.get<Spec>('RNKRTCoreModule');
+const BridgeImpl = (NativeModules as any).RNKRTCoreModule;
 
-const nativeModule: KRTCoreNativeModule = isTurboModuleEnabled
-  ? require('./NativeRNKRTCoreModule').default
-  : NativeModules.RNKRTCoreModule;
+const nativeModule: Spec = (TurboImpl ?? BridgeImpl) as Spec;
 
 /** KARTE SDKのエントリポイントクラスです。 */
 export class KarteApp {
@@ -37,7 +36,7 @@ export class KarteApp {
    * なお初期化が行われていない場合は空文字列を返します。
    */
   public static get visitorId(): string {
-    return nativeModule.getVisitorId();
+    return nativeModule.getVisitorId() ?? '';
   }
 
   /**

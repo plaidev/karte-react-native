@@ -1,9 +1,9 @@
-import { NativeModules } from 'react-native';
+import { TurboModuleRegistry, NativeModules } from 'react-native';
 
 describe('InAppMessaging TurboModule support tests', () => {
-  const originalTurboModuleProxy = global.__turboModuleProxy;
   let mockTurboModule: any;
   let mockNativeModule: any;
+  let originalTurboModuleRegistryGet: typeof TurboModuleRegistry.get;
 
   beforeEach(() => {
     // Clear module cache
@@ -26,22 +26,25 @@ describe('InAppMessaging TurboModule support tests', () => {
 
     // Mock NativeModules
     NativeModules.RNKRTInAppMessagingModule = mockNativeModule;
+
+    // Store original TurboModuleRegistry.get
+    originalTurboModuleRegistryGet = TurboModuleRegistry.get;
   });
 
   afterEach(() => {
-    // Restore original turboModuleProxy
-    global.__turboModuleProxy = originalTurboModuleProxy;
+    // Restore original TurboModuleRegistry.get
+    TurboModuleRegistry.get = originalTurboModuleRegistryGet;
   });
 
-  describe('when TurboModule is enabled', () => {
+  describe('when TurboModule is available', () => {
     beforeEach(() => {
-      // Enable TurboModule
-      global.__turboModuleProxy = {};
-
-      // Mock the TurboModule require
-      jest.doMock('../NativeRNKRTInAppMessagingModule', () => ({
-        default: mockTurboModule,
-      }));
+      // Mock TurboModuleRegistry.get to return the mock TurboModule
+      TurboModuleRegistry.get = jest.fn((name: string) => {
+        if (name === 'RNKRTInAppMessagingModule') {
+          return mockTurboModule;
+        }
+        return null;
+      });
     });
 
     it('should use TurboModule for isPresenting', () => {
@@ -104,8 +107,8 @@ describe('InAppMessaging TurboModule support tests', () => {
 
   describe('when TurboModule is not available', () => {
     beforeEach(() => {
-      // Disable TurboModule
-      global.__turboModuleProxy = undefined;
+      // Mock TurboModuleRegistry.get to return null (no TurboModule)
+      TurboModuleRegistry.get = jest.fn(() => null);
     });
 
     it('should fall back to NativeModules for isPresenting', () => {
@@ -159,18 +162,20 @@ describe('InAppMessaging TurboModule support tests', () => {
 
   describe('module switching behavior', () => {
     it('should consistently use the same module after initialization', () => {
-      // First load with TurboModule enabled
-      global.__turboModuleProxy = {};
-      jest.doMock('../NativeRNKRTInAppMessagingModule', () => ({
-        default: mockTurboModule,
-      }));
+      // First load with TurboModule available
+      TurboModuleRegistry.get = jest.fn((name: string) => {
+        if (name === 'RNKRTInAppMessagingModule') {
+          return mockTurboModule;
+        }
+        return null;
+      });
 
       const { InAppMessaging: InAppMessaging1 } = require('../index');
       InAppMessaging1.dismiss();
       expect(mockTurboModule.dismiss).toHaveBeenCalledTimes(1);
 
-      // Change turboModuleProxy after module is loaded
-      global.__turboModuleProxy = undefined;
+      // Change TurboModuleRegistry.get after module is loaded
+      TurboModuleRegistry.get = jest.fn(() => null);
 
       // Module should still use TurboModule since it was already initialized
       InAppMessaging1.dismiss();

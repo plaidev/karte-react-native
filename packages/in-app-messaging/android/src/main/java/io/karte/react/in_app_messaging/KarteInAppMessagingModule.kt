@@ -36,7 +36,7 @@ private fun log(msg: String) {
 
 private const val FRAGMENT_TAG = "Karte.FileChooserFragment"
 
-@ReactModule(name = KarteInAppMessagingModule.NAME)
+@ReactModule(name = KarteInAppMessagingModule.NAME, isTurboModule = true)
 class KarteInAppMessagingModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext), TurboModule {
   companion object {
     const val NAME = "RNKRTInAppMessagingModule"

@@ -14,15 +14,14 @@
 //  limitations under the License.
 //
 
-import { NativeModules } from 'react-native';
-import type { KRTInAppMessagingNativeModule } from './types';
+import { TurboModuleRegistry, NativeModules } from 'react-native';
+import type { Spec } from './NativeRNKRTInAppMessagingModule';
 
-// TurboModule support with backward compatibility
-const isTurboModuleEnabled = global.__turboModuleProxy != null;
+// TurboModule/Bridge fallback with public API
+const TurboImpl = TurboModuleRegistry.get<Spec>('RNKRTInAppMessagingModule');
+const BridgeImpl = (NativeModules as any).RNKRTInAppMessagingModule;
 
-const nativeModule: KRTInAppMessagingNativeModule = isTurboModuleEnabled
-  ? require('./NativeRNKRTInAppMessagingModule').default
-  : NativeModules.RNKRTInAppMessagingModule;
+const nativeModule: Spec = (TurboImpl ?? BridgeImpl) as Spec;
 
 /** アプリ内メッセージの管理を行うクラスです。 */
 export class InAppMessaging {

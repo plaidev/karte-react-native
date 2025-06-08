@@ -14,16 +14,15 @@
 //  limitations under the License.
 //
 
-import { NativeModules } from 'react-native';
+import { TurboModuleRegistry, NativeModules } from 'react-native';
 import { normalize } from '@react-native-karte/utilities';
-import type { KRTVariablesNativeModule } from './types';
+import type { Spec } from './NativeRNKRTVariablesModule';
 
-// TurboModule support with backward compatibility
-const isTurboModuleEnabled = global.__turboModuleProxy != null;
+// TurboModule/Bridge fallback with public API
+const TurboImpl = TurboModuleRegistry.get<Spec>('RNKRTVariablesModule');
+const BridgeImpl = (NativeModules as any).RNKRTVariablesModule;
 
-const nativeModule: KRTVariablesNativeModule = isTurboModuleEnabled
-  ? require('./NativeRNKRTVariablesModule').default
-  : NativeModules.RNKRTVariablesModule;
+const nativeModule: Spec = (TurboImpl ?? BridgeImpl) as Spec;
 
 /** 設定値の取得・管理を司るクラスです。 */
 export class Variables {
@@ -142,21 +141,21 @@ export interface Variable {
 class VariableImpl implements Variable {
   constructor(public name: string) {}
   public getString(defaultValue: string): string {
-    return nativeModule.getString(this.name, defaultValue);
+    return nativeModule.getString(this.name, defaultValue) ?? defaultValue;
   }
   public getInteger(defaultValue: number): number {
-    return nativeModule.getInteger(this.name, defaultValue);
+    return nativeModule.getInteger(this.name, defaultValue) ?? defaultValue;
   }
   public getDouble(defaultValue: number): number {
-    return nativeModule.getDouble(this.name, defaultValue);
+    return nativeModule.getDouble(this.name, defaultValue) ?? defaultValue;
   }
   public getBoolean(defaultValue: boolean): boolean {
-    return nativeModule.getBoolean(this.name, defaultValue);
+    return nativeModule.getBoolean(this.name, defaultValue) ?? defaultValue;
   }
   public getArray(defaultValue: Array<any>): Array<any> {
-    return nativeModule.getArray(this.name, defaultValue);
+    return nativeModule.getArray(this.name, defaultValue) ?? defaultValue;
   }
   public getObject(defaultValue: object): object {
-    return nativeModule.getObject(this.name, defaultValue);
+    return nativeModule.getObject(this.name, defaultValue) ?? defaultValue;
   }
 }

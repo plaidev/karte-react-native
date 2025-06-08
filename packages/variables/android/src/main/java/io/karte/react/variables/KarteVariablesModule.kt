@@ -25,7 +25,7 @@ import io.karte.android.variables.Variables
 import org.json.JSONArray
 import org.json.JSONObject
 
-@ReactModule(name = KarteVariablesModule.NAME)
+@ReactModule(name = KarteVariablesModule.NAME, isTurboModule = true)
 class KarteVariablesModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext), TurboModule {
   companion object {
     const val NAME = "RNKRTVariablesModule"

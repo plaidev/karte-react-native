@@ -1,9 +1,9 @@
-import { NativeModules } from 'react-native';
+import { TurboModuleRegistry, NativeModules } from 'react-native';
 
 describe('TurboModule support tests', () => {
-  const originalTurboModuleProxy = global.__turboModuleProxy;
   let mockTurboModule: any;
   let mockNativeModule: any;
+  let originalTurboModuleRegistryGet: typeof TurboModuleRegistry.get;
 
   beforeEach(() => {
     // Clear module cache
@@ -46,22 +46,25 @@ describe('TurboModule support tests', () => {
 
     // Mock NativeModules
     NativeModules.RNKRTCoreModule = mockNativeModule;
+
+    // Store original TurboModuleRegistry.get
+    originalTurboModuleRegistryGet = TurboModuleRegistry.get;
   });
 
   afterEach(() => {
-    // Restore original turboModuleProxy
-    global.__turboModuleProxy = originalTurboModuleProxy;
+    // Restore original TurboModuleRegistry.get
+    TurboModuleRegistry.get = originalTurboModuleRegistryGet;
   });
 
-  describe('when TurboModule is enabled', () => {
+  describe('when TurboModule is available', () => {
     beforeEach(() => {
-      // Enable TurboModule
-      global.__turboModuleProxy = {};
-
-      // Mock the TurboModule require
-      jest.doMock('../NativeRNKRTCoreModule', () => ({
-        default: mockTurboModule,
-      }));
+      // Mock TurboModuleRegistry.get to return the mock TurboModule
+      TurboModuleRegistry.get = jest.fn((name: string) => {
+        if (name === 'RNKRTCoreModule') {
+          return mockTurboModule;
+        }
+        return null;
+      });
     });
 
     it('should use TurboModule when available', () => {
@@ -150,8 +153,8 @@ describe('TurboModule support tests', () => {
 
   describe('when TurboModule is not available', () => {
     beforeEach(() => {
-      // Disable TurboModule
-      global.__turboModuleProxy = undefined;
+      // Mock TurboModuleRegistry.get to return null (no TurboModule)
+      TurboModuleRegistry.get = jest.fn(() => null);
     });
 
     it('should fall back to NativeModules when TurboModule is not available', () => {
@@ -221,13 +224,13 @@ describe('TurboModule support tests', () => {
 
   describe('date normalization with TurboModule', () => {
     beforeEach(() => {
-      // Enable TurboModule
-      global.__turboModuleProxy = {};
-
-      // Mock the TurboModule require
-      jest.doMock('../NativeRNKRTCoreModule', () => ({
-        default: mockTurboModule,
-      }));
+      // Mock TurboModuleRegistry.get to return the mock TurboModule
+      TurboModuleRegistry.get = jest.fn((name: string) => {
+        if (name === 'RNKRTCoreModule') {
+          return mockTurboModule;
+        }
+        return null;
+      });
     });
 
     it('should normalize Date objects in track events', () => {

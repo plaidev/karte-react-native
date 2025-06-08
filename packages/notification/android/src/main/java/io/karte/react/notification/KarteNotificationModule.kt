@@ -26,7 +26,7 @@ import io.karte.android.KarteApp
 import io.karte.android.notifications.MessageHandler
 import io.karte.android.notifications.registerFCMToken
 
-@ReactModule(name = KarteNotificationModule.NAME)
+@ReactModule(name = KarteNotificationModule.NAME, isTurboModule = true)
 class KarteNotificationModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext), TurboModule {
   companion object {
     const val NAME = "RNKRTNotificationModule"

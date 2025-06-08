@@ -32,7 +32,7 @@ import io.karte.android.visualtracking.VisualTracking
 
 private const val LOG_TAG = "Karte.VT.RN"
 
-@ReactModule(name = KarteVisualTrackingModule.NAME)
+@ReactModule(name = KarteVisualTrackingModule.NAME, isTurboModule = true)
 class KarteVisualTrackingModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext), LifecycleEventListener, TurboModule {
   companion object {
     const val NAME = "RNKRTVisualTrackingModule"

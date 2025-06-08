@@ -29,7 +29,7 @@ import io.karte.android.KarteApp
 import io.karte.android.core.usersync.UserSync
 import io.karte.android.tracking.Tracker
 
-@ReactModule(name = KarteCoreModule.NAME)
+@ReactModule(name = KarteCoreModule.NAME, isTurboModule = true)
 class KarteCoreModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext), ActivityEventListener, TurboModule {
   companion object {
     const val NAME = "RNKRTCoreModule"
