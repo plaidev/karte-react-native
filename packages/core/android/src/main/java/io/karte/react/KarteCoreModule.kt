@@ -18,22 +18,29 @@ package io.karte.react
 import android.app.Activity
 import android.content.Intent
 import com.facebook.react.bridge.ActivityEventListener
+import com.facebook.react.bridge.Promise
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReactContextBaseJavaModule
 import com.facebook.react.bridge.ReactMethod
 import com.facebook.react.bridge.ReadableMap
+import com.facebook.react.module.annotations.ReactModule
 import io.karte.android.KarteApp
 import io.karte.android.core.usersync.UserSync
 import io.karte.android.tracking.Tracker
 
+@ReactModule(name = KarteCoreModule.NAME)
 class KarteCoreModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext), ActivityEventListener {
+  companion object {
+    const val NAME = "RNKRTCoreModule"
+  }
+
   init {
       reactContext.addActivityEventListener(this)
   }
 
   //region NativeModule
   override fun getName(): String {
-    return "RNKRTCoreModule"
+    return NAME
   }
   //endregion
 
@@ -57,43 +64,51 @@ class KarteCoreModule(reactContext: ReactApplicationContext) : ReactContextBaseJ
   }
 
   @ReactMethod
-  fun optIn() {
+  fun optIn(promise: Promise) {
     KarteApp.optIn()
+    promise.resolve(null)
   }
 
   @ReactMethod
-  fun optOut() {
+  fun optOut(promise: Promise) {
     KarteApp.optOut()
+    promise.resolve(null)
   }
 
   @ReactMethod
-  fun renewVisitorId() {
+  fun renewVisitorId(promise: Promise) {
     KarteApp.renewVisitorId()
+    promise.resolve(null)
   }
 
   @ReactMethod
-  fun track(name: String, values: ReadableMap?) {
+  fun track(name: String, values: ReadableMap?, promise: Promise) {
     Tracker.track(name, values?.toHashMap())
+    promise.resolve(null)
   }
 
   @ReactMethod
-  fun identify(values: ReadableMap) {
+  fun identify(values: ReadableMap, promise: Promise) {
     Tracker.identify(values.toHashMap())
+    promise.resolve(null)
   }
 
   @ReactMethod
-  fun identifyWithUserId(userId: String, values: ReadableMap?) {
+  fun identifyWithUserId(userId: String, values: ReadableMap?, promise: Promise) {
     Tracker.identify(userId, values?.toHashMap())
+    promise.resolve(null)
   }
 
   @ReactMethod
-  fun attribute(values: ReadableMap) {
+  fun attribute(values: ReadableMap, promise: Promise) {
     Tracker.attribute(values.toHashMap())
+    promise.resolve(null)
   }
 
   @ReactMethod
-  fun view(viewName: String, title: String?, values: ReadableMap?) {
+  fun view(viewName: String, title: String?, values: ReadableMap?, promise: Promise) {
     Tracker.view(viewName, title, values?.toHashMap())
+    promise.resolve(null)
   }
 
   @ReactMethod(isBlockingSynchronousMethod = true)

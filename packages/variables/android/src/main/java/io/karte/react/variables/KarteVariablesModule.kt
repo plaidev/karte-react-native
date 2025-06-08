@@ -16,6 +16,7 @@
 package io.karte.react.variables
 
 import com.facebook.react.bridge.*
+import com.facebook.react.module.annotations.ReactModule
 import io.karte.android.utilities.toList
 import io.karte.android.utilities.toMap
 import io.karte.android.variables.Variable
@@ -23,11 +24,16 @@ import io.karte.android.variables.Variables
 import org.json.JSONArray
 import org.json.JSONObject
 
+@ReactModule(name = KarteVariablesModule.NAME)
 class KarteVariablesModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext) {
+  companion object {
+    const val NAME = "RNKRTVariablesModule"
+  }
+
   private val variables: MutableMap<String, Variable> = mutableMapOf()
 
   override fun getName(): String {
-    return "RNKRTVariablesModule"
+    return NAME
   }
 
   @ReactMethod
@@ -50,7 +56,7 @@ class KarteVariablesModule(reactContext: ReactApplicationContext) : ReactContext
   }
 
   @ReactMethod
-  fun trackOpen(keys: ReadableArray, values: ReadableMap?) {
+  fun trackOpen(keys: ReadableArray, values: ReadableMap?, promise: Promise) {
     val vars = (0 until keys.size()).mapNotNull {
       keys.getString(it)
     }.mapNotNull {
@@ -58,10 +64,11 @@ class KarteVariablesModule(reactContext: ReactApplicationContext) : ReactContext
     }
 
     Variables.trackOpen(vars, values?.toHashMap())
+    promise.resolve(null)
   }
 
   @ReactMethod
-  fun trackClick(keys: ReadableArray, values: ReadableMap?) {
+  fun trackClick(keys: ReadableArray, values: ReadableMap?, promise: Promise) {
     val vars = (0 until keys.size()).mapNotNull {
       keys.getString(it)
     }.mapNotNull {
@@ -69,6 +76,7 @@ class KarteVariablesModule(reactContext: ReactApplicationContext) : ReactContext
     }
 
     Variables.trackClick(vars, values?.toHashMap())
+    promise.resolve(null)
   }
 
   @ReactMethod(isBlockingSynchronousMethod = true)
