@@ -15,22 +15,33 @@
 //
 package io.karte.react
 
-import java.util.Arrays
-
-import com.facebook.react.ReactPackage
+import com.facebook.react.BaseReactPackage
 import com.facebook.react.bridge.NativeModule
 import com.facebook.react.bridge.ReactApplicationContext
-import com.facebook.react.uimanager.ViewManager
-import io.karte.react.KarteCoreModule
+import com.facebook.react.module.model.ReactModuleInfo
+import com.facebook.react.module.model.ReactModuleInfoProvider
 
-class KarteCorePackage : ReactPackage {
-    override fun createNativeModules(reactContext: ReactApplicationContext): List<NativeModule> {
-        return Arrays.asList<NativeModule>(
-          KarteCoreModule(reactContext)
-        )
+class KarteCorePackage : BaseReactPackage() {
+    override fun getModule(name: String, reactContext: ReactApplicationContext): NativeModule? {
+        return if (name == KarteCoreModule.NAME) {
+            KarteCoreModule(reactContext)
+        } else {
+            null
+        }
     }
 
-    override fun createViewManagers(reactContext: ReactApplicationContext): List<ViewManager<*, *>> {
-        return emptyList<ViewManager<*, *>>()
+    override fun getReactModuleInfoProvider(): ReactModuleInfoProvider {
+        return ReactModuleInfoProvider {
+            mapOf(
+                KarteCoreModule.NAME to ReactModuleInfo(
+                    KarteCoreModule.NAME,
+                    KarteCoreModule::class.java.name,
+                    true, // canOverrideExistingModule
+                    false, // needsEagerInit
+                    false, // hasConstants
+                    false // isCxxModule
+                )
+            )
+        }
     }
 }

@@ -16,9 +16,17 @@
 
 #import <React/RCTBridgeModule.h>
 
+#ifdef RCT_NEW_ARCH_ENABLED
+#import <RNKRTInAppMessagingModuleSpec/RNKRTInAppMessagingModuleSpec.h>
+#endif
+
 NS_ASSUME_NONNULL_BEGIN
 
+#ifdef RCT_NEW_ARCH_ENABLED
+@interface RNKRTInAppMessagingModule : NSObject <NativeRNKRTInAppMessagingModuleSpec>
+#else
 @interface RNKRTInAppMessagingModule : NSObject <RCTBridgeModule>
+#endif
 @end
 
 NS_ASSUME_NONNULL_END

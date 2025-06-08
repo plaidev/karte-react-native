@@ -14,12 +14,15 @@
 //  limitations under the License.
 //
 
-import { NativeModules } from 'react-native';
+import { TurboModuleRegistry, NativeModules } from 'react-native';
 import { normalize } from '@react-native-karte/utilities';
-import type { KRTVariablesNativeModule } from './types';
+import type { Spec } from './NativeRNKRTVariablesModule';
 
-const nativeModule: KRTVariablesNativeModule =
-  NativeModules.RNKRTVariablesModule;
+// TurboModule/Bridge fallback with public API
+const TurboImpl = TurboModuleRegistry.get<Spec>('RNKRTVariablesModule');
+const BridgeImpl = (NativeModules as any).RNKRTVariablesModule;
+
+const nativeModule: Spec = (TurboImpl ?? BridgeImpl) as Spec;
 
 /** 設定値の取得・管理を司るクラスです。 */
 export class Variables {

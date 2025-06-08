@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0C32444624D3A15F00D10AAD /* RNKRTCoreModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C32443F24D3A15E00D10AAD /* RNKRTCoreModule.m */; };
+		0C32444624D3A15F00D10AAD /* RNKRTCoreModule.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0C32443F24D3A15E00D10AAD /* RNKRTCoreModule.mm */; };
 		0C32444724D3A15F00D10AAD /* RNKRTVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C32444024D3A15E00D10AAD /* RNKRTVersion.m */; };
 		0C32444824D3A15F00D10AAD /* RNKRTLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C32444224D3A15E00D10AAD /* RNKRTLoader.m */; };
 		0C32444924D3A15F00D10AAD /* Karte.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C32444324D3A15E00D10AAD /* Karte.swift */; };
@@ -27,7 +27,7 @@
 
 /* Begin PBXFileReference section */
 		0C32443E24D3A15E00D10AAD /* RNKRTLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RNKRTLoader.h; path = RNKRTCore/RNKRTLoader.h; sourceTree = "<group>"; };
-		0C32443F24D3A15E00D10AAD /* RNKRTCoreModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RNKRTCoreModule.m; path = RNKRTCore/RNKRTCoreModule.m; sourceTree = "<group>"; };
+		0C32443F24D3A15E00D10AAD /* RNKRTCoreModule.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = RNKRTCoreModule.mm; path = RNKRTCore/RNKRTCoreModule.mm; sourceTree = "<group>"; };
 		0C32444024D3A15E00D10AAD /* RNKRTVersion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RNKRTVersion.m; path = RNKRTCore/RNKRTVersion.m; sourceTree = "<group>"; };
 		0C32444124D3A15E00D10AAD /* Karte-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Karte-Bridging-Header.h"; path = "RNKRTCore/Karte-Bridging-Header.h"; sourceTree = "<group>"; };
 		0C32444224D3A15E00D10AAD /* RNKRTLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RNKRTLoader.m; path = RNKRTCore/RNKRTLoader.m; sourceTree = "<group>"; };
@@ -62,7 +62,7 @@
 				0C32444124D3A15E00D10AAD /* Karte-Bridging-Header.h */,
 				0C32444324D3A15E00D10AAD /* Karte.swift */,
 				0C32444524D3A15F00D10AAD /* RNKRTCoreModule.h */,
-				0C32443F24D3A15E00D10AAD /* RNKRTCoreModule.m */,
+				0C32443F24D3A15E00D10AAD /* RNKRTCoreModule.mm */,
 				0C32443E24D3A15E00D10AAD /* RNKRTLoader.h */,
 				0C32444224D3A15E00D10AAD /* RNKRTLoader.m */,
 				0C32444424D3A15E00D10AAD /* RNKRTVersion.h */,
@@ -129,7 +129,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0C32444824D3A15F00D10AAD /* RNKRTLoader.m in Sources */,
-				0C32444624D3A15F00D10AAD /* RNKRTCoreModule.m in Sources */,
+				0C32444624D3A15F00D10AAD /* RNKRTCoreModule.mm in Sources */,
 				0C32444724D3A15F00D10AAD /* RNKRTVersion.m in Sources */,
 				0C32444924D3A15F00D10AAD /* Karte.swift in Sources */,
 			);

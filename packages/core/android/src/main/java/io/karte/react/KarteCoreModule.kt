@@ -22,18 +22,24 @@ import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReactContextBaseJavaModule
 import com.facebook.react.bridge.ReactMethod
 import com.facebook.react.bridge.ReadableMap
+import com.facebook.react.module.annotations.ReactModule
 import io.karte.android.KarteApp
 import io.karte.android.core.usersync.UserSync
 import io.karte.android.tracking.Tracker
 
+@ReactModule(name = KarteCoreModule.NAME)
 class KarteCoreModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext), ActivityEventListener {
+  companion object {
+    const val NAME = "RNKRTCoreModule"
+  }
+
   init {
       reactContext.addActivityEventListener(this)
   }
 
   //region NativeModule
   override fun getName(): String {
-    return "RNKRTCoreModule"
+    return NAME
   }
   //endregion
 

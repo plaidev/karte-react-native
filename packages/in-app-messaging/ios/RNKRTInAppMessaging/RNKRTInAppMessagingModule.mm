@@ -16,23 +16,57 @@
 
 #import "RNKRTInAppMessagingModule.h"
 
-@import KarteInAppMessaging;
+#import <AppTrackingTransparency/ATTrackingManager.h>
+#import <KarteCore/KarteCore-Swift.h>
+#import <KarteInAppMessaging/KarteInAppMessaging-Swift.h>
+
+#ifdef RCT_NEW_ARCH_ENABLED
+#import <React/RCTConversions.h>
+#import <React/RCTUtils.h>
+#endif
 
 @interface RNKRTInAppMessagingModule ()
-
 @end
 
 @implementation RNKRTInAppMessagingModule
+
+RCT_EXPORT_MODULE()
 
 + (BOOL)requiresMainQueueSetup {
     return YES;
 }
 
+#ifdef RCT_NEW_ARCH_ENABLED
+- (std::shared_ptr<facebook::react::TurboModule>)getTurboModule:
+(const facebook::react::ObjCTurboModule::InitParams &)params
+{
+    return std::make_shared<facebook::react::NativeRNKRTInAppMessagingModuleSpecJSI>(params);
+}
+#endif
+
 - (dispatch_queue_t)methodQueue {
     return dispatch_get_main_queue();
 }
 
-RCT_EXPORT_MODULE()
+#ifdef RCT_NEW_ARCH_ENABLED
+- (NSNumber *)isPresenting {
+    return @([[KRTInAppMessaging shared] isPresenting]);
+}
+
+- (void)dismiss {
+    [[KRTInAppMessaging shared] dismiss];
+}
+
+- (void)suppress {
+    [[KRTInAppMessaging shared] suppress];
+}
+
+- (void)unsuppress {
+    [[KRTInAppMessaging shared] unsuppress];
+}
+
+#else
+// Old Architecture implementation
 
 RCT_EXPORT_SYNCHRONOUS_TYPED_METHOD(NSNumber *, isPresenting) {
     return @([[KRTInAppMessaging shared] isPresenting]);
@@ -50,5 +84,6 @@ RCT_EXPORT_METHOD(unsuppress) {
     [[KRTInAppMessaging shared] unsuppress];
 }
 
+#endif
 
 @end

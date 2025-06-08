@@ -14,11 +14,14 @@
 //  limitations under the License.
 //
 
-import { NativeModules } from 'react-native';
-import type { KRTVisualTrackingNativeModule } from './types';
+import { TurboModuleRegistry, NativeModules } from 'react-native';
+import type { Spec } from './NativeRNKRTVisualTrackingModule';
 
-const nativeModule: KRTVisualTrackingNativeModule =
-  NativeModules.RNKRTVisualTrackingModule;
+// TurboModule/Bridge fallback with public API
+const TurboImpl = TurboModuleRegistry.get<Spec>('RNKRTVisualTrackingModule');
+const BridgeImpl = (NativeModules as any).RNKRTVisualTrackingModule;
+
+const nativeModule: Spec = (TurboImpl ?? BridgeImpl) as Spec;
 
 /** ビジュアルトラッキングの管理を行うクラスです。  */
 export class VisualTracking {

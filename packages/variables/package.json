@@ -62,5 +62,10 @@
       "module",
       "typescript"
     ]
+  },
+  "codegenConfig": {
+    "name": "RNKRTVariablesModuleSpec",
+    "type": "modules",
+    "jsSrcsDir": "src"
   }
 }

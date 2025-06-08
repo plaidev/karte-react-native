@@ -17,8 +17,13 @@ package io.karte.react.visual_tracking
 
 import android.app.Activity
 import android.view.View
-import com.facebook.react.bridge.*
+import com.facebook.react.bridge.LifecycleEventListener
+import com.facebook.react.bridge.ReactApplicationContext
+import com.facebook.react.bridge.ReactContextBaseJavaModule
+import com.facebook.react.bridge.ReactMethod
+import com.facebook.react.bridge.UiThreadUtil
 import com.facebook.react.fabric.FabricUIManager
+import com.facebook.react.module.annotations.ReactModule
 import com.facebook.react.uimanager.UIManagerHelper
 import com.facebook.react.uimanager.UIManagerModule
 import com.facebook.react.uimanager.common.UIManagerType
@@ -30,7 +35,12 @@ import io.karte.android.visualtracking.VisualTracking
 
 private const val LOG_TAG = "Karte.VT.RN"
 
+@ReactModule(name = KarteVisualTrackingModule.NAME)
 class KarteVisualTrackingModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext), LifecycleEventListener {
+  companion object {
+    const val NAME = "RNKRTVisualTrackingModule"
+  }
+
   private var isRegistered = false
 
   init {
@@ -38,7 +48,7 @@ class KarteVisualTrackingModule(reactContext: ReactApplicationContext) : ReactCo
   }
 
   override fun getName(): String {
-    return "RNKRTVisualTrackingModule"
+    return NAME
   }
 
   override fun onHostResume() {
