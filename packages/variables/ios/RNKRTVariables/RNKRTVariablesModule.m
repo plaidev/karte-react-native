@@ -135,4 +135,13 @@ RCT_REMAP_BLOCKING_SYNCHRONOUS_METHOD(getObject, NSDictionary *, objectForKey:(N
     return [variable dictionaryWithDefaultValue:value];
 }
 
+RCT_REMAP_METHOD(clearCacheByKey, clearCacheByKey:(NSString *)key) {
+    [KRTVariables clearCacheForKey:key];
+    [self.variables removeObjectForKey:key];
+}
+
+RCT_REMAP_BLOCKING_SYNCHRONOUS_METHOD(getAllKeys, NSArray *, getAllKeys) {
+    return [KRTVariables getAllKeys];
+}
+
 @end

@@ -108,4 +108,18 @@ class KarteVariablesModule(reactContext: ReactApplicationContext) : ReactContext
     val map = variable.jsonObject(JSONObject(defaultValue.toHashMap() as HashMap<*, *>))
     return Arguments.makeNativeMap(map.toMap())
   }
+
+  @ReactMethod
+  fun clearCacheByKey(key: String) {
+    Variables.clearCacheByKey(key)
+    variables.remove(key)
+  }
+
+  @ReactMethod(isBlockingSynchronousMethod = true)
+  fun getAllKeys(): WritableArray {
+    val keys = Variables.getAllKeys()
+    return Arguments.createArray().apply {
+      keys.forEach { pushString(it) }
+    }
+  }
 }
