@@ -83,6 +83,13 @@ export class Variables {
   public static getAllKeys(): Array<string> {
     return nativeModule.getAllKeys();
   }
+
+  /**
+   * 全ての設定値のキャッシュを削除します。
+   */
+  public static clearCacheAll(): void {
+    nativeModule.clearCacheAll();
+  }
 }
 
 /**
