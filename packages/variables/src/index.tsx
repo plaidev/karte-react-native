@@ -75,7 +75,7 @@ export class Variables {
 
   /**
    * 全ての設定値のキーの一覧を取得します。
-   * 
+   *
    * @remarks
    * なお事前に Variables.fetch() を呼び出しておく必要があります。
    * @returns 全ての設定値のキーの一覧
