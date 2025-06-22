@@ -122,4 +122,10 @@ class KarteVariablesModule(reactContext: ReactApplicationContext) : ReactContext
       keys.forEach { pushString(it) }
     }
   }
+
+  @ReactMethod
+  fun clearCacheAll() {
+    Variables.clearCacheAll()
+    variables.clear()
+  }
 }

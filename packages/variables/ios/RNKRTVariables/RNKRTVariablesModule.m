@@ -144,4 +144,9 @@ RCT_REMAP_BLOCKING_SYNCHRONOUS_METHOD(getAllKeys, NSArray *, getAllKeys) {
     return [KRTVariables getAllKeys];
 }
 
+RCT_REMAP_METHOD(clearCacheAll, clearCacheAll) {
+    [KRTVariables clearCacheAll];
+    [self.variables removeAllObjects];
+}
+
 @end
