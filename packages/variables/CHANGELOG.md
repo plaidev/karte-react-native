@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.4.0](https://github.com/plaidev/karte-react-native/compare/@react-native-karte/variables@1.3.1...@react-native-karte/variables@1.4.0) (2025-07-08)
+
+
+### Bug Fixes
+
+* lint formatting in Variables class ([820f126](https://github.com/plaidev/karte-react-native/commit/820f126bb078bbbffa151be03b83a8ec36a5810f))
+
+
+### Features
+
+* **variables:** add clearCacheAll method ([c80ef33](https://github.com/plaidev/karte-react-native/commit/c80ef332822f768c0364383bdedae638fdaae7ab))
+* **variables:** add clearCacheByKey and getAllKeys methods ([365a328](https://github.com/plaidev/karte-react-native/commit/365a328255b060fd7d51252f5c8a3a3c108ebf13))
+
+
+
+
+
 ## [1.3.1](https://github.com/plaidev/karte-react-native/compare/@react-native-karte/variables@1.3.0...@react-native-karte/variables@1.3.1) (2025-03-17)
 
 
