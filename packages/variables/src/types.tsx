@@ -25,4 +25,7 @@ export interface KRTVariablesNativeModule {
   getBoolean(key: string, defaultValue: boolean): boolean;
   getArray(key: string, defaultValue: Array<any>): Array<any>;
   getObject(key: string, defaultValue: object): object;
+  clearCacheByKey(key: string): void;
+  getAllKeys(): Array<string>;
+  clearCacheAll(): void;
 }

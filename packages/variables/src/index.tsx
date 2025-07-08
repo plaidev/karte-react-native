@@ -64,6 +64,32 @@ export class Variables {
     const keys = variables.map((variable) => variable.name);
     nativeModule.trackClick(keys, normalize(values));
   }
+
+  /**
+   * 指定したキーの設定値のキャッシュを削除します。
+   * @param key 削除するキー
+   */
+  public static clearCacheByKey(key: string): void {
+    nativeModule.clearCacheByKey(key);
+  }
+
+  /**
+   * 全ての設定値のキーの一覧を取得します。
+   *
+   * @remarks
+   * なお事前に Variables.fetch() を呼び出しておく必要があります。
+   * @returns 全ての設定値のキーの一覧
+   */
+  public static getAllKeys(): Array<string> {
+    return nativeModule.getAllKeys();
+  }
+
+  /**
+   * 全ての設定値のキャッシュを削除します。
+   */
+  public static clearCacheAll(): void {
+    nativeModule.clearCacheAll();
+  }
 }
 
 /**
