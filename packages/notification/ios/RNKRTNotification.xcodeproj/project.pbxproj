@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0C32445824D3A4D600D10AAD /* RNKRTNotificationModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C32445724D3A4D600D10AAD /* RNKRTNotificationModule.m */; };
+		0C32445824D3A4D600D10AAD /* RNKRTNotificationModule.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0C32445724D3A4D600D10AAD /* RNKRTNotificationModule.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -24,7 +24,7 @@
 
 /* Begin PBXFileReference section */
 		0C32445624D3A4D600D10AAD /* RNKRTNotificationModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RNKRTNotificationModule.h; path = RNKRTNotification/RNKRTNotificationModule.h; sourceTree = "<group>"; };
-		0C32445724D3A4D600D10AAD /* RNKRTNotificationModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RNKRTNotificationModule.m; path = RNKRTNotification/RNKRTNotificationModule.m; sourceTree = "<group>"; };
+		0C32445724D3A4D600D10AAD /* RNKRTNotificationModule.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = RNKRTNotificationModule.mm; path = RNKRTNotification/RNKRTNotificationModule.mm; sourceTree = "<group>"; };
 		134814201AA4EA6300B7C361 /* libKarte.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libKarte.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -51,7 +51,7 @@
 			isa = PBXGroup;
 			children = (
 				0C32445624D3A4D600D10AAD /* RNKRTNotificationModule.h */,
-				0C32445724D3A4D600D10AAD /* RNKRTNotificationModule.m */,
+				0C32445724D3A4D600D10AAD /* RNKRTNotificationModule.mm */,
 				134814211AA4EA7D00B7C361 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -113,7 +113,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0C32445824D3A4D600D10AAD /* RNKRTNotificationModule.m in Sources */,
+				0C32445824D3A4D600D10AAD /* RNKRTNotificationModule.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

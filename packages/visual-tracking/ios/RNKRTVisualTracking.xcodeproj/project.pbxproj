@@ -23,7 +23,7 @@
 		367B8BDA2680FE6600FAEA14 /* RNKRTVisualTracking-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "RNKRTVisualTracking-Bridging-Header.h"; path = "RNKRTVisualTracking/RNKRTVisualTracking-Bridging-Header.h"; sourceTree = "<group>"; };
 		367B8BDB2680FE6D00FAEA14 /* VisualTrackingModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = VisualTrackingModule.swift; path = RNKRTVisualTracking/VisualTrackingModule.swift; sourceTree = "<group>"; };
 		367B8BDC2680FE8500FAEA14 /* RNKRTVisualTrackingModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = RNKRTVisualTrackingModule.h; path = RNKRTVisualTracking/RNKRTVisualTrackingModule.h; sourceTree = "<group>"; };
-		367B8BDD2680FE8B00FAEA14 /* RNKRTVisualTrackingModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = RNKRTVisualTrackingModule.m; path = RNKRTVisualTracking/RNKRTVisualTrackingModule.m; sourceTree = "<group>"; };
+		367B8BDD2680FE8B00FAEA14 /* RNKRTVisualTrackingModule.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = RNKRTVisualTrackingModule.mm; path = RNKRTVisualTracking/RNKRTVisualTrackingModule.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,7 +49,7 @@
 			isa = PBXGroup;
 			children = (
 				367B8BDC2680FE8500FAEA14 /* RNKRTVisualTrackingModule.h */,
-				367B8BDD2680FE8B00FAEA14 /* RNKRTVisualTrackingModule.m */,
+				367B8BDD2680FE8B00FAEA14 /* RNKRTVisualTrackingModule.mm */,
 				367B8BDA2680FE6600FAEA14 /* RNKRTVisualTracking-Bridging-Header.h */,
 				367B8BDB2680FE6D00FAEA14 /* VisualTrackingModule.swift */,
 				134814211AA4EA7D00B7C361 /* Products */,

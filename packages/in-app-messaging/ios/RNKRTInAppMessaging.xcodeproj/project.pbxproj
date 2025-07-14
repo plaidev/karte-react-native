@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0C32444F24D3A23F00D10AAD /* RNKRTInAppMessagingModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C32444D24D3A23F00D10AAD /* RNKRTInAppMessagingModule.m */; };
+		0C32444F24D3A23F00D10AAD /* RNKRTInAppMessagingModule.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0C32444D24D3A23F00D10AAD /* RNKRTInAppMessagingModule.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -23,7 +23,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0C32444D24D3A23F00D10AAD /* RNKRTInAppMessagingModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RNKRTInAppMessagingModule.m; path = RNKRTInAppMessaging/RNKRTInAppMessagingModule.m; sourceTree = "<group>"; };
+		0C32444D24D3A23F00D10AAD /* RNKRTInAppMessagingModule.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = RNKRTInAppMessagingModule.mm; path = RNKRTInAppMessaging/RNKRTInAppMessagingModule.mm; sourceTree = "<group>"; };
 		0C32444E24D3A23F00D10AAD /* RNKRTInAppMessagingModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RNKRTInAppMessagingModule.h; path = RNKRTInAppMessaging/RNKRTInAppMessagingModule.h; sourceTree = "<group>"; };
 		134814201AA4EA6300B7C361 /* libKarte.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libKarte.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -51,7 +51,7 @@
 			isa = PBXGroup;
 			children = (
 				0C32444E24D3A23F00D10AAD /* RNKRTInAppMessagingModule.h */,
-				0C32444D24D3A23F00D10AAD /* RNKRTInAppMessagingModule.m */,
+				0C32444D24D3A23F00D10AAD /* RNKRTInAppMessagingModule.mm */,
 				134814211AA4EA7D00B7C361 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -113,7 +113,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0C32444F24D3A23F00D10AAD /* RNKRTInAppMessagingModule.m in Sources */,
+				0C32444F24D3A23F00D10AAD /* RNKRTInAppMessagingModule.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

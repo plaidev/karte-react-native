@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0C32445524D3A2BE00D10AAD /* RNKRTVariablesModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C32445324D3A2BE00D10AAD /* RNKRTVariablesModule.m */; };
+		0C32445524D3A2BE00D10AAD /* RNKRTVariablesModule.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0C32445324D3A2BE00D10AAD /* RNKRTVariablesModule.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -23,7 +23,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0C32445324D3A2BE00D10AAD /* RNKRTVariablesModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RNKRTVariablesModule.m; path = RNKRTVariables/RNKRTVariablesModule.m; sourceTree = "<group>"; };
+		0C32445324D3A2BE00D10AAD /* RNKRTVariablesModule.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = RNKRTVariablesModule.mm; path = RNKRTVariables/RNKRTVariablesModule.mm; sourceTree = "<group>"; };
 		0C32445424D3A2BE00D10AAD /* RNKRTVariablesModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RNKRTVariablesModule.h; path = RNKRTVariables/RNKRTVariablesModule.h; sourceTree = "<group>"; };
 		134814201AA4EA6300B7C361 /* libKarte.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libKarte.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -51,7 +51,7 @@
 			isa = PBXGroup;
 			children = (
 				0C32445424D3A2BE00D10AAD /* RNKRTVariablesModule.h */,
-				0C32445324D3A2BE00D10AAD /* RNKRTVariablesModule.m */,
+				0C32445324D3A2BE00D10AAD /* RNKRTVariablesModule.mm */,
 				134814211AA4EA7D00B7C361 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -113,7 +113,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0C32445524D3A2BE00D10AAD /* RNKRTVariablesModule.m in Sources */,
+				0C32445524D3A2BE00D10AAD /* RNKRTVariablesModule.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
