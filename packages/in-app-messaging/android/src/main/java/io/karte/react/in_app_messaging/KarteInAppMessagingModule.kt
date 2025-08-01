@@ -23,6 +23,7 @@ import com.facebook.react.bridge.BaseActivityEventListener
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReactContextBaseJavaModule
 import com.facebook.react.bridge.ReactMethod
+import com.facebook.react.module.annotations.ReactModule
 import io.karte.android.inappmessaging.InAppMessaging
 
 private fun log(msg: String) {
@@ -33,7 +34,11 @@ private fun log(msg: String) {
 
 private const val FRAGMENT_TAG = "Karte.FileChooserFragment"
 
+@ReactModule(name = KarteInAppMessagingModule.NAME)
 class KarteInAppMessagingModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext) {
+  companion object {
+    const val NAME = "RNKRTInAppMessagingModule"
+  }
 
   init {
     reactContext.addActivityEventListener(object : BaseActivityEventListener() {
@@ -57,7 +62,7 @@ class KarteInAppMessagingModule(reactContext: ReactApplicationContext) : ReactCo
   }
 
   override fun getName(): String {
-    return "RNKRTInAppMessagingModule"
+    return NAME
   }
 
   @ReactMethod(isBlockingSynchronousMethod = true)

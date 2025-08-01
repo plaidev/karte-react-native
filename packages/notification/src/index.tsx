@@ -14,11 +14,15 @@
 //  limitations under the License.
 //
 
-import { NativeModules } from 'react-native';
-import type { KRTNotificationNativeModule, RemoteMessage } from './types';
+import { TurboModuleRegistry, NativeModules } from 'react-native';
+import type { Spec } from './NativeRNKRTNotificationModule';
+import type { RemoteMessage } from './types';
 
-const nativeModule: KRTNotificationNativeModule =
-  NativeModules.RNKRTNotificationModule;
+// TurboModule/Bridge fallback with public API
+const TurboImpl = TurboModuleRegistry.get<Spec>('RNKRTNotificationModule');
+const BridgeImpl = (NativeModules as any).RNKRTNotificationModule;
+
+const nativeModule: Spec = (TurboImpl ?? BridgeImpl) as Spec;
 
 /** リモート通知メッセージのパースおよびメッセージ中に含まれるディープリンクのハンドリングを行うためのクラスです。 */
 export class Notification {
@@ -68,7 +72,7 @@ export class Notification {
    * (Androidのみ) KARTE経由で送信された通知メッセージから、通知を作成・表示します。
    */
   public show(): void {
-    return nativeModule.show(this.remoteMessage.data ?? {});
+    nativeModule.show(this.remoteMessage.data ?? {});
   }
 
   /**

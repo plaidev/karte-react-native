@@ -19,14 +19,19 @@ import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReactContextBaseJavaModule
 import com.facebook.react.bridge.ReactMethod
 import com.facebook.react.bridge.ReadableMap
+import com.facebook.react.module.annotations.ReactModule
 import io.karte.android.KarteApp
 import io.karte.android.notifications.MessageHandler
 import io.karte.android.notifications.registerFCMToken
 
+@ReactModule(name = KarteNotificationModule.NAME)
 class KarteNotificationModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext) {
+  companion object {
+    const val NAME = "RNKRTNotificationModule"
+  }
 
   override fun getName(): String {
-    return "RNKRTNotificationModule"
+    return NAME
   }
 
   @ReactMethod
@@ -48,12 +53,12 @@ class KarteNotificationModule(reactContext: ReactApplicationContext) : ReactCont
   }
 
   @ReactMethod
-  fun show(message: ReadableMap): Boolean {
-    return MessageHandler.handleMessage(reactApplicationContext, toData(message))
+  fun show(message: ReadableMap) {
+    MessageHandler.handleMessage(reactApplicationContext, toData(message))
   }
 
   @ReactMethod
-  fun track() {
+  fun track(message: ReadableMap) {
     // NOP (iOS only)
   }
 

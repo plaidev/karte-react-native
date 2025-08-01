@@ -16,9 +16,17 @@
 
 #import <React/RCTBridgeModule.h>
 
+#ifdef RCT_NEW_ARCH_ENABLED
+#import <RNKRTVisualTrackingModuleSpec/RNKRTVisualTrackingModuleSpec.h>
+#endif
+
 NS_ASSUME_NONNULL_BEGIN
 
+#ifdef RCT_NEW_ARCH_ENABLED
+@interface RNKRTVisualTrackingModule : NSObject <NativeRNKRTVisualTrackingModuleSpec>
+#else
 @interface RNKRTVisualTrackingModule : NSObject <RCTBridgeModule>
+#endif
 @end
 
 NS_ASSUME_NONNULL_END

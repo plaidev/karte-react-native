@@ -16,6 +16,7 @@
 package io.karte.react.variables
 
 import com.facebook.react.bridge.*
+import com.facebook.react.module.annotations.ReactModule
 import io.karte.android.utilities.toList
 import io.karte.android.utilities.toMap
 import io.karte.android.variables.Variable
@@ -23,11 +24,16 @@ import io.karte.android.variables.Variables
 import org.json.JSONArray
 import org.json.JSONObject
 
+@ReactModule(name = KarteVariablesModule.NAME)
 class KarteVariablesModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext) {
+  companion object {
+    const val NAME = "RNKRTVariablesModule"
+  }
+
   private val variables: MutableMap<String, Variable> = mutableMapOf()
 
   override fun getName(): String {
-    return "RNKRTVariablesModule"
+    return NAME
   }
 
   @ReactMethod
