@@ -8,12 +8,12 @@ export interface Spec extends TurboModule {
   optOut(): void;
   renewVisitorId(): void;
   track(eventName: string, values?: Object): void;
-  identify(values?: Object): void;
+  identify(values: Object): void;
   identifyWithUserId(userId: string, values?: Object): void;
-  attribute(values?: Object): void;
+  attribute(values: Object): void;
   view(viewName: string, title?: string, values?: Object): void;
   appendingUserSyncQueryParameter(url: string): string;
-  getUserSyncScript(): string;
+  getUserSyncScript(): string | null;
 }
 
 export default TurboModuleRegistry.getEnforcing<Spec>('RNKRTCoreModule');

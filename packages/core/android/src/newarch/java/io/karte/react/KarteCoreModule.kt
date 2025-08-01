@@ -19,16 +19,12 @@ import android.app.Activity
 import android.content.Intent
 import com.facebook.react.bridge.ActivityEventListener
 import com.facebook.react.bridge.ReactApplicationContext
-import com.facebook.react.bridge.ReactContextBaseJavaModule
-import com.facebook.react.bridge.ReactMethod
 import com.facebook.react.bridge.ReadableMap
-import com.facebook.react.module.annotations.ReactModule
 import io.karte.android.KarteApp
 import io.karte.android.core.usersync.UserSync
 import io.karte.android.tracking.Tracker
 
-@ReactModule(name = KarteCoreModule.NAME)
-class KarteCoreModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext), ActivityEventListener {
+class KarteCoreModule(reactContext: ReactApplicationContext) : NativeRNKRTCoreModuleSpec(reactContext), ActivityEventListener {
   companion object {
     const val NAME = "RNKRTCoreModule"
   }
@@ -52,63 +48,51 @@ class KarteCoreModule(reactContext: ReactApplicationContext) : ReactContextBaseJ
   }
   //endregion
 
-  @ReactMethod(isBlockingSynchronousMethod = true)
-  fun getVisitorId(): String {
+  override fun getVisitorId(): String {
     return KarteApp.visitorId
   }
 
-  @ReactMethod(isBlockingSynchronousMethod = true)
-  fun isOptOut(): Boolean {
+  override fun isOptOut(): Boolean {
     return KarteApp.isOptOut
   }
 
-  @ReactMethod
-  fun optIn() {
+  override fun optIn() {
     KarteApp.optIn()
   }
 
-  @ReactMethod
-  fun optOut() {
+  override fun optOut() {
     KarteApp.optOut()
   }
 
-  @ReactMethod
-  fun renewVisitorId() {
+  override fun renewVisitorId() {
     KarteApp.renewVisitorId()
   }
 
-  @ReactMethod
-  fun track(name: String, values: ReadableMap?) {
-    Tracker.track(name, values?.toHashMap())
+  override fun track(eventName: String, values: ReadableMap?) {
+    Tracker.track(eventName, values?.toHashMap())
   }
 
-  @ReactMethod
-  fun identify(values: ReadableMap) {
+  override fun identify(values: ReadableMap) {
     Tracker.identify(values.toHashMap())
   }
 
-  @ReactMethod
-  fun identifyWithUserId(userId: String, values: ReadableMap?) {
+  override fun identifyWithUserId(userId: String, values: ReadableMap?) {
     Tracker.identify(userId, values?.toHashMap())
   }
 
-  @ReactMethod
-  fun attribute(values: ReadableMap) {
+  override fun attribute(values: ReadableMap) {
     Tracker.attribute(values.toHashMap())
   }
 
-  @ReactMethod
-  fun view(viewName: String, title: String?, values: ReadableMap?) {
+  override fun view(viewName: String, title: String?, values: ReadableMap?) {
     Tracker.view(viewName, title, values?.toHashMap())
   }
 
-  @ReactMethod(isBlockingSynchronousMethod = true)
-  fun appendingUserSyncQueryParameter(url: String): String {
+  override fun appendingUserSyncQueryParameter(url: String): String {
     return UserSync.appendUserSyncQueryParameter(url)
   }
 
-  @ReactMethod(isBlockingSynchronousMethod = true)
-  fun getUserSyncScript(): String? {
+  override fun getUserSyncScript(): String? {
     return UserSync.getUserSyncScript()
   }
 }

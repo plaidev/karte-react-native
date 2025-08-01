@@ -71,6 +71,9 @@
   "codegenConfig": {
     "name": "RNKRTCoreModuleSpec",
     "type": "modules",
-    "jsSrcsDir": "src"
+    "jsSrcsDir": "src/specs",
+    "android": {
+      "javaPackageName": "io.karte.react"
+    }
   }
 }
