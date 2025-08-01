@@ -16,7 +16,7 @@
 
 import { TurboModuleRegistry, NativeModules } from 'react-native';
 import { normalize } from '@react-native-karte/utilities';
-import type { Spec } from './NativeRNKRTCoreModule';
+import type { Spec } from './specs/NativeRNKRTCoreModule';
 
 // TurboModule/Bridge fallback with public API
 const TurboImpl = TurboModuleRegistry.get<Spec>('RNKRTCoreModule');
@@ -170,7 +170,7 @@ export class UserSync {
    * ユーザースクリプトとしてWebViewに設定することで、WebView内のタグと連携されます。
    * なおSDKの初期化が行われていない場合はnullを返却します。
    */
-  public static getUserSyncScript(): string {
+  public static getUserSyncScript(): string | null {
     return nativeModule.getUserSyncScript();
   }
 }
