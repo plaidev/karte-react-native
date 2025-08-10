@@ -15,7 +15,7 @@
 //
 
 import { TurboModuleRegistry, NativeModules } from 'react-native';
-import type { Spec } from './NativeRNKRTInAppMessagingModule';
+import type { Spec } from './specs/NativeRNKRTInAppMessagingModule';
 
 // TurboModule/Bridge fallback with public API
 const TurboImpl = TurboModuleRegistry.get<Spec>('RNKRTInAppMessagingModule');

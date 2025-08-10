@@ -63,6 +63,9 @@
   "codegenConfig": {
     "name": "RNKRTInAppMessagingModuleSpec",
     "type": "modules",
-    "jsSrcsDir": "src"
+    "jsSrcsDir": "src/specs",
+    "android": {
+      "javaPackageName": "io.karte.react.in_app_messaging"
+    }
   }
 }
