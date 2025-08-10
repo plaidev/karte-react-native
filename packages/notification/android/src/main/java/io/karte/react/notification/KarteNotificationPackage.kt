@@ -32,6 +32,7 @@ class KarteNotificationPackage : BaseReactPackage() {
 
     override fun getReactModuleInfoProvider(): ReactModuleInfoProvider {
         return ReactModuleInfoProvider {
+            val isTurboModule = BuildConfig.IS_NEW_ARCHITECTURE_ENABLED
             mapOf(
                 KarteNotificationModule.NAME to ReactModuleInfo(
                     KarteNotificationModule.NAME,
@@ -39,7 +40,8 @@ class KarteNotificationPackage : BaseReactPackage() {
                     true, // canOverrideExistingModule
                     false, // needsEagerInit
                     false, // hasConstants
-                    false // isCxxModule
+                    false, // isCxxModule
+                    isTurboModule // isTurboModule
                 )
             )
         }

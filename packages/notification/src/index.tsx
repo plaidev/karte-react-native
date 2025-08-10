@@ -15,7 +15,7 @@
 //
 
 import { TurboModuleRegistry, NativeModules } from 'react-native';
-import type { Spec } from './NativeRNKRTNotificationModule';
+import type { Spec } from './specs/NativeRNKRTNotificationModule';
 import type { RemoteMessage } from './types';
 
 // TurboModule/Bridge fallback with public API
