@@ -16,8 +16,13 @@
 
 #import "RNKRTVariablesModule.h"
 
-@import KarteCore;
-@import KarteVariables;
+#import <KarteVariables/KarteVariables-Swift.h>
+#import "KRTTracker+Variables.h"
+
+#ifdef RCT_NEW_ARCH_ENABLED
+#import <React/RCTConversions.h>
+#import <React/RCTUtils.h>
+#endif
 
 @interface RNKRTVariablesModule ()
 @property (nonatomic, strong) NSMutableDictionary<NSString *, id> *variables;
@@ -25,9 +30,19 @@
 
 @implementation RNKRTVariablesModule
 
+RCT_EXPORT_MODULE()
+
 + (BOOL)requiresMainQueueSetup {
     return YES;
 }
+
+#ifdef RCT_NEW_ARCH_ENABLED
+- (std::shared_ptr<facebook::react::TurboModule>)getTurboModule:
+(const facebook::react::ObjCTurboModule::InitParams &)params
+{
+    return std::make_shared<facebook::react::NativeRNKRTVariablesModuleSpecJSI>(params);
+}
+#endif
 
 - (dispatch_queue_t)methodQueue {
     return dispatch_get_main_queue();
@@ -52,7 +67,105 @@
     return [NSArray arrayWithArray:variables];
 }
 
-RCT_EXPORT_MODULE()
+#ifdef RCT_NEW_ARCH_ENABLED
+- (void)fetch:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject {
+    [KRTVariables fetchWithCompletion:^(BOOL isSuccessful) {
+        if (isSuccessful) {
+            [self.variables removeAllObjects];
+            resolve(nil);
+        } else {
+            reject(@"ERR_VAR", @"Failed to fetch variables.", nil);
+        }
+    }];
+}
+
+- (id)getVariable:(NSString *)key {
+    KRTVariable *variable = [KRTVariables variableForKey:key];
+    [self.variables setObject:variable forKey:key];
+
+    return variable.name;
+}
+
+- (void)trackOpen:(NSArray<NSString *> *)keys values:(NSDictionary *)values {
+    NSArray<KRTVariable *> *variables = [self variablesFromKeys:keys];
+    [KRTTracker trackOpenWithVariables:variables values:values];
+}
+
+- (void)trackClick:(NSArray<NSString *> *)keys values:(NSDictionary *)values {
+    NSArray<KRTVariable *> *variables = [self variablesFromKeys:keys];
+    [KRTTracker trackClickWithVariables:variables values:values];
+}
+
+- (NSString *)getString:(NSString *)key defaultValue:(NSString *)value {
+    KRTVariable *variable = self.variables[key];
+    if (!variable) {
+        return value;
+    }
+
+    return [variable stringWithDefaultValue:value];
+}
+
+- (NSNumber *)getInteger:(NSString *)key defaultValue:(NSNumber *)value {
+    KRTVariable *variable = self.variables[key];
+    if (!variable) {
+        return value;
+    }
+
+    return @([variable integerWithDefaultValue:[value integerValue]]);
+}
+
+- (NSNumber *)getDouble:(NSString *)key defaultValue:(NSNumber *)value {
+    KRTVariable *variable = self.variables[key];
+    if (!variable) {
+        return value;
+    }
+
+    return @([variable doubleWithDefaultValue:[value doubleValue]]);
+}
+
+- (NSNumber *)getBoolean:(NSString *)key defaultValue:(NSNumber *)value {
+    KRTVariable *variable = self.variables[key];
+    if (!variable) {
+        return value;
+    }
+
+    return @([variable boolWithDefaultValue:[value boolValue]]);
+}
+
+- (NSArray *)getArray:(NSString *)key defaultValue:(NSArray *)value {
+    KRTVariable *variable = self.variables[key];
+    if (!variable) {
+        return value;
+    }
+
+    return [variable arrayWithDefaultValue:value];
+}
+
+- (NSDictionary *)getObject:(NSString *)key defaultValue:(NSDictionary *)value {
+    KRTVariable *variable = self.variables[key];
+    if (!variable) {
+        return value;
+    }
+
+    return [variable dictionaryWithDefaultValue:value];
+}
+
+- (void)clearCacheByKey:(NSString *)key {
+    [KRTVariables clearCacheForKey:key];
+    [self.variables removeObjectForKey:key];
+}
+
+- (NSArray *)getAllKeys {
+    return [KRTVariables getAllKeys];
+}
+
+- (void)clearCacheAll {
+    [KRTVariables clearCacheAll];
+    [self.variables removeAllObjects];
+}
+
+#else
+// Old Architecture implementation
 
 RCT_REMAP_METHOD(fetch, fetchWithResolver:(RCTPromiseResolveBlock)resolve withRejecter:(RCTPromiseRejectBlock)reject) {
     [KRTVariables fetchWithCompletion:^(BOOL isSuccessful) {
@@ -68,7 +181,7 @@ RCT_REMAP_METHOD(fetch, fetchWithResolver:(RCTPromiseResolveBlock)resolve withRe
 RCT_REMAP_BLOCKING_SYNCHRONOUS_METHOD(getVariable, NSString *, variableForKey:(NSString *)key) {
     KRTVariable *variable = [KRTVariables variableForKey:key];
     [self.variables setObject:variable forKey:key];
-    
+
     return variable.name;
 }
 
@@ -87,7 +200,7 @@ RCT_REMAP_BLOCKING_SYNCHRONOUS_METHOD(getString, NSString *, stringForKey:(NSStr
     if (!variable) {
         return value;
     }
-    
+
     return [variable stringWithDefaultValue:value];
 }
 
@@ -96,7 +209,7 @@ RCT_REMAP_BLOCKING_SYNCHRONOUS_METHOD(getInteger, NSNumber *, integerForKey:(NSS
     if (!variable) {
         return @(value);
     }
-    
+
     return @([variable integerWithDefaultValue:value]);
 }
 
@@ -105,7 +218,7 @@ RCT_REMAP_BLOCKING_SYNCHRONOUS_METHOD(getDouble, NSNumber *, doubleForKey:(NSStr
     if (!variable) {
         return @(value);
     }
-    
+
     return @([variable doubleWithDefaultValue:value]);
 }
 RCT_REMAP_BLOCKING_SYNCHRONOUS_METHOD(getBoolean, NSNumber *, boolForKey:(NSString *)key withDefaultValue:(BOOL)value) {
@@ -113,7 +226,7 @@ RCT_REMAP_BLOCKING_SYNCHRONOUS_METHOD(getBoolean, NSNumber *, boolForKey:(NSStri
     if (!variable) {
         return @(value);
     }
-    
+
     return @([variable boolWithDefaultValue:value]);
 }
 
@@ -122,7 +235,7 @@ RCT_REMAP_BLOCKING_SYNCHRONOUS_METHOD(getArray, NSArray *, arrayForKey:(NSString
     if (!variable) {
         return value;
     }
-    
+
     return [variable arrayWithDefaultValue:value];
 }
 
@@ -131,7 +244,7 @@ RCT_REMAP_BLOCKING_SYNCHRONOUS_METHOD(getObject, NSDictionary *, objectForKey:(N
     if (!variable) {
         return value;
     }
-    
+
     return [variable dictionaryWithDefaultValue:value];
 }
 
@@ -148,5 +261,7 @@ RCT_REMAP_METHOD(clearCacheAll, clearCacheAll) {
     [KRTVariables clearCacheAll];
     [self.variables removeAllObjects];
 }
+
+#endif
 
 @end

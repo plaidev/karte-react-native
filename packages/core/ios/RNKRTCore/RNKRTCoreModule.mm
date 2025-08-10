@@ -16,25 +16,92 @@
 
 #import "RNKRTCoreModule.h"
 
-@import KarteCore;
+#import <AppTrackingTransparency/ATTrackingManager.h>
+#import <KarteCore/KarteCore-Swift.h>
+
+#ifdef RCT_NEW_ARCH_ENABLED
+#import <React/RCTConversions.h>
+#import <React/RCTUtils.h>
+#endif
 
 @interface RNKRTCoreModule ()
-
 @end
 
 @implementation RNKRTCoreModule
+
+RCT_EXPORT_MODULE()
 
 + (BOOL)requiresMainQueueSetup {
     return YES;
 }
 
+#ifdef RCT_NEW_ARCH_ENABLED
+- (std::shared_ptr<facebook::react::TurboModule>)getTurboModule:
+(const facebook::react::ObjCTurboModule::InitParams &)params
+{
+    return std::make_shared<facebook::react::NativeRNKRTCoreModuleSpecJSI>(params);
+}
+#endif
+
 - (dispatch_queue_t)methodQueue {
     return dispatch_get_main_queue();
 }
 
-RCT_EXPORT_MODULE()
-
 // KarteApp
+#ifdef RCT_NEW_ARCH_ENABLED
+- (NSString *)getVisitorId {
+    return [KRTApp visitorId];
+}
+
+- (NSNumber *)isOptOut {
+    return @([KRTApp isOptOut]);
+}
+
+- (void)optIn {
+    [KRTApp optIn];
+}
+
+- (void)optOut {
+    [KRTApp optOut];
+}
+
+- (void)renewVisitorId {
+    [KRTApp renewVisitorId];
+}
+
+// Tracking
+- (void)track:(NSString *)eventName values:(NSDictionary *)values {
+    [KRTTracker track:eventName values:values ?: @{}];
+}
+
+- (void)identify:(NSDictionary *)values {
+    [KRTTracker identify:values ?: @{}];
+}
+
+- (void)identifyWithUserId:(NSString *)userId values:(NSDictionary *)values {
+    [KRTTracker identify:userId :values ?: @{}];
+}
+
+- (void)attribute:(NSDictionary *)values {
+    [KRTTracker attribute:values ?: @{}];
+}
+
+- (void)view:(NSString *)viewName title:(NSString *)title values:(NSDictionary *)values {
+    [KRTTracker view:viewName title:title values:values ?: @{}];
+}
+
+// UserSync
+- (NSString *)appendingUserSyncQueryParameter:(NSString *)url {
+    return [KRTUserSync appendingQueryParameterWithURLString:url];
+}
+
+- (NSString *)getUserSyncScript {
+    return [KRTUserSync getUserSyncScript];
+}
+
+#else
+// Old Architecture implementation
+
 RCT_EXPORT_SYNCHRONOUS_TYPED_METHOD(NSString *, getVisitorId) {
     return [KRTApp visitorId];
 }
@@ -76,7 +143,7 @@ RCT_EXPORT_METHOD(view:(NSString *)viewName title:(NSString *)title values:(NSDi
     [KRTTracker view:viewName title:title values:values];
 }
 
-//// UserSync
+// UserSync
 RCT_EXPORT_SYNCHRONOUS_TYPED_METHOD(NSString *, appendingUserSyncQueryParameter:(NSString *)url) {
     return [KRTUserSync appendingQueryParameterWithURLString:url];
 }
@@ -84,5 +151,7 @@ RCT_EXPORT_SYNCHRONOUS_TYPED_METHOD(NSString *, appendingUserSyncQueryParameter:
 RCT_EXPORT_SYNCHRONOUS_TYPED_METHOD(NSString *, getUserSyncScript) {
     return [KRTUserSync getUserSyncScript];
 }
+
+#endif
 
 @end

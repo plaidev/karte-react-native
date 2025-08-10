@@ -59,5 +59,10 @@
       "module",
       "typescript"
     ]
+  },
+  "codegenConfig": {
+    "name": "RNKRTNotificationModuleSpec",
+    "type": "modules",
+    "jsSrcsDir": "src"
   }
 }

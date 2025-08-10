@@ -36,6 +36,10 @@ project.xcworkspace
 .gradle
 local.properties
 
+# Eclipse
+#
+.settings/
+
 # Cocoapods
 #
 example/ios/Pods
