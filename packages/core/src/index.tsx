@@ -90,12 +90,12 @@ export class Tracker {
   private constructor() {}
   /**
    * イベントの送信を行います。
-   * @param name イベント名
+   * @param eventName イベント名
    * @param values イベントに紐付けるカスタムオブジェクト
    */
 
-  public static track(name: string, values: object = {}) {
-    nativeModule.track(name, normalize(values));
+  public static track(eventName: string, values: object = {}) {
+    nativeModule.track(eventName, normalize(values));
   }
 
   /**

@@ -78,7 +78,7 @@ class KarteVariablesModule(reactContext: ReactApplicationContext) : ReactContext
   }
 
   @ReactMethod(isBlockingSynchronousMethod = true)
-  fun getString(key: String, defaultValue: String): String? {
+  fun getString(key: String, defaultValue: String): String {
     val variable = variables[key] ?: return defaultValue
     return variable.string(defaultValue)
   }
@@ -102,14 +102,14 @@ class KarteVariablesModule(reactContext: ReactApplicationContext) : ReactContext
   }
 
   @ReactMethod(isBlockingSynchronousMethod = true)
-  fun getArray(key: String, defaultValue: ReadableArray): WritableArray? {
+  fun getArray(key: String, defaultValue: ReadableArray): WritableArray {
     val variable = variables[key] ?: return Arguments.makeNativeArray(defaultValue.toArrayList())
     val array = variable.jsonArray(JSONArray(defaultValue.toArrayList()))
     return Arguments.makeNativeArray(array.toList())
   }
 
   @ReactMethod(isBlockingSynchronousMethod = true)
-  fun getObject(key: String, defaultValue: ReadableMap): WritableMap? {
+  fun getObject(key: String, defaultValue: ReadableMap): WritableMap {
     val variable = variables[key] ?: return Arguments.makeNativeMap(defaultValue.toHashMap())
     val map = variable.jsonObject(JSONObject(defaultValue.toHashMap() as HashMap<*, *>))
     return Arguments.makeNativeMap(map.toMap())

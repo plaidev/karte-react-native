@@ -66,6 +66,9 @@
   "codegenConfig": {
     "name": "RNKRTVariablesModuleSpec",
     "type": "modules",
-    "jsSrcsDir": "src"
+    "jsSrcsDir": "src/specs",
+    "android": {
+      "javaPackageName": "io.karte.react.variables"
+    }
   }
 }

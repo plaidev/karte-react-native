@@ -20,7 +20,7 @@ export interface KRTCoreNativeModule {
   optIn(): void;
   optOut(): void;
   renewVisitorId(): void;
-  track(name: string, values?: object): void;
+  track(eventName: string, values?: object): void;
   identify(values: object): void;
   identifyWithUserId(userId: string, values?: object): void;
   attribute(values: object): void;

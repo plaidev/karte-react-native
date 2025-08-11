@@ -16,7 +16,7 @@
 
 import { TurboModuleRegistry, NativeModules } from 'react-native';
 import { normalize } from '@react-native-karte/utilities';
-import type { Spec } from './NativeRNKRTVariablesModule';
+import type { Spec } from './specs/NativeRNKRTVariablesModule';
 
 // TurboModule/Bridge fallback with public API
 const TurboImpl = TurboModuleRegistry.get<Spec>('RNKRTVariablesModule');
