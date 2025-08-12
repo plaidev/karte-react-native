@@ -72,6 +72,9 @@
   "codegenConfig": {
     "name": "RNKRTVisualTrackingModuleSpec",
     "type": "modules",
-    "jsSrcsDir": "src"
+    "jsSrcsDir": "src/specs",
+    "android": {
+      "javaPackageName": "io.karte.react.visual_tracking"
+    }
   }
 }

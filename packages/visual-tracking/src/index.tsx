@@ -15,7 +15,7 @@
 //
 
 import { TurboModuleRegistry, NativeModules } from 'react-native';
-import type { Spec } from './NativeRNKRTVisualTrackingModule';
+import type { Spec } from './specs/NativeRNKRTVisualTrackingModule';
 
 // TurboModule/Bridge fallback with public API
 const TurboImpl = TurboModuleRegistry.get<Spec>('RNKRTVisualTrackingModule');

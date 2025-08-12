@@ -58,15 +58,17 @@ android {
     targetCompatibility JavaVersion.VERSION_1_8
   }
   
-  if (isNewArchitectureEnabled()) {
-    // Codegen configuration for New Architecture
-    sourceSets {
-      main {
+  sourceSets {
+    main {
+      if (isNewArchitectureEnabled()) {
+        java.srcDirs += ['src/newarch']
         java {
           srcDirs += [
             "$buildDir/generated/source/codegen/java"
           ]
         }
+      } else {
+        java.srcDirs += ['src/oldarch']
       }
     }
   }
