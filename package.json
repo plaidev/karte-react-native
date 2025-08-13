@@ -33,7 +33,8 @@
     "docs": "lerna run docs",
     "docs:clean": "lerna run docs:clean",
     "docs:publish": "yarn docs && ts-node scripts/publish-docs.ts",
-    "test": "jest"
+    "test": "jest",
+    "yalc:push": "yarn prepare && lerna exec --parallel -- yalc push --force"
   },
   "devDependencies": {
     "@commitlint/config-conventional": "^9.1.1",
