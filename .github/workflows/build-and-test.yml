@@ -1,0 +1,33 @@
+name: Build and Test
+on:
+  push:
+    branches: [master, develop]
+  pull_request:
+    branches: [master, develop]
+env:
+  NODE_VERSION: 16.17
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+      - name: Setup Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'yarn'
+      - name: Install dependencies
+        # NOTE: yarn is pre-installed in ubuntu-latest.
+        # https://github.com/actions/runner-images/blob/25f533f3b2db8f03ad46ca4c87603cee7a41eeac/images/ubuntu/Ubuntu2404-Readme.md?plain=1#L36
+        run: yarn install --frozen-lockfile
+      - name: Lint files
+        run: yarn lint
+      - name: Typecheck files
+        run: yarn typecheck
+      - name: Build packages
+        run: yarn lerna run prepare
+      - name: Verify paths for types
+        run: node scripts/check-types-path.js
+      - name: Test packages
+        run: yarn test
