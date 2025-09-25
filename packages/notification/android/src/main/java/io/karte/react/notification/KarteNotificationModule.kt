@@ -48,8 +48,8 @@ class KarteNotificationModule(reactContext: ReactApplicationContext) : ReactCont
   }
 
   @ReactMethod
-  fun show(message: ReadableMap): Boolean {
-    return MessageHandler.handleMessage(reactApplicationContext, toData(message))
+  fun show(message: ReadableMap) {
+    MessageHandler.handleMessage(reactApplicationContext, toData(message))
   }
 
   @ReactMethod

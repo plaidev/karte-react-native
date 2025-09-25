@@ -37,7 +37,7 @@ class KarteInAppMessagingModule(reactContext: ReactApplicationContext) : ReactCo
 
   init {
     reactContext.addActivityEventListener(object : BaseActivityEventListener() {
-      override fun onActivityResult(activity: Activity?, requestCode: Int, resultCode: Int, data: Intent?) {
+      override fun onActivityResult(activity: Activity, requestCode: Int, resultCode: Int, data: Intent?) {
         log("onActivityResult $activity, $requestCode, $resultCode, $data")
         if (activity is FragmentActivity) {
           val fragment = activity.supportFragmentManager.findFragmentByTag(FRAGMENT_TAG)
