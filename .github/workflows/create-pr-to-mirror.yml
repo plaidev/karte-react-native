@@ -8,6 +8,7 @@ on:
 jobs:
   sync-to-mirror:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     # Should be executed on the dev repo.
     if: github.event.pull_request.merged == true && github.repository != 'plaidev/karte-react-native'
     permissions:

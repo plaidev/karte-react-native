@@ -4,6 +4,7 @@ on:
 jobs:
   create-release:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     # Should be executed on the dev repo.
     if: github.repository != 'plaidev/karte-react-native'
     permissions:

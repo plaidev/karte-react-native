@@ -1,0 +1,29 @@
+{
+  "version": "v1",
+  "packages": {
+    "@react-native-karte/utilities": {
+      "signature": "29ab274b971662cd86db81d89eeb81f8",
+      "file": true
+    },
+    "@react-native-karte/core": {
+      "signature": "b630340de81d5ed98683177998873c0b",
+      "file": true
+    },
+    "@react-native-karte/in-app-messaging": {
+      "signature": "d1ad1c8572874211f66de6e3173a6737",
+      "file": true
+    },
+    "@react-native-karte/notification": {
+      "signature": "64c62b8b68bda70a893a550f7723aeab",
+      "file": true
+    },
+    "@react-native-karte/variables": {
+      "signature": "7c65774595289746292152aaeb298727",
+      "file": true
+    },
+    "@react-native-karte/visual-tracking": {
+      "signature": "e27f5b906090215ca33ebc6a2c3435fe",
+      "file": true
+    }
+  }
+}

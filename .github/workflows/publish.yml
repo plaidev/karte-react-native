@@ -4,6 +4,7 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    timeout-minutes: 40
     # Publish on public repository.
     if: github.repository == 'plaidev/karte-react-native'
     permissions:
