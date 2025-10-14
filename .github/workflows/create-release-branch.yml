@@ -30,7 +30,7 @@ jobs:
         id: create_pr
         env:
           # TODO: Consider using GitHub Apps instead of PAT tokens.
-          GH_TOKEN: ${{ secrets.DEV_GH_TOKEN }}
+          GH_TOKEN: ${{ secrets.SHARED_GITHUB_ACCESS_TOKEN }}
         run: |
           PR_URL=$(gh pr create \
             --title "Release by ${{ github.actor }}" \
