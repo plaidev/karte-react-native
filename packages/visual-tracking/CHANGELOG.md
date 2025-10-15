@@ -1,7 +1,14 @@
 # Change Log
 
 All notable changes to this project will be documented in this file.
-See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 0.3.0
+
+- Fixed native SDK versions to specific releases for better stability:
+  - iOS: KarteCore 2.32.0, KarteVisualTracking 2.14.0
+  - Android: core 2.31.1, visualtracking 2.12.0
+- Updated minimum iOS platform target from 10.0 to 15.0.
+
 
 ## [0.2.2](https://github.com/plaidev/karte-react-native/compare/@react-native-karte/visual-tracking@0.2.1...@react-native-karte/visual-tracking@0.2.2) (2025-03-17)
 

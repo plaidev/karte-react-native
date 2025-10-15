@@ -1,7 +1,14 @@
 # Change Log
 
 All notable changes to this project will be documented in this file.
-See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 2.0.0
+
+- Fixed native SDK versions to specific releases for better stability:
+  - iOS: KarteCore 2.32.0, KarteVariables 2.13.0
+  - Android: core 2.31.1, variables 2.10.0
+- Updated minimum iOS platform target from 10.0 to 15.0.
+
 
 # [1.4.0](https://github.com/plaidev/karte-react-native/compare/@react-native-karte/variables@1.3.1...@react-native-karte/variables@1.4.0) (2025-07-08)
 

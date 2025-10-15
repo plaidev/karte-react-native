@@ -1,6 +1,6 @@
 {
   "name": "@react-native-karte/in-app-messaging",
-  "version": "1.2.0",
+  "version": "2.0.0",
   "description": "KARTE SDK In-app messaging for React Native.",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
@@ -45,7 +45,7 @@
     "url": "https://github.com/plaidev/karte-react-native/issues"
   },
   "peerDependencies": {
-    "@react-native-karte/core": "^1.0.0"
+    "@react-native-karte/core": "^2.0.0"
   },
   "devDependencies": {
     "react-native-builder-bob": "^0.18.3",
