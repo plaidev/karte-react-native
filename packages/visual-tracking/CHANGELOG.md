@@ -8,6 +8,7 @@ All notable changes to this project will be documented in this file.
   - iOS: KarteCore 2.32.0, KarteVisualTracking 2.14.0
   - Android: core 2.31.1, visualtracking 2.12.0
 - Updated minimum iOS platform target from 10.0 to 15.0.
+- Removal of deprecated jcenter()
 
 
 ## [0.2.2](https://github.com/plaidev/karte-react-native/compare/@react-native-karte/visual-tracking@0.2.1...@react-native-karte/visual-tracking@0.2.2) (2025-03-17)

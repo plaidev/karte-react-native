@@ -8,6 +8,7 @@ All notable changes to this project will be documented in this file.
   - iOS: KarteCore 2.32.0
   - Android: core 2.31.1
 - Updated minimum iOS platform target from 10.0 to 15.0.
+- Removal of deprecated jcenter()
 
 
 # [1.4.0](https://github.com/plaidev/karte-react-native/compare/@react-native-karte/core@1.3.0...@react-native-karte/core@1.4.0) (2023-03-13)

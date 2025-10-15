@@ -8,6 +8,7 @@ All notable changes to this project will be documented in this file.
   - iOS: KarteCore 2.32.0, KarteRemoteNotification 2.13.0
   - Android: core 2.31.1, notifications 2.15.0
 - Updated minimum iOS platform target from 10.0 to 15.0.
+- Removal of deprecated jcenter()
 
 
 # [1.3.0](https://github.com/plaidev/karte-react-native/compare/@react-native-karte/notification@1.2.0...@react-native-karte/notification@1.3.0) (2024-02-20)
