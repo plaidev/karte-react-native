@@ -15,7 +15,7 @@ To install the KARTE React Native SDK, the following prerequisites must be met.
 
 The supported versions of React Native for this SDK align with [React Native's official support policy](https://github.com/reactwg/react-native-releases/blob/main/docs/support.md), which covers the latest stable version and the two preceding minor versions.
 
-Regarding Expo versions, we support any version that is compatible with the supported React Native versions mentioned above.
+Regarding Expo versions, we support the versions that correspond to the supported React Native versions mentioned above.
 
 The KARTE React Native SDK is a bridge SDK that wraps the native SDKs for each platform.  
 Therefore, your project must also meet the prerequisites for the respective native KARTE SDKs.

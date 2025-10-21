@@ -15,6 +15,7 @@ All notable changes to this project will be documented in this file.
   - iOS: KarteInAppMessaging 2.22.0
   - Android: inappmessaging 2.24.0
 - Updated minimum iOS platform target from 10.0 to 15.0.
+- Add namespace to `build.gradle` for Android Gradle Plugin (AGP) version 7 and later.
 
 ## [1.2.0](https://github.com/plaidev/karte-react-native/compare/@react-native-karte/in-app-messaging@1.1.0...@react-native-karte/in-app-messaging@1.2.0) (2022-10-20)
 
