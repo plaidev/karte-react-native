@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 
 **💊FIXED**
 
+- Updated bridging module (`KarteCoreModule`) to support React Native 0.80 and later.
 - Replaced `jcenter()` with `mavenCentral()` to support React Native 0.82 and later.
 
 **🔨CHANGED**
