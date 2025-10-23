@@ -1,0 +1,67 @@
+name: Publish packages to npmjs.com
+on:
+  workflow_dispatch:
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    # Publish on public repository.
+    if: github.repository == 'plaidev/karte-react-native'
+    permissions:
+      contents: write # Required for tagging.
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+      - name: Setup Node.js
+        uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903 # v6.0.0
+        with:
+          node-version: 20
+          # Sets up auth token in .npmrc.
+          # https://docs.github.com/en/actions/tutorials/publish-packages/publish-nodejs-packages#publishing-packages-to-the-npm-registry
+          registry-url: 'https://registry.npmjs.org'
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+      - name: Build packages
+        run: yarn lerna run prepare
+      - name: Run linting
+        run: yarn lint
+      - name: Run type checking
+        run: yarn typecheck
+      - name: Run tests
+        run: yarn test
+      - name: Configure Git
+        run: |
+          git config --global user.email "git@users.noreply.github.com"
+          git config --global user.name "github actions"
+      # Publishes packages with unpublished versions.
+      - name: Publish packages
+        run: yarn lerna publish from-package --yes
+        env:
+          # TODO: Migrate to trusted publishing with OIDC if possible.
+          # Lerna directly uses `libnpmpublish`, which does not
+          # natively support the OIDC token exchange required by trusted publishing.
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      # Creates unexisting version tags (= published version tags).
+      - name: Create version tags
+        run: |
+          git fetch --tags
+          yarn lerna exec \$LERNA_ROOT_PATH/scripts/ci-create-tag.sh
+          git push --tags
+      - name: Notify Slack on success
+        if: success()
+        uses: rtCamp/action-slack-notify@e31e87e03dd19038e411e38ae27cbad084a90661 # v2.3.3
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_MESSAGE: |
+            ✅ Successfully published packages to npmjs.com
+            Triggered by: ${{ github.actor }}
+          SLACK_COLOR: success
+      - name: Notify Slack on failure
+        if: failure()
+        uses: rtCamp/action-slack-notify@e31e87e03dd19038e411e38ae27cbad084a90661 # v2.3.3
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_MESSAGE: |
+            ❌ Failed to publish packages to npmjs.com
+            Triggered by: ${{ github.actor }}
+          SLACK_COLOR: failure

@@ -38,10 +38,10 @@ class KarteCoreModule(reactContext: ReactApplicationContext) : ReactContextBaseJ
   //endregion
 
   //region ActivityEventListener
-  override fun onActivityResult(p0: Activity?, p1: Int, p2: Int, p3: Intent?) {
+  override fun onActivityResult(p0: Activity, p1: Int, p2: Int, p3: Intent?) {
   }
 
-  override fun onNewIntent(intent: Intent?) {
+  override fun onNewIntent(intent: Intent) {
     KarteApp.onNewIntent(intent)
   }
   //endregion

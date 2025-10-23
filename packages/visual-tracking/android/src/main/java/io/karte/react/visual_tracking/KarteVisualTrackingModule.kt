@@ -100,7 +100,7 @@ class KarteVisualTrackingModule(reactContext: ReactApplicationContext) : ReactCo
 
   @ReactMethod
   fun view(action: String, actionId: String?, targetText: String?) {
-    currentActivity?.let { handleLifecycleAction(it, action, actionId, targetText) }
+    reactApplicationContext.currentActivity?.let { handleLifecycleAction(it, action, actionId, targetText) }
   }
 
 }

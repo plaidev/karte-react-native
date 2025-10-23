@@ -68,7 +68,7 @@ export class Notification {
    * (Androidのみ) KARTE経由で送信された通知メッセージから、通知を作成・表示します。
    */
   public show(): void {
-    return nativeModule.show(this.remoteMessage.data ?? {});
+    nativeModule.show(this.remoteMessage.data ?? {});
   }
 
   /**
