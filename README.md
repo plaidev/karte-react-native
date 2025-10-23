@@ -9,6 +9,20 @@ This repository holds the source code for the React Native version of KARTE SDK.
 ## Getting Started
 Please see the detailed instructions in our docs to add [KARTE React Native SDK](https://developers.karte.io/docs/react-native-sdk-v2) to your project.
 
+## Requirements
+
+To install the KARTE React Native SDK, the following prerequisites must be met.
+
+The supported versions of React Native for this SDK align with [React Native's official support policy](https://github.com/reactwg/react-native-releases/blob/main/docs/support.md), which covers the latest stable version and the two preceding minor versions.
+
+Regarding Expo versions, we support the versions that correspond to the supported React Native versions mentioned above.
+
+The KARTE React Native SDK is a bridge SDK that wraps the native SDKs for each platform.  
+Therefore, your project must also meet the prerequisites for the respective native KARTE SDKs.
+
+- [iOS](https://developers.karte.io/docs/setup-ios-sdk-v2)
+- [Android](https://developers.karte.io/docs/setup-android-sdk-v2)
+
 ## Documentation
 The developer guide is located at
 - [Developer Portal - KARTE React Native SDK](https://developers.karte.io/docs/react-native-sdk-v2)

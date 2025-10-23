@@ -21,10 +21,6 @@
     "prepare": "lerna run prepare",
     "bootstrap": "lerna bootstrap",
     "clean": "lerna clean",
-    "versionup": "lerna version --conventional-commits --no-commit-hooks",
-    "versionup:patch": "lerna version patch --conventional-commits --no-commit-hooks",
-    "versionup:minor": "lerna version minor --conventional-commits --no-commit-hooks",
-    "versionup:major": "lerna version major --conventional-commits --no-commit-hooks",
     "release": "lerna publish from-package",
     "release:canary": "lerna publish --canary",
     "typecheck": "tsc --noEmit --composite false",
@@ -37,12 +33,10 @@
     "yalc:push": "yarn prepare && lerna exec --parallel -- yalc push --force"
   },
   "devDependencies": {
-    "@commitlint/config-conventional": "^9.1.1",
     "@react-native-community/eslint-config": "^3.1.0",
     "@types/jest": "^29.1.2",
     "@types/react": "^18.0.0",
     "@types/react-native": "^0.70.4",
-    "commitlint": "^12.1.4",
     "compare-versions": "^3.6.0",
     "eslint": "^8.25.0",
     "eslint-config-prettier": "^8.5.0",
@@ -70,7 +64,6 @@
   },
   "husky": {
     "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
       "pre-commit": "yarn lint && yarn typecheck"
     }
   },

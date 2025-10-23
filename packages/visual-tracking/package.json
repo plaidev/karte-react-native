@@ -1,6 +1,6 @@
 {
   "name": "@react-native-karte/visual-tracking",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "description": "KARTE SDK Visual tracking for React Native",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
@@ -50,7 +50,7 @@
     "url": "https://github.com/plaidev/karte-react-native/issues"
   },
   "peerDependencies": {
-    "@react-native-karte/core": "^1.0.0",
+    "@react-native-karte/core": "^2.0.0",
     "react": "*",
     "react-native": "*"
   },

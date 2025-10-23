@@ -4,7 +4,7 @@ buildscript {
 
   repositories {
     google()
-    jcenter()
+    mavenCentral()
   }
 
   dependencies {
@@ -63,7 +63,6 @@ android {
 
 repositories {
   mavenCentral()
-  jcenter()
   google()
 
   def found = false
@@ -138,6 +137,6 @@ dependencies {
   // noinspection GradleDynamicVersion
   api 'com.facebook.react:react-native:+'
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-  api 'io.karte.android:core:2+'
-  api 'io.karte.android:visualtracking:2.+'
+  api 'io.karte.android:core:2.31.1'
+  api 'io.karte.android:visualtracking:2.12.0'
 }
