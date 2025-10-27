@@ -25,12 +25,9 @@ def getExtOrIntegerDefault(name) {
 }
 
 android {
-  def agpVersion = com.android.Version.ANDROID_GRADLE_PLUGIN_VERSION
-  if (agpVersion.tokenize('.')[0].toInteger() >= 7) {
-    namespace "io.karte.react.variables"
-    buildFeatures {
-      buildConfig true
-    }
+  namespace "io.karte.react.variables"
+  buildFeatures {
+    buildConfig true
   }
 
   compileSdkVersion getExtOrIntegerDefault('compileSdkVersion')
