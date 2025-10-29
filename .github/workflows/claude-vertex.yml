@@ -21,8 +21,8 @@ jobs:
           script: |
             const comment = context.payload.comment.body;
             if (comment.includes('@claude-opus-4')) {
-              core.setOutput('model', 'claude-opus-4-1-20250805');
-              console.log('Using Opus-4.1 model');
+              core.setOutput('model', 'claude-opus-4-20250514');
+              console.log('Using Opus-4 model');
             } else {
               core.setOutput('model', 'claude-sonnet-4-20250514');
               console.log('Using Sonnet-4 model');
