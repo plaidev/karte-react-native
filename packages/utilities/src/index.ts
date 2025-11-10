@@ -1,3 +1,5 @@
+export { withBridgeInfo } from './bridge-info';
+
 /**
  * イベントに紐付けるカスタムオブジェクトの正規化を行います。
  *
