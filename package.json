@@ -19,8 +19,6 @@
   "author": "PLAID, Inc.",
   "scripts": {
     "prepare": "lerna run prepare",
-    "bootstrap": "lerna bootstrap",
-    "clean": "lerna clean",
     "release": "lerna publish from-package",
     "release:canary": "lerna publish --canary",
     "typecheck": "tsc --noEmit --composite false",
@@ -33,6 +31,10 @@
     "yalc:push": "yarn prepare && lerna exec --parallel -- yalc push --force"
   },
   "devDependencies": {
+    "@lerna-lite/cli": "^4.9.2",
+    "@lerna-lite/exec": "^4.9.2",
+    "@lerna-lite/publish": "^4.9.2",
+    "@lerna-lite/run": "^4.9.2",
     "@react-native-community/eslint-config": "^3.1.0",
     "@types/jest": "^29.1.2",
     "@types/react": "^18.0.0",
@@ -46,7 +48,6 @@
     "genversion": "^2.2.1",
     "husky": "^4.2.5",
     "jest": "^26.6.3",
-    "lerna": "^4.0.0",
     "metro-react-native-babel-preset": "^0.73.2",
     "pod-install": "^0.1.8",
     "prettier": "^2.0.5",
