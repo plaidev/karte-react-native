@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## x.x.x
+
+- Replaced deprecated `metro-react-native-babel-preset` with `@react-native/babel-preset`.
+
 ## 2.0.0
 
 **💊FIXED**

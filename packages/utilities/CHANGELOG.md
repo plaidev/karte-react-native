@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## x.x.x
+
+- Replaced deprecated `metro-react-native-babel-preset` with `@react-native/babel-preset`.
+
 ## [0.1.1](https://github.com/plaidev/karte-react-native/compare/@react-native-karte/utilities@0.1.0...@react-native-karte/utilities@0.1.1) (2023-03-13)
 
 ### Bug Fixes
