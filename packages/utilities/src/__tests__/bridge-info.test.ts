@@ -1,9 +1,15 @@
 import { withBridgeInfo } from '../bridge-info';
 import * as rnVersion from '../react-native-version';
+import * as newArchDetection from '../new-architecture-detection';
 
 // Mock the getReactNativeVersion function
 jest.mock('../react-native-version', () => ({
   getReactNativeVersion: jest.fn(() => '0.72.4'),
+}));
+
+// Mock the isNewArchitectureEnabled function
+jest.mock('../new-architecture-detection', () => ({
+  isNewArchitectureEnabled: jest.fn(() => false),
 }));
 
 describe('Bridge Info Utility', () => {
@@ -14,19 +20,31 @@ describe('Bridge Info Utility', () => {
   describe('withBridgeInfo', () => {
     it('should handle undefined, null, empty, and optional values', () => {
       expect(withBridgeInfo(undefined)).toEqual({
-        bridge_info: { react_native_version: '0.72.4' },
+        bridge_info: {
+          react_native_version: '0.72.4',
+          new_arch: false,
+        },
       });
 
       expect(withBridgeInfo(null as any)).toEqual({
-        bridge_info: { react_native_version: '0.72.4' },
+        bridge_info: {
+          react_native_version: '0.72.4',
+          new_arch: false,
+        },
       });
 
       expect(withBridgeInfo({})).toEqual({
-        bridge_info: { react_native_version: '0.72.4' },
+        bridge_info: {
+          react_native_version: '0.72.4',
+          new_arch: false,
+        },
       });
 
       expect(withBridgeInfo()).toEqual({
-        bridge_info: { react_native_version: '0.72.4' },
+        bridge_info: {
+          react_native_version: '0.72.4',
+          new_arch: false,
+        },
       });
     });
 
@@ -44,6 +62,7 @@ describe('Bridge Info Utility', () => {
         customData: { foo: 'bar' },
         bridge_info: {
           react_native_version: '0.72.4',
+          new_arch: false,
         },
       });
     });
@@ -68,6 +87,7 @@ describe('Bridge Info Utility', () => {
         tags: [{ name: 'tag1' }, { name: 'tag2' }],
         bridge_info: {
           react_native_version: '0.72.4',
+          new_arch: false,
         },
       });
     });
@@ -103,6 +123,7 @@ describe('Bridge Info Utility', () => {
         test: 'value',
         bridge_info: {
           react_native_version: 'unknown',
+          new_arch: false,
         },
       });
     });
@@ -127,6 +148,60 @@ describe('Bridge Info Utility', () => {
 
       withBridgeInfo(values);
       expect(mockGetVersion).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('Integration with New Architecture detection', () => {
+    it('should include New Architecture flag when enabled', () => {
+      const mockIsNewArch =
+        newArchDetection.isNewArchitectureEnabled as jest.Mock;
+      mockIsNewArch.mockReturnValueOnce(true);
+
+      const result = withBridgeInfo({ test: 'value' });
+      expect(result).toEqual({
+        test: 'value',
+        bridge_info: {
+          react_native_version: '0.72.4',
+          new_arch: true,
+        },
+      });
+    });
+
+    it('should include New Architecture flag when disabled', () => {
+      const mockIsNewArch =
+        newArchDetection.isNewArchitectureEnabled as jest.Mock;
+      mockIsNewArch.mockReturnValueOnce(false);
+
+      const result = withBridgeInfo({ test: 'value' });
+      expect(result).toEqual({
+        test: 'value',
+        bridge_info: {
+          react_native_version: '0.72.4',
+          new_arch: false,
+        },
+      });
+    });
+
+    it('should call isNewArchitectureEnabled exactly once per call', () => {
+      const mockIsNewArch =
+        newArchDetection.isNewArchitectureEnabled as jest.Mock;
+      mockIsNewArch.mockClear();
+
+      withBridgeInfo({ test: 'value' });
+      expect(mockIsNewArch).toHaveBeenCalledTimes(1);
+    });
+
+    it('should not call isNewArchitectureEnabled when bridge_info exists', () => {
+      const mockIsNewArch =
+        newArchDetection.isNewArchitectureEnabled as jest.Mock;
+      mockIsNewArch.mockClear();
+
+      const values = {
+        bridge_info: { existing: 'data' },
+      };
+
+      withBridgeInfo(values);
+      expect(mockIsNewArch).not.toHaveBeenCalled();
     });
   });
 });

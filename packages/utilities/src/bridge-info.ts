@@ -2,6 +2,7 @@
  * Bridge info utility for adding React Native version to KARTE events
  */
 import { getReactNativeVersion } from './react-native-version';
+import { isNewArchitectureEnabled } from './new-architecture-detection';
 
 /**
  * Returns a new object with bridge_info added, handling null/undefined cases
@@ -21,6 +22,7 @@ export function withBridgeInfo(
     ...baseValues,
     bridge_info: {
       react_native_version: getReactNativeVersion(),
+      new_arch: isNewArchitectureEnabled(),
     },
   };
 }

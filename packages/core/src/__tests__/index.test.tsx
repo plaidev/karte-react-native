@@ -10,7 +10,10 @@ jest.mock('@react-native-karte/utilities', () => {
       }
       return {
         ...normalizedValues,
-        bridge_info: { react_native_version: '0.72.4' },
+        bridge_info: {
+          react_native_version: '0.72.4',
+          new_arch: false,
+        },
       };
     },
   };
@@ -65,7 +68,10 @@ describe('Tracker test', () => {
     expect(nativeMock.track.mock.calls[0][0]).toBe('aaa');
     expect(nativeMock.track.mock.calls[0][1]).toEqual({
       date: 1,
-      bridge_info: { react_native_version: '0.72.4' },
+      bridge_info: {
+        react_native_version: '0.72.4',
+        new_arch: false,
+      },
     });
   });
 
@@ -101,7 +107,10 @@ describe('Tracker test', () => {
     expect(nativeMock.view.mock.calls[0][1]).toBe('bbb');
     expect(nativeMock.view.mock.calls[0][2]).toEqual({
       date: 1,
-      bridge_info: { react_native_version: '0.72.4' },
+      bridge_info: {
+        react_native_version: '0.72.4',
+        new_arch: false,
+      },
     });
   });
 });
