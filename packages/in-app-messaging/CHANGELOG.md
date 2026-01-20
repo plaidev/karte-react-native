@@ -2,9 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
-## x.x.x
+## 2.1.0
 
 - Replaced deprecated `metro-react-native-babel-preset` with `@react-native/babel-preset`.
+- Updated native SDK versions to latest releases:
+  - iOS: KarteInAppMessaging 2.25.0
+  - Android: inappmessaging 2.26.0
 
 ## 2.0.0
 

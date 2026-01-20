@@ -130,5 +130,5 @@ dependencies {
   // noinspection GradleDynamicVersion
   api 'com.facebook.react:react-native:+'
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-  api 'io.karte.android:inappmessaging:2.24.0'
+  api 'io.karte.android:inappmessaging:2.26.0'
 }

@@ -2,9 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
-## x.x.x
+## 2.1.0
 
 - Replaced deprecated `metro-react-native-babel-preset` with `@react-native/babel-preset`.
+- Updated native SDK versions to latest releases:
+  - iOS: KarteCore 2.35.0
+  - Android: core 2.33.0
 
 ## 2.0.0
 

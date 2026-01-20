@@ -1,6 +1,6 @@
 {
   "name": "@react-native-karte/variables",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "KARTE SDK Variables for React Native.",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
@@ -48,7 +48,7 @@
     "@react-native-karte/utilities": "^0.1.1"
   },
   "peerDependencies": {
-    "@react-native-karte/core": "^2.0.0"
+    "@react-native-karte/core": "^2.1.0"
   },
   "devDependencies": {
     "react-native-builder-bob": "^0.18.3",
