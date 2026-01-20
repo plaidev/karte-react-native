@@ -52,7 +52,6 @@ jobs:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
           SLACK_MESSAGE: |
             ✅ Successfully published packages to npmjs.com
-            Triggered by: ${{ github.actor }}
           SLACK_COLOR: success
       - name: Notify Slack on failure
         if: failure()
@@ -61,5 +60,4 @@ jobs:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
           SLACK_MESSAGE: |
             ❌ Failed to publish packages to npmjs.com
-            Triggered by: ${{ github.actor }}
           SLACK_COLOR: failure
