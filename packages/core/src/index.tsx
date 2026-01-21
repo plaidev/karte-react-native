@@ -15,7 +15,7 @@
 //
 
 import { NativeModules } from 'react-native';
-import { normalize } from '@react-native-karte/utilities';
+import { normalize, withBridgeInfo } from '@react-native-karte/utilities';
 import type { KRTCoreNativeModule } from './types';
 
 const nativeModule: KRTCoreNativeModule = NativeModules.RNKRTCoreModule;
@@ -91,7 +91,8 @@ export class Tracker {
    */
 
   public static track(name: string, values: object = {}) {
-    nativeModule.track(name, normalize(values));
+    const valuesWithBridgeInfo = withBridgeInfo(values);
+    nativeModule.track(name, normalize(valuesWithBridgeInfo));
   }
 
   /**
@@ -132,7 +133,8 @@ export class Tracker {
    * @param values Viewイベントに紐付けるカスタムオブジェクト
    */
   public static view(viewName: string, title?: string, values: object = {}) {
-    nativeModule.view(viewName, title, normalize(values));
+    const valuesWithBridgeInfo = withBridgeInfo(values);
+    nativeModule.view(viewName, title, normalize(valuesWithBridgeInfo));
   }
 }
 /**

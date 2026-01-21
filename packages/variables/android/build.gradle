@@ -25,12 +25,9 @@ def getExtOrIntegerDefault(name) {
 }
 
 android {
-  def agpVersion = com.android.Version.ANDROID_GRADLE_PLUGIN_VERSION
-  if (agpVersion.tokenize('.')[0].toInteger() >= 7) {
-    namespace "io.karte.react.variables"
-    buildFeatures {
-      buildConfig true
-    }
+  namespace "io.karte.react.variables"
+  buildFeatures {
+    buildConfig true
   }
 
   compileSdkVersion getExtOrIntegerDefault('compileSdkVersion')
@@ -133,6 +130,6 @@ dependencies {
   // noinspection GradleDynamicVersion
   api 'com.facebook.react:react-native:+'
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-  api 'io.karte.android:core:2.31.1'
-  api 'io.karte.android:variables:2.10.0'
+  api 'io.karte.android:core:2.33.0'
+  api 'io.karte.android:variables:2.12.0'
 }

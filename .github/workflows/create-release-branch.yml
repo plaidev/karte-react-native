@@ -10,6 +10,15 @@ jobs:
     permissions:
       contents: write
     steps:
+      - name: Generate GitHub App token
+        uses: actions/create-github-app-token@7e473efe3cb98aa54f8d4bac15400b15fad77d94 # v2.2.0
+        id: app-token
+        with:
+          app-id: ${{ secrets.SHARED_GITHUB_ACTION_AGENT_APP_ID }}
+          private-key: ${{ secrets.SHARED_GITHUB_ACTION_AGENT_APP_PRIVATE_KEY }}
+          owner: plaidev
+          repositories: |
+            karte-react-native-dev
       - name: Checkout develop
         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
         with:
@@ -29,14 +38,16 @@ jobs:
       - name: Create Pull Request
         id: create_pr
         env:
-          # TODO: Consider using GitHub Apps instead of PAT tokens.
-          GH_TOKEN: ${{ secrets.SHARED_GITHUB_ACCESS_TOKEN }}
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+          PR_BODY: |
+            ### 以下の項目を確認してください
+            - [ ] `package.json`内のバージョンならびに`CHANGELOG.md`が更新されていることを確認した。
+            - [ ] サンプルアプリで動作確認を行った。
+            - [ ] 全てのチェックボックスを埋めると自動的にマージ作業を開始します。
         run: |
           PR_URL=$(gh pr create \
             --title "Release by ${{ github.actor }}" \
-            --body "### 以下の項目を確認してください
-          - [ ] \`package.json\`内のバージョンならびに\`CHANGELOG.md\`が更新されていることを確認した。
-          - [ ] サンプルアプリで動作確認を行った。" \
+            --body "$PR_BODY" \
             --base master \
             --head release/${{ steps.date.outputs.date }})
           echo "pr_url=$PR_URL" >> $GITHUB_OUTPUT

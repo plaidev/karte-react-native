@@ -19,5 +19,5 @@ Pod::Spec.new do |s|
   s.static_framework = true
  
   s.dependency "React"
-  s.dependency "KarteCore", '2.32.0'
+  s.dependency "KarteCore", '2.35.0'
 end

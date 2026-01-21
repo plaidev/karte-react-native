@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2.1.0
+
+- Replaced deprecated `metro-react-native-babel-preset` with `@react-native/babel-preset`.
+- Updated native SDK versions to latest releases:
+  - iOS: KarteCore 2.35.0 (no change for KarteRemoteNotification 2.13.0)
+  - Android: core 2.33.0, notifications 2.17.0
+
 ## 2.0.0
 
 **💊FIXED**

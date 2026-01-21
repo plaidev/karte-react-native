@@ -19,8 +19,6 @@
   "author": "PLAID, Inc.",
   "scripts": {
     "prepare": "lerna run prepare",
-    "bootstrap": "lerna bootstrap",
-    "clean": "lerna clean",
     "release": "lerna publish from-package",
     "release:canary": "lerna publish --canary",
     "typecheck": "tsc --noEmit --composite false",
@@ -33,10 +31,25 @@
     "yalc:push": "yarn prepare && lerna exec --parallel -- yalc push --force"
   },
   "devDependencies": {
+    "@babel/core": "^7.25.2",
+    "@babel/preset-env": "^7.25.3",
+    "@babel/runtime": "^7.25.0",
+    "@lerna-lite/cli": "^4.9.2",
+    "@lerna-lite/exec": "^4.9.2",
+    "@lerna-lite/publish": "^4.9.2",
+    "@lerna-lite/run": "^4.9.2",
     "@react-native-community/eslint-config": "^3.1.0",
-    "@types/jest": "^29.1.2",
-    "@types/react": "^18.0.0",
-    "@types/react-native": "^0.70.4",
+    "@react-native-community/cli": "^18.0.0",
+    "@react-native-community/cli-platform-android": "^18.0.0",
+    "@react-native-community/cli-platform-ios": "^18.0.0",
+    "@react-native/babel-preset": "^0.79.6",
+    "@react-native/eslint-config": "^0.79.6",
+    "@react-native/metro-config": "^0.79.6",
+    "@react-native/typescript-config": "^0.79.6",
+    "@types/react-test-renderer": "^19.0.0",
+    "react-test-renderer": "^19.0.0",
+    "@types/jest": "^29.5.13",
+    "@types/react": "^19.0.0",
     "compare-versions": "^3.6.0",
     "eslint": "^8.25.0",
     "eslint-config-prettier": "^8.5.0",
@@ -45,17 +58,15 @@
     "fs-extra": "^9.1.0",
     "genversion": "^2.2.1",
     "husky": "^4.2.5",
-    "jest": "^26.6.3",
-    "lerna": "^4.0.0",
-    "metro-react-native-babel-preset": "^0.73.2",
+    "jest": "^29.6.3",
     "pod-install": "^0.1.8",
     "prettier": "^2.0.5",
-    "react": "^18.2.0",
-    "react-native": "^0.70.3",
+    "react": "^19.0.0",
+    "react-native": "^0.79.6",
     "ts-jest": "^26.5.4",
     "ts-node": "^10.9.1",
     "typedoc": "^0.23.17",
-    "typescript": "^4.8.4"
+    "typescript": "~5.0.4"
   },
   "jest": {
     "projects": [
@@ -73,5 +84,8 @@
     "tabWidth": 2,
     "trailingComma": "es5",
     "useTabs": false
+  },
+  "engines": {
+    "node": ">=18"
   }
 }
