@@ -14,11 +14,12 @@ jobs:
         uses: actions/create-github-app-token@7e473efe3cb98aa54f8d4bac15400b15fad77d94 # v2.2.0
         id: app-token
         with:
-          app-id: ${{ secrets.SHARED_GITHUB_ACTION_AGENT_APP_ID }}
-          private-key: ${{ secrets.SHARED_GITHUB_ACTION_AGENT_APP_PRIVATE_KEY }}
+          app-id: ${{ secrets.APP_TEAM_GITHUB_APP_ID }}
+          private-key: ${{ secrets.APP_TEAM_GITHUB_APP_PRIVATE_KEY }}
           owner: plaidev
           repositories: |
             karte-react-native-dev
+            karte-react-native-tools
       - name: Checkout develop
         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
         with:
@@ -51,6 +52,22 @@ jobs:
             --base master \
             --head release/${{ steps.date.outputs.date }})
           echo "pr_url=$PR_URL" >> $GITHUB_OUTPUT
+      - name: Trigger deploy-test-expo-app (iOS)
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+        run: |
+          gh workflow run deploy-test-expo-app-ios.yml \
+            --repo plaidev/karte-react-native-tools \
+            --field sdk_branch=release/${{ steps.date.outputs.date }} \
+            --field expo_plugin_branch=main
+      - name: Trigger deploy-test-expo-app (Android)
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+        run: |
+          gh workflow run deploy-test-expo-app-android.yml \
+            --repo plaidev/karte-react-native-tools \
+            --field sdk_branch=release/${{ steps.date.outputs.date }} \
+            --field expo_plugin_branch=main
       - name: Notify Slack on success
         if: success()
         uses: rtCamp/action-slack-notify@e31e87e03dd19038e411e38ae27cbad084a90661 # v2.3.3
