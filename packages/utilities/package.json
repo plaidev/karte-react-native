@@ -1,6 +1,6 @@
 {
   "name": "@react-native-karte/utilities",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "KARTE SDK Utilities",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",

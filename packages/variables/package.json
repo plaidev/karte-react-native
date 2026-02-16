@@ -1,6 +1,6 @@
 {
   "name": "@react-native-karte/variables",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "KARTE SDK Variables for React Native.",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
@@ -45,7 +45,7 @@
     "url": "https://github.com/plaidev/karte-react-native/issues"
   },
   "dependencies": {
-    "@react-native-karte/utilities": "^0.1.1"
+    "@react-native-karte/utilities": "^0.1.2"
   },
   "peerDependencies": {
     "@react-native-karte/core": "^2.1.0"

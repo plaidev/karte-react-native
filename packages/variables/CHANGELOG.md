@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2.1.1
+
+- Updated dependency `@react-native-karte/utilities` to `0.1.2`.
+
 ## 2.1.0
 
 - Replaced deprecated `metro-react-native-babel-preset` with `@react-native/babel-preset`.
