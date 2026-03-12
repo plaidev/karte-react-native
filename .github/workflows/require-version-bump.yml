@@ -6,6 +6,7 @@ env:
   NODE_VERSION: 20
 jobs:
   check:
+    if: github.repository != 'plaidev/karte-react-native'
     runs-on: ubuntu-latest
     timeout-minutes: 5
     permissions:
