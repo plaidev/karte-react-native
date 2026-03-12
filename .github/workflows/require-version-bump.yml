@@ -1,0 +1,28 @@
+name: "Require version bump for package changes"
+on:
+  pull_request:
+    branches: [master, develop]
+env:
+  NODE_VERSION: 20
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          fetch-depth: 0 # Fetches Git tags.
+          persist-credentials: false
+      - name: Setup Node.js
+        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "yarn"
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+      - name: Check version bumps
+        id: version_check
+        run: yarn lerna exec --since origin/master --no-bail --exclude-dependents \$LERNA_ROOT_PATH/scripts/ci-check-version-bump.sh
