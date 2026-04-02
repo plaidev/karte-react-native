@@ -22,8 +22,10 @@ jobs:
       # Ensure npm 11.5.1 or later is installed for trusted publishing.
       - name: Install latest npm
         run: npm install -g npm@latest
+      - name: Enable Corepack
+        run: corepack enable
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: yarn install --immutable
       - name: Build packages
         run: yarn lerna run prepare
       - name: Run linting

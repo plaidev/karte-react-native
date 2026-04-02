@@ -22,8 +22,10 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: "yarn"
+      - name: Enable Corepack
+        run: corepack enable
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: yarn install --immutable
       - name: Check version bumps
         id: version_check
         run: yarn lerna exec --since origin/master --no-bail --exclude-dependents \$LERNA_ROOT_PATH/scripts/ci-check-version-bump.sh

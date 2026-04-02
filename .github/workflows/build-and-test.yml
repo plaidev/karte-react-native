@@ -18,10 +18,10 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'yarn'
+      - name: Enable Corepack
+        run: corepack enable
       - name: Install dependencies
-        # NOTE: yarn is pre-installed in ubuntu-latest.
-        # https://github.com/actions/runner-images/blob/25f533f3b2db8f03ad46ca4c87603cee7a41eeac/images/ubuntu/Ubuntu2404-Readme.md?plain=1#L36
-        run: yarn install --frozen-lockfile
+        run: yarn install --immutable
       - name: Lint files
         run: yarn lint
       - name: Typecheck files

@@ -34,7 +34,7 @@
     "directory": "packages/variables"
   },
   "scripts": {
-    "prepare": "npm run build",
+    "prepare": "yarn run build",
     "build": "bob build",
     "build:clean": "del lib",
     "docs": "typedoc src/index.tsx --excludePrivate",
