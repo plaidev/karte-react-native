@@ -3,7 +3,7 @@ on:
   pull_request:
     branches: [master, develop]
 env:
-  NODE_VERSION: 20
+  NODE_VERSION: 24
 jobs:
   check:
     if: github.repository != 'plaidev/karte-react-native'
@@ -22,6 +22,8 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: "yarn"
+      - name: Show npm version
+        run: npm --version
       - name: Enable Corepack
         run: corepack enable
       - name: Install dependencies
