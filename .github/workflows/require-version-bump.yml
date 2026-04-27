@@ -2,6 +2,8 @@ name: "Require version bump for package changes"
 on:
   pull_request:
     branches: [master, develop]
+    paths:
+      - "packages/**"
 env:
   NODE_VERSION: 24
 jobs:
