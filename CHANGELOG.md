@@ -1,13 +1,14 @@
 # Release - 2026.01.21
+### notification 2.1.0
 
-### core 2.1.0
+**🔨 CHANGED**
 
-**🔨CHANGED**
+#### 変更詳細
 
 * 非推奨の `metro-react-native-babel-preset` を `@react-native/babel-preset` に置き換えました。
 * ネイティブ SDK のバージョンを最新版に更新しました:
-  * iOS: KarteCore 2.35.0
-  * Android: core 2.33.0
+  * iOS: KarteCore 2.35.0 (KarteRemoteNotification 2.13.0 は変更なし)
+  * Android: core 2.33.0, notifications 2.17.0
 
 ### in-app-messaging 2.1.0
 
@@ -18,14 +19,14 @@
   * iOS: KarteInAppMessaging 2.25.0
   * Android: inappmessaging 2.26.0
 
-### notification 2.1.0
+### core 2.1.0
 
 **🔨CHANGED**
 
 * 非推奨の `metro-react-native-babel-preset` を `@react-native/babel-preset` に置き換えました。
 * ネイティブ SDK のバージョンを最新版に更新しました:
-  * iOS: KarteCore 2.35.0 (KarteRemoteNotification 2.13.0 は変更なし)
-  * Android: core 2.33.0, notifications 2.17.0
+  * iOS: KarteCore 2.35.0
+  * Android: core 2.33.0
 
 ### variables 2.1.0
 
