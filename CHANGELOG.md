@@ -132,13 +132,13 @@
 
 ### **notification 1.3.1**
 
-**💊 FIXED**
+**💊FIXED**
 
 * Android において React Native 0.75 以上で発生していた `variables` のビルドエラーを修正しました。
 
 ### **visual-tracking 0.2.2**
 
-**💊 FIXED**
+**💊FIXED**
 
 * 新しいアーキテクチャにおける `UIManager` の処理に条件を追加し、適切に対応しました。
 
@@ -146,7 +146,7 @@
 
 ### notification 1.3.0
 
-**💊 FIXED**
+**💊FIXED**
 
 * `@react-native-firebase/messaging: 18.5.0`で修正された `RemoteMessage.data`の型変更に対応しました
 
@@ -154,7 +154,7 @@
 
 ### visual-tracking 0.2.1
 
-**💊 FIXED**
+**💊FIXED**
 
 * iOSにおいてRNKRTVisualTrackingのビルドができない問題を修正しました。
 
@@ -198,7 +198,7 @@
   * 返されるスクリプトをWebViewで実行することで、`android.webkit.WebView以外のWebView`に対してもユーザー連携が可能になります。
   * これに伴い、クエリパラメータ連携API `UserSync.appendUserSyncQueryParameter` は非推奨になります。
 
-**💊 FIXED**
+**💊FIXED**
 
 * Android/iOSの依存関係を修正しました。
 
@@ -208,28 +208,28 @@
 
 ### in-app-messaging 1.2.0
 
-**💊 FIXED**
+**💊FIXED**
 
 * Android/iOSの依存関係を修正しました。
 * coreモジュールへの依存の不具合を修正しました。
 
 ### notification 1.2.0
 
-**💊 FIXED**
+**💊FIXED**
 
 * Android/iOSの依存関係を修正しました。
 * coreモジュールへの依存の不具合を修正しました。
 
 ### variables 1.2.0
 
-**💊 FIXED**
+**💊FIXED**
 
 * Android/iOSの依存関係を修正しました。
 * coreモジュールへの依存の不具合を修正しました。
 
 ### visual-tracking 0.2.0　
 
-**💊 FIXED**
+**💊FIXED**
 
 * Android/iOSの依存関係を修正しました。
 * coreモジュールへの依存の不具合を修正しました。
@@ -285,7 +285,7 @@
 
 ### in-app-messaging 1.0.0
 
-**💊 FIXED**
+**💊FIXED**
 
 * Androidにおいて、チャット接客内で画像アップロードが動作しない不具合を修正しました。
 
