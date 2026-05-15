@@ -1,4 +1,4 @@
-# Release - 2026.01.21
+# Releases - 2026.01.21
 
 ### core 2.1.0
 
@@ -45,7 +45,7 @@
   * iOS: KarteCore 2.35.0 (KarteVisualTracking 2.14.0 は変更なし)
   * Android: core 2.33.0, visualtracking 2.14.0
 
-# Release - 2025.10.23
+# Releases - 2025.10.23
 
 ### core 2.0.0
 
@@ -121,44 +121,44 @@
 * iOS の最小サポートバージョンを 10.0 から 15.0 に更新しました。
 * Android Gradle Plugin (AGP) 7 以降に対応するため、`build.gradle` に `namespace` を追加しました。
 
-# Release - 2025.07.08
+# Releases - 2025.07.08
 
 ### **variables 1.4.0**
 
 * 設定値のKeyをすべて取得するgetAllKeysを追加しました
 * 設定値のキャッシュを削除するcacheClearAll, cacheClearByKeyを追加しました
 
-# Release - 2025.03.17
+# Releases - 2025.03.17
 
 ### **notification 1.3.1**
 
-**💊 FIXED**
+**💊FIXED**
 
 * Android において React Native 0.75 以上で発生していた `variables` のビルドエラーを修正しました。
 
 ### **visual-tracking 0.2.2**
 
-**💊 FIXED**
+**💊FIXED**
 
 * 新しいアーキテクチャにおける `UIManager` の処理に条件を追加し、適切に対応しました。
 
-# Release - 2024.02.20
+# Releases - 2024.02.20
 
 ### notification 1.3.0
 
-**💊 FIXED**
+**💊FIXED**
 
 * `@react-native-firebase/messaging: 18.5.0`で修正された `RemoteMessage.data`の型変更に対応しました
 
-# Release - 2023.03.14
+# Releases - 2023.03.14
 
 ### visual-tracking 0.2.1
 
-**💊 FIXED**
+**💊FIXED**
 
 * iOSにおいてRNKRTVisualTrackingのビルドができない問題を修正しました。
 
-# Release - 2023.03.13
+# Releases - 2023.03.13
 
 ### core 1.4.0
 
@@ -174,7 +174,7 @@
 
 
 
-# Release - 2023.03.10
+# Releases - 2023.03.10
 
 ### core 1.3.0
 
@@ -184,7 +184,7 @@
 
 
 
-# Release - 2022.10.20
+# Releases - 2022.10.20
 
 ### core 1.2.0
 
@@ -198,7 +198,7 @@
   * 返されるスクリプトをWebViewで実行することで、`android.webkit.WebView以外のWebView`に対してもユーザー連携が可能になります。
   * これに伴い、クエリパラメータ連携API `UserSync.appendUserSyncQueryParameter` は非推奨になります。
 
-**💊 FIXED**
+**💊FIXED**
 
 * Android/iOSの依存関係を修正しました。
 
@@ -208,28 +208,28 @@
 
 ### in-app-messaging 1.2.0
 
-**💊 FIXED**
+**💊FIXED**
 
 * Android/iOSの依存関係を修正しました。
 * coreモジュールへの依存の不具合を修正しました。
 
 ### notification 1.2.0
 
-**💊 FIXED**
+**💊FIXED**
 
 * Android/iOSの依存関係を修正しました。
 * coreモジュールへの依存の不具合を修正しました。
 
 ### variables 1.2.0
 
-**💊 FIXED**
+**💊FIXED**
 
 * Android/iOSの依存関係を修正しました。
 * coreモジュールへの依存の不具合を修正しました。
 
 ### visual-tracking 0.2.0　
 
-**💊 FIXED**
+**💊FIXED**
 
 * Android/iOSの依存関係を修正しました。
 * coreモジュールへの依存の不具合を修正しました。
@@ -241,7 +241,7 @@
 
 * 開発時に依存しているReact / React Nativeのバージョンをアップデートしました。
 
-# Release - 2022.08.23
+# Releases - 2022.08.23
 
 ### core 1.1.0
 
@@ -273,7 +273,7 @@
 
 * Deployment Targetの変更 iOS9 → iOS10
 
-# Release - 2021.07.01
+# Releases - 2021.07.01
 
 ### visual-tracking 0.1.0
 
@@ -281,15 +281,15 @@
 
 * 初回リリース
 
-# Release - 2021.03.30
+# Releases - 2021.03.30
 
 ### in-app-messaging 1.0.0
 
-**💊 FIXED**
+**💊FIXED**
 
 * Androidにおいて、チャット接客内で画像アップロードが動作しない不具合を修正しました。
 
-# Release - 2020.11.18
+# Releases - 2020.11.18
 
 ### core 1.0.0
 
@@ -315,7 +315,7 @@
 
 * 正式版をリリースしました。
 
-# Release - 2020.09.10
+# Releases - 2020.09.10
 
 ### notification 0.2.0
 
@@ -324,7 +324,7 @@
 * 手動で通知の開封イベントを送信するためのメソッドを追加しました。  
   これを利用するためには RemoteNotification iOS SDK v2.4.0 以上をインストールする必要があります。
 
-# Release - 2020.08.03
+# Releases - 2020.08.03
 
 ### core 0.1.0
 
