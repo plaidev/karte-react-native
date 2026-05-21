@@ -42,8 +42,8 @@ jobs:
           GH_TOKEN: ${{ steps.app-token.outputs.token }}
           PR_BODY: |
             ### 以下の項目を確認してください
-            - [ ] 全体の`CHANGELOG.md`が更新されていることを確認した。
-            - [ ] `package.json`内のバージョンならびに`CHANGELOG.md`が更新されていることを確認した。
+            - [ ] 各パッケージの`package.json`内のバージョンが更新されていることを確認した。
+            - [ ] `CHANGELOG.md`が更新されていることを確認した。
             - [ ] サンプルアプリで動作確認を行った。
             - [ ] 全てのチェックボックスを埋めると自動的にマージ作業を開始します。
         run: |
