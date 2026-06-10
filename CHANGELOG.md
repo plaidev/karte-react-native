@@ -1,3 +1,17 @@
+# Releases - xxxx.xx.xx
+
+### core 2.2.0
+
+**🔨CHANGED**
+
+* `@react-native-karte/utilities` への依存を除去しました。
+
+### variables 2.2.0
+
+**🔨CHANGED**
+
+* `@react-native-karte/utilities` への依存を除去しました。
+
 # Releases - 2026.01.21
 
 ### core 2.1.0

@@ -1,6 +1,6 @@
 {
   "name": "@react-native-karte/core",
-  "version": "2.1.1",
+  "version": "2.2.0",
   "description": "KARTE SDK Core for React Native.",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
@@ -44,9 +44,6 @@
   },
   "bugs": {
     "url": "https://github.com/plaidev/karte-react-native/issues"
-  },
-  "dependencies": {
-    "@react-native-karte/utilities": "^0.1.2"
   },
   "peerDependencies": {
     "react": "*",

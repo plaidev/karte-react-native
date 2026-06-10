@@ -4358,7 +4358,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@react-native-karte/core@workspace:packages/core"
   dependencies:
-    "@react-native-karte/utilities": "npm:^0.1.2"
     del-cli: "npm:^3.0.1"
     genversion: "npm:^2.2.1"
     react-native: "npm:^0.79.6"
@@ -4392,24 +4391,14 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@react-native-karte/utilities@npm:^0.1.2, @react-native-karte/utilities@workspace:packages/utilities":
-  version: 0.0.0-use.local
-  resolution: "@react-native-karte/utilities@workspace:packages/utilities"
-  dependencies:
-    react-native-builder-bob: "npm:^0.18.3"
-    typescript: "npm:~5.0.4"
-  languageName: unknown
-  linkType: soft
-
 "@react-native-karte/variables@workspace:packages/variables":
   version: 0.0.0-use.local
   resolution: "@react-native-karte/variables@workspace:packages/variables"
   dependencies:
-    "@react-native-karte/utilities": "npm:^0.1.2"
     react-native-builder-bob: "npm:^0.18.3"
     typescript: "npm:~5.0.4"
   peerDependencies:
-    "@react-native-karte/core": ^2.1.0
+    "@react-native-karte/core": ^2.2.0
   languageName: unknown
   linkType: soft
 

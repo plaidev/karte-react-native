@@ -1,6 +1,9 @@
 {
   "extends": "../../tsconfig",
-  "references": [
-    { "path": "../utilities" }
-  ]
+  "compilerOptions": {
+    "composite": true,
+    "declaration": true,
+    "declarationMap": true,
+    "outDir": "./lib/typescript"
+  }
 }

@@ -1,24 +1,3 @@
-// Mock withBridgeInfo to avoid React Native bridge initialization issues in tests
-jest.mock('@react-native-karte/utilities', () => {
-  const actual = jest.requireActual('@react-native-karte/utilities');
-  return {
-    ...actual,
-    withBridgeInfo: (values?: Record<string, any>) => {
-      const normalizedValues = values ?? {};
-      if ('bridge_info' in normalizedValues) {
-        return normalizedValues;
-      }
-      return {
-        ...normalizedValues,
-        bridge_info: {
-          react_native_version: '0.72.4',
-          new_arch: false,
-        },
-      };
-    },
-  };
-});
-
 import { NativeModules } from 'react-native';
 
 let optout = false;
@@ -69,8 +48,8 @@ describe('Tracker test', () => {
     expect(nativeMock.track.mock.calls[0][1]).toEqual({
       date: 1,
       bridge_info: {
-        react_native_version: '0.72.4',
-        new_arch: false,
+        react_native_version: '1000.0.0',
+        new_arch: true,
       },
     });
   });
@@ -108,8 +87,8 @@ describe('Tracker test', () => {
     expect(nativeMock.view.mock.calls[0][2]).toEqual({
       date: 1,
       bridge_info: {
-        react_native_version: '0.72.4',
-        new_arch: false,
+        react_native_version: '1000.0.0',
+        new_arch: true,
       },
     });
   });
