@@ -137,20 +137,20 @@
 
 # Releases - 2025.07.08
 
-### **variables 1.4.0**
+### variables 1.4.0
 
 * 設定値のKeyをすべて取得するgetAllKeysを追加しました
 * 設定値のキャッシュを削除するcacheClearAll, cacheClearByKeyを追加しました
 
 # Releases - 2025.03.17
 
-### **notification 1.3.1**
+### notification 1.3.1
 
 **💊FIXED**
 
 * Android において React Native 0.75 以上で発生していた `variables` のビルドエラーを修正しました。
 
-### **visual-tracking 0.2.2**
+### visual-tracking 0.2.2
 
 **💊FIXED**
 
