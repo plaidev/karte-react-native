@@ -2,15 +2,9 @@
   "name": "react-native-karte",
   "description": "KARTE SDK for React Native.",
   "private": true,
-  "workspaces": {
-    "packages": [
-      "packages/*"
-    ],
-    "nohoist": [
-      "**/react-native",
-      "**/react-native/**"
-    ]
-  },
+  "workspaces": [
+    "packages/*"
+  ],
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
@@ -38,18 +32,17 @@
     "@lerna-lite/exec": "^4.9.2",
     "@lerna-lite/publish": "^4.9.2",
     "@lerna-lite/run": "^4.9.2",
-    "@react-native-community/eslint-config": "^3.1.0",
     "@react-native-community/cli": "^18.0.0",
     "@react-native-community/cli-platform-android": "^18.0.0",
     "@react-native-community/cli-platform-ios": "^18.0.0",
+    "@react-native-community/eslint-config": "^3.1.0",
     "@react-native/babel-preset": "^0.79.6",
     "@react-native/eslint-config": "^0.79.6",
     "@react-native/metro-config": "^0.79.6",
     "@react-native/typescript-config": "^0.79.6",
-    "@types/react-test-renderer": "^19.0.0",
-    "react-test-renderer": "^19.0.0",
     "@types/jest": "^29.5.13",
     "@types/react": "^19.0.0",
+    "@types/react-test-renderer": "^19.0.0",
     "compare-versions": "^3.6.0",
     "eslint": "^8.25.0",
     "eslint-config-prettier": "^8.5.0",
@@ -63,6 +56,7 @@
     "prettier": "^2.0.5",
     "react": "^19.0.0",
     "react-native": "^0.79.6",
+    "react-test-renderer": "^19.0.0",
     "ts-jest": "^26.5.4",
     "ts-node": "^10.9.1",
     "typedoc": "^0.23.17",
@@ -87,5 +81,6 @@
   },
   "engines": {
     "node": ">=18"
-  }
+  },
+  "packageManager": "yarn@4.13.0"
 }

@@ -11,9 +11,10 @@ jobs:
       contents: write
     steps:
       - name: Generate GitHub App token
-        uses: actions/create-github-app-token@7e473efe3cb98aa54f8d4bac15400b15fad77d94 # v2.2.0
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
         id: app-token
         with:
+          # TODO: app-id is deprecated in v3.1.0, rename to client-id
           app-id: ${{ secrets.APP_TEAM_GITHUB_APP_ID }}
           private-key: ${{ secrets.APP_TEAM_GITHUB_APP_PRIVATE_KEY }}
           owner: plaidev
@@ -21,7 +22,7 @@ jobs:
             karte-react-native-dev
             karte-react-native-tools
       - name: Checkout develop
-        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
         with:
           ref: develop
       - name: Configure Git
@@ -32,9 +33,16 @@ jobs:
       - name: Get current date
         id: date
         run: echo "date=$(date +'%Y.%m.%dT%H.%M.%S')" >> $GITHUB_OUTPUT
-      - name: Create and push release branch
+      - name: Create release branch
         run: |
           git checkout -b release/${{ steps.date.outputs.date }}
+      - name: Update CHANGELOG.md
+        run: |
+          sed -i "0,/# Releases - xxxx.xx.xx/ s/# Releases - xxxx.xx.xx/# Releases - $(date '+%Y.%m.%d')/" ./CHANGELOG.md
+          git add ./CHANGELOG.md
+          git commit -m "Update CHANGELOG.md"
+      - name: Push release branch
+        run: |
           git push origin -u release/${{ steps.date.outputs.date }}
       - name: Create Pull Request
         id: create_pr
@@ -42,7 +50,8 @@ jobs:
           GH_TOKEN: ${{ steps.app-token.outputs.token }}
           PR_BODY: |
             ### 以下の項目を確認してください
-            - [ ] `package.json`内のバージョンならびに`CHANGELOG.md`が更新されていることを確認した。
+            - [ ] 各パッケージの`package.json`内のバージョンが更新されていることを確認した。
+            - [ ] `CHANGELOG.md`が更新されていることを確認した。
             - [ ] サンプルアプリで動作確認を行った。
             - [ ] 全てのチェックボックスを埋めると自動的にマージ作業を開始します。
         run: |
@@ -70,7 +79,7 @@ jobs:
             --field expo_plugin_branch=main
       - name: Notify Slack on success
         if: success()
-        uses: rtCamp/action-slack-notify@e31e87e03dd19038e411e38ae27cbad084a90661 # v2.3.3
+        uses: rtCamp/action-slack-notify@33ca3be66c6f378fe1610fd1d5258632dbed5e58 # v2.4.0
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
           SLACK_MESSAGE: |
@@ -79,7 +88,7 @@ jobs:
           SLACK_COLOR: success
       - name: Notify Slack on failure
         if: failure()
-        uses: rtCamp/action-slack-notify@e31e87e03dd19038e411e38ae27cbad084a90661 # v2.3.3
+        uses: rtCamp/action-slack-notify@33ca3be66c6f378fe1610fd1d5258632dbed5e58 # v2.4.0
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
           SLACK_MESSAGE: |

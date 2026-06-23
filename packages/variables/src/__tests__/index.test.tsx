@@ -1,5 +1,9 @@
 import { NativeModules } from 'react-native';
 
+jest.mock('@react-native-karte/core', () => ({
+  normalize: require('../../../core/src/utilities').normalize,
+}));
+
 const nativeMock = {
   fetch: jest.fn(() => Promise.resolve()),
   getVariable: jest.fn((key: string) => key),

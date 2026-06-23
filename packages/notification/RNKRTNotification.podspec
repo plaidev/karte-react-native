@@ -19,5 +19,5 @@ Pod::Spec.new do |s|
   
   s.dependency "React"
   s.dependency "RNKRTCore"
-	s.dependency "KarteRemoteNotification", '2.13.0'
+	s.dependency "KarteRemoteNotification", '2.14.0'
 end

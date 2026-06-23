@@ -15,7 +15,7 @@
 //
 
 import { NativeModules } from 'react-native';
-import { normalize, withBridgeInfo } from '@react-native-karte/utilities';
+import { normalize, withBridgeInfo } from './utilities';
 import type { KRTCoreNativeModule } from './types';
 
 const nativeModule: KRTCoreNativeModule = NativeModules.RNKRTCoreModule;

@@ -1,6 +1,6 @@
 {
   "name": "@react-native-karte/core",
-  "version": "2.1.1",
+  "version": "2.2.0",
   "description": "KARTE SDK Core for React Native.",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
@@ -34,8 +34,8 @@
     "directory": "packages/core"
   },
   "scripts": {
-    "prepare": "npm run build",
-    "build": "bob build && npm run build:version",
+    "prepare": "yarn run build",
+    "build": "bob build && yarn run build:version",
     "build:version": "genversion --semi lib/version.js && node ./scripts/genversion-ios && node ./scripts/genversion-android",
     "build:clean": "del lib",
     "docs": "typedoc src/index.tsx --excludePrivate",
@@ -44,9 +44,6 @@
   },
   "bugs": {
     "url": "https://github.com/plaidev/karte-react-native/issues"
-  },
-  "dependencies": {
-    "@react-native-karte/utilities": "^0.1.2"
   },
   "peerDependencies": {
     "react": "*",

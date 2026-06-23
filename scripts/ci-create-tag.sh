@@ -8,7 +8,7 @@ PACKAGE_NAME=$(jq -r ".name" package.json)
 PACKAGE_VERSION=$(jq -r ".version" package.json)
 TAG_NAME="${PACKAGE_NAME}@${PACKAGE_VERSION}"
 
-if git tag -l | grep -q "^${TAG_NAME}$"; then
+if git tag -l "${TAG_NAME}" | grep -q .; then
   echo "Tag $TAG_NAME already exists, skipping"
 else
   echo "Creating tag: $TAG_NAME"

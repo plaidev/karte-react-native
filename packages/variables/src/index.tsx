@@ -15,7 +15,7 @@
 //
 
 import { NativeModules } from 'react-native';
-import { normalize } from '@react-native-karte/utilities';
+import { normalize } from '@react-native-karte/core';
 import type { KRTVariablesNativeModule } from './types';
 
 const nativeModule: KRTVariablesNativeModule =
