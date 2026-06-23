@@ -1,4 +1,4 @@
-# Releases - xxxx.xx.xx
+# Releases - 2026.06.23
 
 ### core 2.2.0
 
