@@ -5,12 +5,42 @@
 **🔨CHANGED**
 
 * `@react-native-karte/utilities` への依存を除去しました。
+* ネイティブ SDK のバージョンを最新版に更新しました:
+  * iOS: KarteCore 2.36.0
+  * Android: core 2.34.0
+
+### in-app-messaging 2.2.0
+
+**🔨CHANGED**
+
+* ネイティブ SDK のバージョンを最新版に更新しました:
+  * iOS: KarteInAppMessaging 2.26.0
+  * Android: inappmessaging 2.27.0
+
+### notification 2.2.0
+
+**🔨CHANGED**
+
+* ネイティブ SDK のバージョンを最新版に更新しました:
+  * iOS: KarteCore 2.36.0, KarteRemoteNotification 2.14.0
+  * Android: core 2.34.0, notifications 2.18.0
 
 ### variables 2.2.0
 
 **🔨CHANGED**
 
 * `@react-native-karte/utilities` への依存を除去しました。
+* ネイティブ SDK のバージョンを最新版に更新しました:
+  * iOS: KarteCore 2.36.0 (KarteVariables 2.13.0 は変更なし)
+  * Android: core 2.34.0, variables 2.13.0
+
+### visual-tracking 0.5.0
+
+**🔨CHANGED**
+
+* ネイティブ SDK のバージョンを最新版に更新しました:
+  * iOS: KarteCore 2.36.0 (KarteVisualTracking 2.14.0 は変更なし)
+  * Android: core 2.34.0, visualtracking 2.15.0
 
 # Releases - 2026.01.21
 
